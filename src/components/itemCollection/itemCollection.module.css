@@ -1,0 +1,16 @@
+.ItemCollection {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 5px;
+  width: 200px;
+
+  .title {
+    font-size: 18px;
+    height: 30px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

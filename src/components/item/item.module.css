@@ -1,0 +1,63 @@
+.Item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
+  width: 100%;
+  background: #444;
+  border-radius: 5px;
+  padding: 0 5px;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  &.mastered {
+    background-color: #3a3;
+  }
+
+  .name {
+    font-size: 14px;
+    flex-grow: 1;
+    white-space: nowrap;
+  }
+
+  .controls {
+    .checkbox {
+    }
+  }
+
+  &.split {
+    flex-flow: row nowrap;
+    cursor: unset;
+    padding: 0;
+
+    .section {
+      cursor: pointer;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 5px;
+      padding: 0 5px;
+      height: 100%;
+      overflow: hidden;
+
+      &.mastered {
+        background-color: #3a3;
+      }
+
+      &:first-of-type {
+        flex: 1 1 auto;
+      }
+
+      &:not(:first-of-type) {
+        flex-shrink: 0;
+        border-left: 1px solid #666;
+        padding-left: 5px;
+      }
+    }
+  }
+}
