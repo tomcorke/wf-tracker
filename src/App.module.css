@@ -16,5 +16,5 @@
   flex-flow: row nowrap;
 
   gap: 10px;
-  overflow-x: scroll;
+  padding-bottom: 20em;
 }

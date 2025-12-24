@@ -13,6 +13,7 @@ import { KUBROWS } from "./processed-data/kubrows";
 import { SPECIALCOMPANIONS } from "./processed-data/specialCompanions";
 import { NECRAMECHS } from "./processed-data/necramechs";
 import { SENTINELWEAPONS } from "./processed-data/sentinelWeapons";
+import { Metadata } from "./components/Metadata";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <ItemCollection title="Special Companions" items={SPECIALCOMPANIONS} />
       <ItemCollection title="Sentinel Weapons" items={SENTINELWEAPONS} />
       <ItemCollection title="Necramechs" items={NECRAMECHS} />
+      <Metadata />
     </div>
   );
 }

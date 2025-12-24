@@ -15,7 +15,7 @@
   overflow: hidden;
 
   &.mastered {
-    background-color: #3a3;
+    background-color: var(--highlight-color, #3c9672);
   }
 
   .name {
@@ -33,6 +33,7 @@
     flex-flow: row nowrap;
     cursor: unset;
     padding: 0;
+    gap: 0;
 
     .section {
       cursor: pointer;
@@ -46,7 +47,7 @@
       overflow: hidden;
 
       &.mastered {
-        background-color: #3a3;
+        background-color: var(--highlight-color, #3c9672);
       }
 
       &:first-of-type {
