@@ -11,6 +11,11 @@ const formatName = (name: string) => {
   return name.replace("<ARCHWING>", "");
 };
 
+const openWikiForItem = (itemName: string) => {
+  const url = new URL(`https://wiki.warframe.com/?search=${itemName}`);
+  window.open(url.toString(), "_blank");
+};
+
 export const Item = ({ name }: ItemProps) => {
   const state = useDataStore(
     useShallow((store) => store.itemStates[name] || {})
@@ -21,7 +26,12 @@ export const Item = ({ name }: ItemProps) => {
   return (
     <div
       className={classNames(STYLES.Item, { [STYLES.mastered]: state.mastered })}
-      onClick={() => setItemState(name, { mastered: !state.mastered })}
+      onClick={(e) => {
+        if (e.ctrlKey || e.metaKey || e.shiftKey) {
+          return openWikiForItem(name);
+        }
+        setItemState(name, { mastered: !state.mastered });
+      }}
     >
       <div className={STYLES.name}>{formatName(name)}</div>
       <div className={STYLES.controls}>
@@ -57,9 +67,12 @@ export const ItemWithPrime = ({ baseName, primeName }: ItemWithPrimeProps) => {
         className={classNames(STYLES.section, {
           [STYLES.mastered]: baseItemState.mastered,
         })}
-        onClick={() =>
-          setItemState(baseName, { mastered: !baseItemState.mastered })
-        }
+        onClick={(e) => {
+          if (e.ctrlKey || e.metaKey || e.shiftKey) {
+            return openWikiForItem(baseName);
+          }
+          setItemState(baseName, { mastered: !baseItemState.mastered });
+        }}
       >
         <div className={STYLES.name}>{formatName(baseName)}</div>
         <div className={STYLES.controls}>
@@ -75,9 +88,12 @@ export const ItemWithPrime = ({ baseName, primeName }: ItemWithPrimeProps) => {
         className={classNames(STYLES.section, {
           [STYLES.mastered]: primeItemState.mastered,
         })}
-        onClick={() =>
-          setItemState(primeName, { mastered: !primeItemState.mastered })
-        }
+        onClick={(e) => {
+          if (e.ctrlKey || e.metaKey || e.shiftKey) {
+            return openWikiForItem(primeName);
+          }
+          setItemState(primeName, { mastered: !primeItemState.mastered });
+        }}
       >
         <div className={STYLES.name}>Prime</div>
         <div className={STYLES.controls}>
