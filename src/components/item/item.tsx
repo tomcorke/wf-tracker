@@ -1,7 +1,8 @@
 import { useShallow } from "zustand/shallow";
-import { useDataStore } from "../storage/data-store";
+import { ItemState, useDataStore } from "../storage/data-store";
 import STYLES from "./item.module.css";
 import classNames from "classnames";
+import { PropsWithChildren } from "react";
 
 type ItemProps = {
   name: string;
@@ -16,6 +17,50 @@ const openWikiForItem = (itemName: string) => {
   window.open(url.toString(), "_blank");
 };
 
+const BaseItem = ({ children }: PropsWithChildren<{}>) => {
+  return <div className={STYLES.ItemWrapper}>{children}</div>;
+};
+
+const ItemComponent = ({
+  itemName,
+  displayName,
+  itemState,
+  setItemState,
+  className,
+}: {
+  itemName: string;
+  displayName?: string;
+  itemState: ItemState;
+  setItemState: (itemName: string, newState: Partial<ItemState>) => void;
+  className: string;
+}) => (
+  <div
+    className={classNames(className, {
+      [STYLES.mastered]: itemState.mastered,
+    })}
+    onClick={(e) => {
+      if (e.ctrlKey || e.metaKey || e.shiftKey) {
+        return openWikiForItem(itemName);
+      }
+    }}
+  >
+    <div className={STYLES.name}>{formatName(displayName ?? itemName)}</div>
+    <div className={STYLES.controls}>
+      <input
+        type="checkbox"
+        className={STYLES.checkbox}
+        checked={!!itemState.mastered}
+        readOnly
+        onClick={(e) => {
+          setItemState(itemName, { mastered: !itemState.mastered });
+          e.stopPropagation();
+          return false;
+        }}
+      />
+    </div>
+  </div>
+);
+
 export const Item = ({ name }: ItemProps) => {
   const state = useDataStore(
     useShallow((store) => store.itemStates[name] || {})
@@ -24,25 +69,15 @@ export const Item = ({ name }: ItemProps) => {
   const setItemState = useDataStore((store) => store.setItemState);
 
   return (
-    <div
-      className={classNames(STYLES.Item, { [STYLES.mastered]: state.mastered })}
-      onClick={(e) => {
-        if (e.ctrlKey || e.metaKey || e.shiftKey) {
-          return openWikiForItem(name);
-        }
-        setItemState(name, { mastered: !state.mastered });
-      }}
-    >
-      <div className={STYLES.name}>{formatName(name)}</div>
-      <div className={STYLES.controls}>
-        <input
-          type="checkbox"
-          className={STYLES.checkbox}
-          checked={!!state.mastered}
-          readOnly
-        />
-      </div>
-    </div>
+    <BaseItem>
+      <ItemComponent
+        itemName={name}
+        itemState={state}
+        setItemState={setItemState}
+        className={STYLES.Item}
+      />
+      <div className={STYLES.ItemDetails}>Item details</div>
+    </BaseItem>
   );
 };
 
@@ -62,49 +97,23 @@ export const ItemWithPrime = ({ baseName, primeName }: ItemWithPrimeProps) => {
   const setItemState = useDataStore((store) => store.setItemState);
 
   return (
-    <div className={classNames(STYLES.Item, STYLES.split)}>
-      <div
-        className={classNames(STYLES.section, {
-          [STYLES.mastered]: baseItemState.mastered,
-        })}
-        onClick={(e) => {
-          if (e.ctrlKey || e.metaKey || e.shiftKey) {
-            return openWikiForItem(baseName);
-          }
-          setItemState(baseName, { mastered: !baseItemState.mastered });
-        }}
-      >
-        <div className={STYLES.name}>{formatName(baseName)}</div>
-        <div className={STYLES.controls}>
-          <input
-            type="checkbox"
-            className={STYLES.checkbox}
-            checked={!!baseItemState.mastered}
-            readOnly
-          />
-        </div>
+    <BaseItem>
+      <div className={classNames(STYLES.Item, STYLES.split)}>
+        <ItemComponent
+          itemName={baseName}
+          itemState={baseItemState}
+          setItemState={setItemState}
+          className={STYLES.splitItemSection}
+        />
+        <ItemComponent
+          itemName={primeName}
+          displayName={"Prime"}
+          itemState={primeItemState}
+          setItemState={setItemState}
+          className={STYLES.splitItemSection}
+        />
       </div>
-      <div
-        className={classNames(STYLES.section, {
-          [STYLES.mastered]: primeItemState.mastered,
-        })}
-        onClick={(e) => {
-          if (e.ctrlKey || e.metaKey || e.shiftKey) {
-            return openWikiForItem(primeName);
-          }
-          setItemState(primeName, { mastered: !primeItemState.mastered });
-        }}
-      >
-        <div className={STYLES.name}>Prime</div>
-        <div className={STYLES.controls}>
-          <input
-            type="checkbox"
-            className={STYLES.checkbox}
-            checked={!!primeItemState.mastered}
-            readOnly
-          />
-        </div>
-      </div>
-    </div>
+      <div className={STYLES.ItemDetails}>Prime Item Details</div>
+    </BaseItem>
   );
 };

@@ -8,6 +8,7 @@ import { useDataStore } from "../storage/data-store";
 type ItemCollectionProps<K extends string, T> = {
   items: DataSet<K, T>;
   title: string;
+  filter?: string;
 };
 
 const isPrime = <T extends { name: string }>(item: T): boolean =>
@@ -39,8 +40,18 @@ const CollectionCounter = <K extends string, T extends { name: string }>({
 export const ItemCollection = <K extends string, T extends { name: string }>({
   items,
   title,
+  filter,
 }: ItemCollectionProps<K, T>) => {
-  const collectionHasPrimes = items.itemNames.some((name) => isPrime({ name }));
+  const useFilter = filter && filter.trim().length > 0;
+  const filteredItemNames = useFilter
+    ? items.itemNames.filter((name) =>
+        name.toLowerCase().includes((filter || "").toLowerCase())
+      )
+    : items.itemNames;
+
+  const collectionHasPrimes = filteredItemNames.some((name) =>
+    isPrime({ name })
+  );
 
   if (!collectionHasPrimes) {
     return (
@@ -49,7 +60,7 @@ export const ItemCollection = <K extends string, T extends { name: string }>({
           <span>{title}</span>
           <CollectionCounter items={items} />
         </div>
-        {items.itemNames.map((name) => (
+        {filteredItemNames.map((name) => (
           <Item key={name} name={name} />
         ))}
       </div>
@@ -62,6 +73,11 @@ export const ItemCollection = <K extends string, T extends { name: string }>({
       (item) =>
         !isPrime(item) ||
         !Array.from(items.primes?.values() || []).some((p) => p === item)
+    )
+    .filter(
+      (item) =>
+        filteredItemNames.includes(item.name as any) ||
+        filteredItemNames.includes(items.primes?.get(item)?.name || ("" as any))
     );
 
   return (

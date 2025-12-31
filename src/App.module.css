@@ -11,10 +11,36 @@
   box-sizing: border-box;
 }
 
+body > div {
+  position: relative;
+  overflow: auto;
+  height: calc(100vh - 0.7em);
+}
+
 .container {
+  position: absolute;
+  width: 4000px;
+  height: 100%;
+
   display: flex;
   flex-flow: row nowrap;
 
   gap: 10px;
-  padding-bottom: 20em;
+
+  .stacked {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1em;
+  }
+}
+
+.tasksContainer {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 800px;
+  background: black;
 }

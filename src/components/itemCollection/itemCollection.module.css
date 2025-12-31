@@ -2,11 +2,12 @@
   display: flex;
   flex-flow: column nowrap;
   gap: 5px;
-  width: 200px;
+  width: 250px;
 
   .title {
     font-size: 18px;
-    height: 30px;
+    height: 40px;
+    flex-shrink: 0;
 
     display: flex;
     flex-flow: row nowrap;

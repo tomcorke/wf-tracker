@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type ItemState = {
+export type ItemState = {
   owned: boolean;
   wanted: boolean;
   mastered: boolean;
