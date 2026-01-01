@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { useShallow } from "zustand/shallow";
 
 export type ItemState = {
   owned: boolean;
@@ -30,3 +31,14 @@ export const useDataStore = create<TrackerDataStore>()(
     { name: "wf-tracker-data-store" }
   )
 );
+
+export const useItemData = (itemName: string) => {
+  const itemState = useDataStore(
+    useShallow((store) => store.itemStates[itemName] || {})
+  );
+
+  // Find some details to show for this item
+  const itemDetails = {}; // Replace with actual logic to find item details
+
+  return { itemState, itemDetails };
+};

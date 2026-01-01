@@ -8,6 +8,7 @@ import z from "zod";
 import fs from "fs";
 import path from "path";
 import url from "url";
+import * as cheerio from "cheerio";
 
 // https://wiki.warframe.com/w/Public_Export
 const BASE_URL = "https://origin.warframe.com/PublicExport";
@@ -293,6 +294,52 @@ export const ${camelCategory.toUpperCase()}: DataSet<${singularize(
     fs.writeFileSync(filePath, content);
   };
 
+  const listUnusedItemCategories = (
+    dataRecord: Record<string, any>,
+    ...itemsWithCategories: { productCategory: string }[][]
+  ) => {
+    const usedCategories = new Set<string>();
+    for (const items of itemsWithCategories) {
+      for (const item of items) {
+        usedCategories.add(item.productCategory);
+      }
+    }
+
+    const allCategories = new Set<string>();
+    // Don't assume data structure, recursively scan to find all items with "productCategory"
+    const findAllCategories = (data: any) => {
+      if (Array.isArray(data)) {
+        for (const item of data) {
+          if (item.productCategory) {
+            allCategories.add(item.productCategory);
+          }
+          findAllCategories(item);
+        }
+      } else if (typeof data === "object" && data !== null) {
+        for (const key of Object.keys(data)) {
+          findAllCategories(data[key]);
+        }
+      }
+    };
+
+    findAllCategories(dataRecord);
+
+    const unusedCategories = Array.from(allCategories).filter(
+      (cat) => !usedCategories.has(cat)
+    );
+
+    if (unusedCategories.length > 0) {
+      console.log("Unused item categories:");
+      for (const cat of unusedCategories) {
+        console.log(`- ${cat}`);
+      }
+    } else {
+      console.log("No unused item categories found.");
+    }
+  };
+
+  listUnusedItemCategories(dataRecord, allFrames, allCompanions, allWeapons);
+
   writeCategoryFile("warframes", "WarframeData", warframes);
   writeCategoryFile("archwings", "WarframeData", archwings);
   writeCategoryFile("necramechs", "WarframeData", necramechs);
@@ -307,4 +354,29 @@ export const ${camelCategory.toUpperCase()}: DataSet<${singularize(
   writeCategoryFile("specialWeapons", "WeaponData", specialWeapons);
   writeCategoryFile("crewShipWeapons", "WeaponData", crewShipWeapons);
   writeCategoryFile("sentinelWeapons", "WeaponData", sentinelWeapons);
+
+  // Now get drop data
+
+  const dropTablesUrl =
+    "https://warframe-web-assets.nyc3.cdn.digitaloceanspaces.com/uploads/cms/hnfvc0o3jnfvc873njb03enrf56.html";
+
+  const dropTablesHtmlResponse = await fetch(dropTablesUrl);
+  const dropTablesHtml = await dropTablesHtmlResponse.text();
+
+  const dropTables$ = cheerio.load(dropTablesHtml);
+
+  const isDefined = <T>(value: T | undefined): value is T =>
+    value !== undefined;
+
+  const headers = dropTables$("h3")
+    .toArray()
+    .map((el) => el.attributes.find((a) => a.name === "id")?.value)
+    .filter(isDefined);
+
+  console.log(headers);
+
+  const tables = headers.reduce((acc, header) => {
+    const table = dropTables$(`#${header}`).next("table");
+    return { ...acc, [header]: table };
+  }, {});
 })();

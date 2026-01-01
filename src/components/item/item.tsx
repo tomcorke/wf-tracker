@@ -1,5 +1,4 @@
-import { useShallow } from "zustand/shallow";
-import { ItemState, useDataStore } from "../storage/data-store";
+import { ItemState, useDataStore, useItemData } from "../storage/data-store";
 import STYLES from "./item.module.css";
 import classNames from "classnames";
 import { PropsWithChildren } from "react";
@@ -27,22 +26,20 @@ const ItemComponent = ({
   itemState,
   setItemState,
   className,
+  onClick,
 }: {
   itemName: string;
   displayName?: string;
   itemState: ItemState;
   setItemState: (itemName: string, newState: Partial<ItemState>) => void;
   className: string;
+  onClick: (event: React.MouseEvent<unknown, MouseEvent>) => void;
 }) => (
   <div
     className={classNames(className, {
       [STYLES.mastered]: itemState.mastered,
     })}
-    onClick={(e) => {
-      if (e.ctrlKey || e.metaKey || e.shiftKey) {
-        return openWikiForItem(itemName);
-      }
-    }}
+    onClick={onClick}
   >
     <div className={STYLES.name}>{formatName(displayName ?? itemName)}</div>
     <div className={STYLES.controls}>
@@ -62,9 +59,7 @@ const ItemComponent = ({
 );
 
 export const Item = ({ name }: ItemProps) => {
-  const state = useDataStore(
-    useShallow((store) => store.itemStates[name] || {})
-  );
+  const { itemState } = useItemData(name);
 
   const setItemState = useDataStore((store) => store.setItemState);
 
@@ -72,11 +67,16 @@ export const Item = ({ name }: ItemProps) => {
     <BaseItem>
       <ItemComponent
         itemName={name}
-        itemState={state}
+        itemState={itemState}
         setItemState={setItemState}
         className={STYLES.Item}
+        onClick={(e) => {
+          if (e.ctrlKey || e.metaKey || e.shiftKey) {
+            return openWikiForItem(name);
+          }
+        }}
       />
-      <div className={STYLES.ItemDetails}>Item details</div>
+      {/* <div className={STYLES.ItemDetails}>Item details</div> */}
     </BaseItem>
   );
 };
@@ -87,12 +87,8 @@ type ItemWithPrimeProps = {
 };
 
 export const ItemWithPrime = ({ baseName, primeName }: ItemWithPrimeProps) => {
-  const baseItemState = useDataStore(
-    useShallow((store) => store.itemStates[baseName] || {})
-  );
-  const primeItemState = useDataStore(
-    useShallow((store) => store.itemStates[primeName] || {})
-  );
+  const { itemState: baseItemState } = useItemData(baseName);
+  const { itemState: primeItemState } = useItemData(primeName);
 
   const setItemState = useDataStore((store) => store.setItemState);
 
@@ -104,6 +100,11 @@ export const ItemWithPrime = ({ baseName, primeName }: ItemWithPrimeProps) => {
           itemState={baseItemState}
           setItemState={setItemState}
           className={STYLES.splitItemSection}
+          onClick={(e) => {
+            if (e.ctrlKey || e.metaKey || e.shiftKey) {
+              return openWikiForItem(baseName);
+            }
+          }}
         />
         <ItemComponent
           itemName={primeName}
@@ -111,9 +112,14 @@ export const ItemWithPrime = ({ baseName, primeName }: ItemWithPrimeProps) => {
           itemState={primeItemState}
           setItemState={setItemState}
           className={STYLES.splitItemSection}
+          onClick={(e) => {
+            if (e.ctrlKey || e.metaKey || e.shiftKey) {
+              return openWikiForItem(primeName);
+            }
+          }}
         />
       </div>
-      <div className={STYLES.ItemDetails}>Prime Item Details</div>
+      {/* <div className={STYLES.ItemDetails}>Prime Item Details</div> */}
     </BaseItem>
   );
 };
