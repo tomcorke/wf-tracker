@@ -71,7 +71,42 @@
   }
 
   .ItemDetails {
-    padding: 5px;
+    padding: 10px;
     background: #444;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1em;
+  }
+
+  .ingredientList {
+    .ingredientListTitle {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    ul {
+      margin: 0;
+      padding: 0 0 0 20px;
+      li {
+        list-style-type: disc;
+      }
+    }
+  }
+
+  .sourceList {
+    .sourceListTitle {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    ul {
+      margin: 0;
+      padding: 0 0 0 20px;
+      li {
+        list-style-type: disc;
+      }
+    }
   }
 }

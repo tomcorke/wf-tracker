@@ -22,72 +22,83 @@ function App() {
     <>
       <div className={STYLES.outer}>
         <div className={STYLES.header}>
-          <input
-            type="text"
-            placeholder="Filter items..."
-            value={filterText}
-            onChange={(e) => setFilterText(e.target.value)}
-          />
+          <div className={STYLES.filterInputWrapper}>
+            <input
+              className={STYLES.filterInput}
+              type="text"
+              placeholder="Filter items..."
+              value={filterText}
+              onChange={(e) => setFilterText(e.target.value)}
+            />
+            {filterText ? (
+              <div
+                className={STYLES.clearInput}
+                onClick={() => setFilterText("")}
+              >
+                ×
+              </div>
+            ) : null}
+          </div>
         </div>
         <div className={STYLES.container}>
           <ItemCollection
-            title="Warframe"
-            items={WARFRAMES}
+            title="Warframes"
+            itemDataSet={WARFRAMES}
             filter={filterText}
           />
           <ItemCollection
             title="Primary Weapons"
-            items={PRIMARYWEAPONS}
+            itemDataSet={PRIMARYWEAPONS}
             filter={filterText}
           />
           <ItemCollection
             title="Secondary Weapons"
-            items={SECONDARYWEAPONS}
+            itemDataSet={SECONDARYWEAPONS}
             filter={filterText}
           />
           <ItemCollection
             title="Melee Weapons"
-            items={MELEEWEAPONS}
+            itemDataSet={MELEEWEAPONS}
             filter={filterText}
           />
           <div className={STYLES.stacked}>
             <ItemCollection
               title="Archwings"
-              items={ARCHWINGS}
+              itemDataSet={ARCHWINGS}
               filter={filterText}
             />
             <ItemCollection
               title="Archwing Guns"
-              items={ARCHWINGGUNS}
+              itemDataSet={ARCHWINGGUNS}
               filter={filterText}
             />
             <ItemCollection
               title="Archwing Melee"
-              items={ARCHWINGMELEE}
+              itemDataSet={ARCHWINGMELEE}
               filter={filterText}
             />
           </div>
           <div className={STYLES.stacked}>
             <ItemCollection
               title="Sentinels"
-              items={SENTINELS}
+              itemDataSet={SENTINELS}
               filter={filterText}
             />
             <ItemCollection
               title="Sentinel Weapons"
-              items={SENTINELWEAPONS}
+              itemDataSet={SENTINELWEAPONS}
               filter={filterText}
             />
           </div>
           <div className={STYLES.stacked}>
             <ItemCollection
               title="Kubrows"
-              items={KUBROWS}
+              itemDataSet={KUBROWS}
               filter={filterText}
             />
             <ItemCollection
               title="Necramechs"
-              items={NECRAMECHS}
+              itemDataSet={NECRAMECHS}
               filter={filterText}
             />
           </div>

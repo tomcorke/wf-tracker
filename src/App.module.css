@@ -17,6 +17,39 @@ body > div {
   height: calc(100vh - 0.7em);
 }
 
+.filterInputWrapper {
+  position: relative;
+  gap: 5px;
+  overflow: hidden;
+  display: inline-block;
+  width: 300px;
+  max-width: 90%;
+
+  .filterInput {
+    font-size: 18px;
+    color: white;
+    background: #222;
+    color: white;
+    border: none;
+    padding: 3px;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .clearInput {
+    position: absolute;
+    top: -4px;
+    right: 3px;
+    font-size: 36px;
+    color: white;
+    max-height: 20px;
+    cursor: pointer;
+  }
+}
+
 .container {
   position: absolute;
   width: 4000px;

@@ -37,5 +37,13 @@ export type DataRecord = {
 export type DataSet<K extends string, T> = {
   itemNames: K[];
   itemsByName: Record<K, T>;
+  items: T[];
   primes?: Map<T, T>;
 };
+
+export const MiscItemSchema = z.object({
+  name: z.string(),
+  uniqueName: z.string(),
+});
+
+export type MiscItem = z.infer<typeof MiscItemSchema>;

@@ -1,12 +1,12 @@
 import { useShallow } from "zustand/shallow";
-import { DataSet } from "../../data-types";
 import { Item } from "../item";
 import { ItemWithPrime } from "../item/item";
 import STYLES from "./itemCollection.module.css";
 import { useDataStore } from "../storage/data-store";
+import { DataSet } from "../../data-types";
 
 type ItemCollectionProps<K extends string, T> = {
-  items: DataSet<K, T>;
+  itemDataSet: DataSet<K, T>;
   title: string;
   filter?: string;
 };
@@ -14,17 +14,18 @@ type ItemCollectionProps<K extends string, T> = {
 const isPrime = <T extends { name: string }>(item: T): boolean =>
   item.name.endsWith(" Prime");
 
-const CollectionCounter = <K extends string, T extends { name: string }>({
+const CollectionCounter = <T extends { uniqueName: string }>({
   items,
 }: {
-  items: DataSet<K, T>;
+  items: T[];
 }) => {
-  const totalItems = items.itemNames.length;
+  const totalItems = items.length;
 
   const masteredCount = useDataStore(
     useShallow((state) =>
-      items.itemNames.reduce(
-        (count, name) => count + (state.itemStates[name]?.mastered ? 1 : 0),
+      items.reduce(
+        (count, item) =>
+          count + (state.itemStates[item.uniqueName]?.mastered ? 1 : 0),
         0
       )
     )
@@ -37,21 +38,25 @@ const CollectionCounter = <K extends string, T extends { name: string }>({
   );
 };
 
-export const ItemCollection = <K extends string, T extends { name: string }>({
-  items,
+export const ItemCollection = <
+  K extends string,
+  T extends { uniqueName: string; name: string }
+>({
+  itemDataSet,
   title,
   filter,
 }: ItemCollectionProps<K, T>) => {
   const useFilter = filter && filter.trim().length > 0;
-  const filteredItemNames = useFilter
-    ? items.itemNames.filter((name) =>
-        name.toLowerCase().includes((filter || "").toLowerCase())
-      )
-    : items.itemNames;
 
-  const collectionHasPrimes = filteredItemNames.some((name) =>
-    isPrime({ name })
-  );
+  const { items, primes } = itemDataSet;
+
+  const filteredItems = useFilter
+    ? items.filter((item) =>
+        item.name.toLowerCase().includes((filter || "").toLowerCase())
+      )
+    : items;
+
+  const collectionHasPrimes = filteredItems.some(isPrime);
 
   if (!collectionHasPrimes) {
     return (
@@ -60,25 +65,32 @@ export const ItemCollection = <K extends string, T extends { name: string }>({
           <span>{title}</span>
           <CollectionCounter items={items} />
         </div>
-        {filteredItemNames.map((name) => (
-          <Item key={name} name={name} />
+        {filteredItems.map((item) => (
+          <Item
+            key={item.uniqueName}
+            uniqueName={item.uniqueName}
+            displayName={item.name}
+          />
         ))}
       </div>
     );
   }
 
-  const baseItems = items.itemNames
-    .map((name) => items.itemsByName[name] as T)
+  const baseItems = items
     .filter(
       (item) =>
         !isPrime(item) ||
-        !Array.from(items.primes?.values() || []).some((p) => p === item)
+        !Array.from(primes?.values() || []).some((p) => p === item)
     )
-    .filter(
-      (item) =>
-        filteredItemNames.includes(item.name as any) ||
-        filteredItemNames.includes(items.primes?.get(item)?.name || ("" as any))
-    );
+    .filter((item) => {
+      if (primes) {
+        const primeItem = primes.get(item);
+        if (primeItem && filteredItems.includes(primeItem)) {
+          return true;
+        }
+      }
+      return filteredItems.includes(item);
+    });
 
   return (
     <div className={STYLES.ItemCollection}>
@@ -87,17 +99,25 @@ export const ItemCollection = <K extends string, T extends { name: string }>({
         <CollectionCounter items={items} />
       </div>
       {baseItems.map((baseItem) => {
-        const primeItem = items.primes?.get(baseItem);
+        const primeItem = primes?.get(baseItem);
         if (primeItem) {
           return (
             <ItemWithPrime
               key={baseItem.name}
-              baseName={baseItem.name}
-              primeName={primeItem.name}
+              baseUniqueName={baseItem.uniqueName}
+              baseDisplayName={baseItem.name}
+              primeUniqueName={primeItem.uniqueName}
+              primeDisplayName={primeItem.name}
             />
           );
         } else {
-          return <Item key={baseItem.name} name={baseItem.name} />;
+          return (
+            <Item
+              key={baseItem.name}
+              uniqueName={baseItem.uniqueName}
+              displayName={baseItem.name}
+            />
+          );
         }
       })}
     </div>
