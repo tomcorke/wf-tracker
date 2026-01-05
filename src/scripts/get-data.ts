@@ -119,7 +119,7 @@ import url from "url";
   const partsMap = new Map<string, any[]>();
 
   // For each item in datasets, find its recipe parts
-  for (const [datasetName, , items] of datasets) {
+  for (const [, , items] of datasets) {
     for (const item of items) {
       const parts = getItemPartsOrBlueprints(item);
       if (parts.length > 0) {
