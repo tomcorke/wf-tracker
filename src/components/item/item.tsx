@@ -62,38 +62,6 @@ type ItemProps = {
   displayName: string;
 };
 
-const formatIngredients = (
-  ingredients: { uniqueName: string; name: string }[]
-) => {
-  if (ingredients.length === 0) {
-    return <div className={STYLES.ingredientList}>No recipe for item</div>;
-  }
-  return (
-    <div className={STYLES.ingredientList}>
-      <div className={STYLES.ingredientListTitle}>
-        <span>Blueprints/Parts:</span>
-        <Button>track</Button>
-      </div>
-      <ul>
-        {ingredients.map((ingredient, i) => (
-          <>
-            <li key={`${ingredient.uniqueName}_${i}`}>{ingredient.name}</li>
-            {/* <li
-              style={{
-                font: "9px monospace",
-                wordBreak: "break-word",
-                opacity: 0.7,
-              }}
-            >
-              {ingredient.uniqueName}
-            </li> */}
-          </>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
 const formatSources = (sources: { source: string[]; type: string }[]) => {
   if (sources.length === 0) {
     return (
