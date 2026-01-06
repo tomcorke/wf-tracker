@@ -1,10 +1,14 @@
 import { getItemRecipeParts } from "../../processed-data/itemRecipes";
-import { Button } from "../button";
+// import { Button } from "../button";
 import { ItemState, useDataStore, useItemData } from "../storage/data-store";
 import STYLES from "./item.module.css";
 import classNames from "classnames";
 import { PropsWithChildren, useCallback, useMemo, useState } from "react";
 import { getItemSources } from "../../processed-data/itemSources";
+import {
+  primeResurgenceItems,
+  vaultedPrimeItems,
+} from "../../processed-data/vaulted-items";
 
 const formatName = (name: string) => {
   return name.replace("<ARCHWING>", "");
@@ -64,11 +68,7 @@ type ItemProps = {
 
 const formatSources = (sources: { source: string[]; type: string }[]) => {
   if (sources.length === 0) {
-    return (
-      <div className={STYLES.sourceList}>
-        No sources in known data - check market or clan dojo?
-      </div>
-    );
+    return <div className={STYLES.sourceList}>No sources in known data</div>;
   }
   return (
     <div className={STYLES.sourceList}>
@@ -134,8 +134,36 @@ const formatDetails = (uniqueName: string, displayName: string) => {
     }
   );
 
+  const isVaulted = vaultedPrimeItems.has(displayName) ? (
+    <div className={STYLES.vaultedIndicator}>
+      In{" "}
+      <a
+        href="https://wiki.warframe.com/w/Prime_Vault"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Prime Vault
+      </a>
+    </div>
+  ) : null;
+
+  const isInPrimeResurgence = primeResurgenceItems.has(displayName) ? (
+    <div className={STYLES.primeResurgenceIndicator}>
+      Currently available in{" "}
+      <a
+        href="https://wiki.warframe.com/w/Prime_Resurgence"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Prime Resurgence
+      </a>
+    </div>
+  ) : null;
+
   return (
     <>
+      {isVaulted}
+      {isInPrimeResurgence}
       {itemSources.length > 0 || ingredientElements.length === 0
         ? formattedItemSources
         : null}
@@ -156,6 +184,9 @@ const formatDetails = (uniqueName: string, displayName: string) => {
 
 export const Item = ({ uniqueName, displayName }: ItemProps) => {
   const { itemState } = useItemData(uniqueName);
+
+  const isVaulted = vaultedPrimeItems.has(displayName);
+  const isInPrimeResurgence = primeResurgenceItems.has(displayName);
 
   const setItemState = useDataStore((store) => store.setItemState);
 
@@ -178,7 +209,10 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
         displayName={displayName}
         itemState={itemState}
         setItemState={setItemState}
-        className={STYLES.Item}
+        className={classNames(STYLES.Item, {
+          [STYLES.vaulted]: isVaulted,
+          [STYLES.primeResurgence]: isInPrimeResurgence,
+        })}
         onClick={(e) => {
           if (e.ctrlKey || e.metaKey || e.shiftKey) {
             return openWikiForItem(displayName);
@@ -208,6 +242,9 @@ export const ItemWithPrime = ({
 }: ItemWithPrimeProps) => {
   const { itemState: baseItemState } = useItemData(baseUniqueName);
   const { itemState: primeItemState } = useItemData(primeUniqueName);
+
+  const isPrimeVaulted = vaultedPrimeItems.has(primeDisplayName);
+  const isInPrimeResurgence = primeResurgenceItems.has(primeDisplayName);
 
   const setItemState = useDataStore((store) => store.setItemState);
 
@@ -256,7 +293,10 @@ export const ItemWithPrime = ({
           displayName={"Prime"}
           itemState={primeItemState}
           setItemState={setItemState}
-          className={STYLES.splitItemSection}
+          className={classNames(STYLES.splitItemSection, {
+            [STYLES.vaulted]: isPrimeVaulted,
+            [STYLES.primeResurgence]: isInPrimeResurgence,
+          })}
           onClick={(e) => {
             if (e.ctrlKey || e.metaKey || e.shiftKey) {
               return openWikiForItem(primeDisplayName);

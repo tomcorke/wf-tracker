@@ -1,12 +1,28 @@
 .ItemWrapper {
   --item-row-height: 20px;
 
+  --header-background-color: #222;
+  --details-background-color: #181818;
+  --vaulted-color: #96355f;
+  --prime-resurgence-color: #2e71be;
+  --mastered-color: #3c9672;
+
   flex-shrink: 0;
 
   width: 100%;
   border-radius: 5px;
   overflow: hidden;
   font-size: 14px;
+
+  a {
+    color: white;
+    &[href] {
+      &::after {
+        content: " 🔗";
+        display: inline-block;
+      }
+    }
+  }
 
   .Item {
     min-height: var(--item-row-height);
@@ -17,13 +33,33 @@
     justify-content: space-between;
     align-items: center;
     gap: 5px;
-    background: #222;
+    background: var(--header-background-color);
     padding: 0 5px;
 
     cursor: pointer;
 
+    &.vaulted {
+      background: linear-gradient(
+        to right,
+        var(--vaulted-color),
+        transparent 100%
+      );
+    }
+
+    &.primeResurgence {
+      background: linear-gradient(
+        to right,
+        var(--prime-resurgence-color),
+        transparent 100%
+      );
+    }
+
     &.mastered {
-      background-color: var(--highlight-color, #3c9672);
+      background: linear-gradient(
+        to right,
+        var(--mastered-color),
+        transparent 200%
+      );
     }
 
     .name {
@@ -53,8 +89,28 @@
         height: 100%;
         overflow: hidden;
 
+        &.vaulted {
+          background: linear-gradient(
+            to right,
+            var(--vaulted-color),
+            transparent 100%
+          );
+        }
+
+        &.primeResurgence {
+          background: linear-gradient(
+            to right,
+            var(--prime-resurgence-color),
+            transparent 100%
+          );
+        }
+
         &.mastered {
-          background-color: var(--highlight-color, #3c9672);
+          background: linear-gradient(
+            to right,
+            var(--mastered-color),
+            transparent 200%
+          );
         }
 
         &:first-of-type {
@@ -72,10 +128,28 @@
 
   .ItemDetails {
     padding: 10px;
-    background: #444;
+    background: var(--details-background-color);
     display: flex;
     flex-flow: column nowrap;
     gap: 1em;
+
+    .vaultedIndicator {
+      padding: 5px;
+      background: linear-gradient(
+        to right,
+        var(--vaulted-color),
+        transparent 100%
+      );
+    }
+
+    .primeResurgenceIndicator {
+      padding: 5px;
+      background: linear-gradient(
+        to right,
+        var(--prime-resurgence-color),
+        transparent 100%
+      );
+    }
   }
 
   .ingredientList {
