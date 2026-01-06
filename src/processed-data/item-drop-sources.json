@@ -18086,6 +18086,38 @@
       "type": "relicRewards"
     }
   ],
+  "/Lotus/Types/Recipes/ArchwingRecipes/PrimeArchwing/PrimeArchwingBlueprint": [
+    {
+      "source": [
+        "Axi L4 Relic"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Axi V8 Relic"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith F1 Relic"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Meso C2 Relic"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Meso S1 Relic"
+      ],
+      "type": "relicRewards"
+    }
+  ],
   "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBoOrnament": [
     {
       "source": [

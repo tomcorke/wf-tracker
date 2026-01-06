@@ -66,6 +66,21 @@ import url from "url";
     }[];
   };
 
+  const EXCLUDED_BLUEPRINT_ITEMS = new Set<string>([
+    "Braton",
+    "MK1-Braton",
+    "MK1-Paris",
+    "MK1-Strun",
+    "Strun",
+    "Aklato",
+    "Lato",
+    "Lex",
+    "MK1-Furis",
+    "MK1-Kunai",
+    "MK1-Bo",
+    "MK1-Furax",
+  ]);
+
   const getItemRecipe = (itemUniqueName: string) => {
     const recipes = dataRecord.Recipes.ExportRecipes as any[];
     const matchingRecipe = recipes.find((r) => r.resultType === itemUniqueName);
@@ -86,18 +101,21 @@ import url from "url";
     uniqueName: string;
     name: string;
   }) => {
+    const fixedItemName = item.name.replace(/^<ARCHWING> /, "");
     const recipe = getItemRecipe(item.uniqueName);
     const parts = getItemRecipeParts(item.uniqueName);
     let results: any[] = [];
     if (recipe || parts.length > 0) {
-      results.push({
-        uniqueName: recipe.uniqueName,
-        name: `${item.name} Blueprint`,
-      });
+      if (!EXCLUDED_BLUEPRINT_ITEMS.has(item.name)) {
+        results.push({
+          uniqueName: recipe.uniqueName,
+          name: `${fixedItemName} Blueprint`,
+        });
+      }
       for (const part of parts) {
         const partName = uniqueNameToItemMap.get(part.ItemType);
         const partBlueprint = getItemRecipe(part.ItemType);
-        if (partName) {
+        if (partName && !EXCLUDED_BLUEPRINT_ITEMS.has(partName)) {
           for (let i = 0; i < part.ItemCount; i++) {
             if (partBlueprint) {
               results.push({
@@ -177,5 +195,184 @@ import url from "url";
       null,
       2
     )
+  );
+
+  // load wiki data text and reformat to JS object
+  const wikiData = fs.readFileSync(
+    path.join(
+      path.dirname(url.fileURLToPath(import.meta.url)),
+      "../data/wiki-vendor-data.txt"
+    ),
+    "utf-8"
+  );
+
+  const wikiDataLines = wikiData.split("\n");
+  const mappedWikiDataLines: string[] = [];
+
+  let inOfferingsArray = false;
+  let inComplexOffering = false;
+  let complexOfferingLines: string[] = [];
+  let complexOfferingDepth = 0;
+
+  const isNumericString = (value: unknown) => {
+    return /^-?\d+(\.\d+)?$/.test(String(value));
+  };
+
+  const isQuotedString = (value: unknown) => {
+    return /^["'].*["']$/.test(String(value));
+  };
+
+  const handleSingleLineOffering = (line: string) => {
+    // convert to JSON-like array
+    let _line = line;
+    _line = _line.replace(/^(\s*)\{(.+)\}(.*)$/, "$1[$2]$3");
+
+    // extract named properties
+    const namedElements = Array.from(_line.matchAll(/(\w+): ([^,}\]]+)/g));
+    // and remove from JSON-like array
+    for (const n of namedElements) {
+      _line = _line.replace(n[0], "");
+    }
+    // parse array, removing trailing commas
+    _line = _line.replace(/,\s*$/, "");
+    while (/, [\]\}]/.test(_line)) {
+      _line = _line.replace(/, ([\]\}])/, "$1");
+    }
+    const elements = JSON.parse(_line);
+
+    const indentation = _line.match(/^(\s*)/)![1];
+    const columns = ["Name", "Type", "Price", "Limit"];
+    const offeringData: any = {};
+    for (let i = 0; i < columns.length; i++) {
+      if (elements[i]) {
+        offeringData[columns[i]] = elements[i];
+      }
+    }
+    for (const match of namedElements) {
+      offeringData[match[1]] = match[2].trim();
+    }
+    return `${indentation}{ ${Object.entries(offeringData)
+      .map(
+        ([k, v]) =>
+          `${JSON.stringify(k)}: ${
+            isNumericString(v) || isQuotedString(v) ? v : JSON.stringify(v)
+          }`
+      )
+      .join(", ")} },`;
+  };
+
+  for (const line of wikiDataLines) {
+    let _line = line;
+    if (_line.trim().startsWith("--")) {
+      _line = _line.replace(/--(.+)/, "/* $1 */");
+      mappedWikiDataLines.push(_line);
+      continue;
+    }
+    if (_line.trim() === "return {") {
+      _line = "export const wikiVendorData: WikiVendorData = {";
+      mappedWikiDataLines.push(_line);
+      continue;
+    }
+    if (/[a-zA-Z0-9\- ]+ = ./.test(_line)) {
+      _line = _line.replace(/([a-zA-Z0-9\- ]+) = (.)/g, "$1: $2");
+    }
+    if (/\[["'][a-zA-Z0-9\-' ]+["']\] = ./.test(_line)) {
+      _line = _line.replace(
+        /\[["']([a-zA-Z0-9\-' ]+)["']\] = (.)/g,
+        '"$1": $2'
+      );
+    }
+
+    if (/Ranks: \{ \[0\] = .+\},?/.test(_line)) {
+      const rankNames = _line.match(/Ranks: \{ \[0\] = ([^}]+) \},?/);
+      const rankArray = rankNames![1]
+        .split(", ")
+        .map((r) => r.trim().replace(/"(.+)"/, "$1"));
+      const indentation = _line.match(/^(\s*)/)![1];
+      _line =
+        indentation +
+        "Ranks: [" +
+        rankArray.map((r) => `"${r}"`).join(", ") +
+        "],";
+    }
+
+    if (/\w+: \{ .+\},?/.test(_line)) {
+      _line = _line.replace(/(\w+): \{ (.+) \},?/, "$1: [ $2 ],");
+    }
+
+    if (_line.trim() === "Offerings: {") {
+      _line = _line.replace("Offerings: {", "Offerings: [");
+      inOfferingsArray = true;
+    }
+
+    if (inOfferingsArray) {
+      if (/\{.+\},?/.test(_line)) {
+        _line = handleSingleLineOffering(_line);
+      }
+
+      if (/^},?$/.test(_line.trim()) && !inComplexOffering) {
+        _line = _line.replace("},", "],");
+        inOfferingsArray = false;
+      }
+
+      if (_line.trim() === "{" && !inComplexOffering) {
+        inComplexOffering = true;
+      }
+
+      if (inComplexOffering) {
+        if (_line.trim() === "{") {
+          complexOfferingDepth += 1;
+        }
+
+        if (/^},?$/.test(_line.trim())) {
+          complexOfferingDepth -= 1;
+        }
+
+        complexOfferingLines.push(_line);
+
+        if (complexOfferingDepth === 0) {
+          const asSingleLine = complexOfferingLines
+            .join(" ")
+            .replace(/(\S)\s\s+/g, "$1 ");
+          // mappedWikiDataLines.push(asSingleLine);
+          mappedWikiDataLines.push(handleSingleLineOffering(asSingleLine));
+          inComplexOffering = false;
+          complexOfferingLines = [];
+        }
+
+        continue;
+      }
+    }
+    mappedWikiDataLines.push(_line);
+  }
+
+  fs.writeFileSync(
+    path.join(
+      path.dirname(url.fileURLToPath(import.meta.url)),
+      "../processed-data/wiki-vendor-data.ts"
+    ),
+    `export type WikiVendorData = {
+  Vendors: {
+    [VendorName: string]: {
+      Currency?: string | string[];
+      Link: string;
+      Name: string;
+      Offerings: {
+        Name?: string;
+        Type: string;
+        Price: number | { [Currency: string]: number };
+        Limit?: number;
+        Timer?: number;
+        Prereq?: number | string;
+        Credits?: number;
+        Standing?: number;
+      }[];
+      Ranks?: string[];
+      Type: string;
+    };
+  };
+};
+
+${mappedWikiDataLines.join("\n")}`
   );
 })();

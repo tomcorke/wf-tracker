@@ -95,6 +95,8 @@
   }
 
   .sourceList {
+    margin: 5px 0;
+
     .sourceListTitle {
       display: flex;
       flex-flow: row nowrap;

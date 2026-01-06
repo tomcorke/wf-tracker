@@ -2006,7 +2006,7 @@
   "/Lotus/Powersuits/Archwing/SupportJetPack/SupportJetPack": [
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/SupportArchwing/SupportArchwingBlueprint",
-      "name": "<ARCHWING> Amesha Blueprint"
+      "name": "Amesha Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/SupportArchwing/SupportArchwingChassisBlueprint",
@@ -2024,7 +2024,7 @@
   "/Lotus/Powersuits/Archwing/DemolitionJetPack/DemolitionJetPack": [
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/DemolitionArchwing/DemolitionArchwingBlueprint",
-      "name": "<ARCHWING> Elytron Blueprint"
+      "name": "Elytron Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/DemolitionArchwing/DemolitionArchwingChassisBlueprint",
@@ -2042,7 +2042,7 @@
   "/Lotus/Powersuits/Archwing/StealthJetPack/StealthJetPack": [
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/StealthArchwing/StealthArchwingBlueprint",
-      "name": "<ARCHWING> Itzal Blueprint"
+      "name": "Itzal Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/StealthArchwing/StealthArchwingChassisBlueprint",
@@ -2060,7 +2060,7 @@
   "/Lotus/Powersuits/Archwing/StandardJetPack/StandardJetPack": [
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/StandardArchwing/StandardArchwingBlueprint",
-      "name": "<ARCHWING> Odonata Blueprint"
+      "name": "Odonata Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/StandardArchwing/StandardArchwingChassisBlueprint",
@@ -2078,7 +2078,7 @@
   "/Lotus/Powersuits/Archwing/PrimeJetPack/PrimeJetPack": [
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/PrimeArchwing/PrimeArchwingBlueprint",
-      "name": "<ARCHWING> Odonata Prime Blueprint"
+      "name": "Odonata Prime Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/PrimeArchwing/PrimeArchwingChassisBlueprint",
@@ -2543,12 +2543,6 @@
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BoltorPrimeStock",
       "name": "Boltor Prime Stock"
-    }
-  ],
-  "/Lotus/Weapons/Tenno/Rifle/Rifle": [
-    {
-      "uniqueName": "/Lotus/Types/Recipes/Weapons/BratonBlueprint",
-      "name": "Braton Blueprint"
     }
   ],
   "/Lotus/Weapons/Tenno/Rifle/BratonPrime": [
@@ -4211,14 +4205,6 @@
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/AklexBlueprint",
       "name": "Aklex Blueprint"
-    },
-    {
-      "uniqueName": "/Lotus/Weapons/Tenno/Pistol/HeavyPistol",
-      "name": "Lex"
-    },
-    {
-      "uniqueName": "/Lotus/Weapons/Tenno/Pistol/HeavyPistol",
-      "name": "Lex"
     }
   ],
   "/Lotus/Weapons/Tenno/Akimbo/AkLexPrimePistols": [
@@ -4447,10 +4433,6 @@
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/BoltoBlueprint",
       "name": "Bolto Blueprint"
-    },
-    {
-      "uniqueName": "/Lotus/Types/Recipes/Weapons/LatoBlueprint",
-      "name": "Lato Blueprint"
     }
   ],
   "/Lotus/Weapons/Grineer/Pistols/GrineerHandShotgun/GrineerHandCannon": [
@@ -4811,12 +4793,6 @@
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/Evolving/ZarimanHeavyPistolBlueprint",
       "name": "Laetum Blueprint"
-    }
-  ],
-  "/Lotus/Weapons/Tenno/Pistol/Pistol": [
-    {
-      "uniqueName": "/Lotus/Types/Recipes/Weapons/LatoBlueprint",
-      "name": "Lato Blueprint"
     }
   ],
   "/Lotus/Weapons/Tenno/Pistol/LatoVandal": [
@@ -7586,7 +7562,7 @@
   "/Lotus/Weapons/Tenno/Archwing/Melee/ArchSwordHook/ArchHookSwordWeapon": [
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/ArchHookSwordBlueprint",
-      "name": "<ARCHWING> Agkuza Blueprint"
+      "name": "Agkuza Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ArchHookSwordBlade",
@@ -7604,7 +7580,7 @@
   "/Lotus/Weapons/Tenno/Archwing/Melee/Archswordandshield/ArchSwordShield": [
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/ArchSwordShieldBlueprint",
-      "name": "<ARCHWING> Centaur Blueprint"
+      "name": "Centaur Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ArchSwordShieldBlade",
@@ -7622,7 +7598,7 @@
   "/Lotus/Weapons/Tenno/Archwing/Melee/ArchScythe/ArchScythe": [
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/ArchScytheBlueprint",
-      "name": "<ARCHWING> Kaszas Blueprint"
+      "name": "Kaszas Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ArchScytheBlade",
@@ -7636,7 +7612,7 @@
   "/Lotus/Weapons/Tenno/Archwing/Melee/GrnArchHand/GrnArchHandWeapon": [
     {
       "uniqueName": "/Lotus/Weapons/ClanTech/Chemical/GrnArchHandBlueprint",
-      "name": "<ARCHWING> Knux Blueprint"
+      "name": "Knux Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/FuraxBlueprint",
@@ -7646,7 +7622,7 @@
   "/Lotus/Weapons/Tenno/Archwing/Melee/Archaxe/ArchAxeWeapon": [
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/ArchAxeBlueprint",
-      "name": "<ARCHWING> Onorix Blueprint"
+      "name": "Onorix Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ArchAxeBlade",
@@ -7664,7 +7640,7 @@
   "/Lotus/Weapons/Tenno/Archwing/Melee/ArchHammer/ArchHammer": [
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/ArchHammerBlueprint",
-      "name": "<ARCHWING> Rathbone Blueprint"
+      "name": "Rathbone Blueprint"
     },
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ArchHammerHead",
@@ -7678,7 +7654,7 @@
   "/Lotus/Weapons/Tenno/Archwing/Melee/Archsword/ArchSwordWeapon": [
     {
       "uniqueName": "/Lotus/Types/Recipes/Weapons/VerituxBlueprint",
-      "name": "<ARCHWING> Veritux Blueprint"
+      "name": "Veritux Blueprint"
     }
   ],
   "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetComponents/CryoxionWeapon": [

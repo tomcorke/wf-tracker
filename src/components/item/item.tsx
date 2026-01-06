@@ -98,13 +98,13 @@ const formatSources = (sources: { source: string[]; type: string }[]) => {
   if (sources.length === 0) {
     return (
       <div className={STYLES.sourceList}>
-        No known drop sources for item, possibly available from vendor
+        No sources in known data - check market or clan dojo?
       </div>
     );
   }
   return (
     <div className={STYLES.sourceList}>
-      <div className={STYLES.sourceListTitle}>Sources:</div>
+      {/* <div className={STYLES.sourceListTitle}>Sources:</div> */}
       <ul>
         {sources.map((source, index) => (
           <li key={index}>
@@ -117,17 +117,66 @@ const formatSources = (sources: { source: string[]; type: string }[]) => {
   );
 };
 
-const formatDetails = (uniqueName: string) => {
-  const ingredients = formatIngredients(getItemRecipeParts(uniqueName));
-  const sources = formatSources(
-    getItemRecipeParts(uniqueName).flatMap((part) =>
-      getItemSources(part.uniqueName)
-    )
+const formatDetails = (uniqueName: string, displayName: string) => {
+  // old version to display all sources after all ingredients
+  // const ingredients = formatIngredients(getItemRecipeParts(uniqueName));
+  // const sources = formatSources([
+  //   ...getItemSources(uniqueName, displayName),
+  //   ...getItemRecipeParts(uniqueName).flatMap((part) =>
+  //     getItemSources(part.uniqueName, part.name)
+  //   ),
+  // ]);
+  // return (
+  //   <>
+  //     {ingredients}
+  //     {sources}
+  //     <div
+  //       style={{ font: "9px monospace", wordBreak: "break-word", opacity: 0.7 }}
+  //     >
+  //       {uniqueName}
+  //     </div>
+  //   </>
+  // );
+
+  // now we want to display sources for whole item
+  // then per ingredient:
+  //   list ingredient
+  //   sources for ingredient
+
+  const itemSources = getItemSources(uniqueName, displayName);
+  const formattedItemSources = formatSources(itemSources);
+  const itemParts = getItemRecipeParts(uniqueName);
+  const itemPartSources = itemParts.map((part) => ({
+    part,
+    sources: getItemSources(part.uniqueName, part.name),
+  }));
+
+  const ingredientElements = itemPartSources.map(
+    ({ part, sources: partSources }, i) => {
+      const formattedPartSources = formatSources(partSources);
+      return (
+        <li
+          key={`${part.uniqueName}_section_${i}`}
+          className={STYLES.ingredientSection}
+        >
+          <div className={STYLES.ingredientName}>{part.name}</div>
+          {formattedPartSources}
+        </li>
+      );
+    }
   );
+
   return (
     <>
-      {ingredients}
-      {sources}
+      {itemSources.length > 0 || ingredientElements.length === 0
+        ? formattedItemSources
+        : null}
+      {ingredientElements.length > 0 ? (
+        <div className={STYLES.ingredientList}>
+          <div className={STYLES.ingredientListTitle}>Blueprints/Parts:</div>
+          <ul>{ingredientElements}</ul>
+        </div>
+      ) : null}
       <div
         style={{ font: "9px monospace", wordBreak: "break-word", opacity: 0.7 }}
       >
@@ -149,7 +198,10 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
     []
   );
 
-  const detailsContent = useMemo(() => formatDetails(uniqueName), [uniqueName]);
+  const detailsContent = useMemo(
+    () => formatDetails(uniqueName, displayName),
+    [uniqueName, displayName]
+  );
 
   return (
     <BaseItem>
@@ -206,9 +258,9 @@ export const ItemWithPrime = ({
   const detailsContent = useMemo(
     () =>
       detailsState === "base"
-        ? formatDetails(baseUniqueName)
+        ? formatDetails(baseUniqueName, baseDisplayName)
         : detailsState === "prime"
-        ? formatDetails(primeUniqueName)
+        ? formatDetails(primeUniqueName, primeDisplayName)
         : null,
     [detailsState, baseUniqueName, primeUniqueName]
   );
