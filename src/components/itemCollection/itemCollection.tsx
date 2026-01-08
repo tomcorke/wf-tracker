@@ -96,7 +96,7 @@ export const ItemCollection = <
     <div className={STYLES.ItemCollection}>
       <div className={STYLES.title}>
         <span>{title}</span>
-        <CollectionCounter items={items} />
+        <CollectionCounter items={filteredItems} />
       </div>
       {baseItems.map((baseItem) => {
         const primeItem = primes?.get(baseItem);

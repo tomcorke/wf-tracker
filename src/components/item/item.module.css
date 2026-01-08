@@ -133,6 +133,18 @@
     flex-flow: column nowrap;
     gap: 1em;
 
+    .priceContainer {
+      &:empty,
+      &:has(.priceDisplay:empty) {
+        display: none;
+      }
+
+      .priceValue {
+        font-weight: bold;
+        color: cyan;
+      }
+    }
+
     .vaultedIndicator {
       padding: 5px;
       background: linear-gradient(

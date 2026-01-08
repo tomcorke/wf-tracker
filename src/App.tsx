@@ -14,6 +14,36 @@ import { NECRAMECHS } from "./processed-data/necramechs";
 import { SENTINELWEAPONS } from "./processed-data/sentinelWeapons";
 import { Metadata } from "./components/Metadata";
 import { useState } from "react";
+import { DataSet } from "./data-types";
+import { useDataStore } from "./components/storage/data-store";
+import { useShallow } from "zustand/shallow";
+
+import metadata from "./data/build-metadata.json";
+
+const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
+  const itemStates = useDataStore(
+    useShallow((store) =>
+      datasets.flatMap((ds) =>
+        ds.items.map((item) =>
+          store.itemStates[item.uniqueName]?.mastered ? true : false
+        )
+      )
+    )
+  );
+  const asBinaryString = itemStates
+    .map((state) => (state ? "1" : "0"))
+    .join("");
+  const asNumber = BigInt("0b" + asBinaryString);
+  const asText = asNumber.toString(36);
+  const commitSha = metadata.commitSha;
+  const commitShaAsNumber = BigInt("0x" + commitSha);
+  const commitShaAsText = commitShaAsNumber.toString(36);
+  return (
+    <div className={STYLES.shareLink}>
+      {commitShaAsText}:{asText}
+    </div>
+  );
+};
 
 function App() {
   const [filterText, setFilterText] = useState("");
@@ -38,6 +68,23 @@ function App() {
                 ×
               </div>
             ) : null}
+          </div>
+          <div className={STYLES.share}>
+            <ShareLink
+              datasets={[
+                WARFRAMES,
+                PRIMARYWEAPONS,
+                SECONDARYWEAPONS,
+                MELEEWEAPONS,
+                ARCHWINGS,
+                ARCHWINGGUNS,
+                ARCHWINGMELEE,
+                SENTINELS,
+                KUBROWS,
+                NECRAMECHS,
+                SENTINELWEAPONS,
+              ]}
+            />
           </div>
         </div>
         <div className={STYLES.container}>

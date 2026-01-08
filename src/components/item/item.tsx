@@ -1,3 +1,4 @@
+import { Suspense, use } from "react";
 import { getItemRecipeParts } from "../../processed-data/itemRecipes";
 // import { Button } from "../button";
 import { ItemState, useDataStore, useItemData } from "../storage/data-store";
@@ -9,6 +10,10 @@ import {
   primeResurgenceItems,
   vaultedPrimeItems,
 } from "../../processed-data/vaulted-items";
+import {
+  useWarframeMarket,
+  WarframeMarketDataStore,
+} from "../storage/warframe-market";
 
 const formatName = (name: string) => {
   return name.replace("<ARCHWING>", "");
@@ -81,6 +86,38 @@ const formatSources = (sources: { source: string[]; type: string }[]) => {
           </li>
         ))}
       </ul>
+    </div>
+  );
+};
+
+const priceFetchPromises: Record<
+  string,
+  Promise<Awaited<ReturnType<WarframeMarketDataStore["getItemSetPrice"]>>>
+> = {};
+
+const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
+  const { getItemSetPrice, getItemPrice } = useWarframeMarket();
+  if (!priceFetchPromises[uniqueName]) {
+    priceFetchPromises[uniqueName] = getItemSetPrice(uniqueName);
+    setTimeout(() => delete priceFetchPromises[uniqueName], 5 * 60 * 1000); // cache for 5 minutes
+  }
+  const priceResult = use(priceFetchPromises[uniqueName]);
+  return (
+    <div className={STYLES.priceDisplay}>
+      {priceResult === "item-not-found" || !priceResult ? null : priceResult ===
+        "no-sell-orders" ? (
+        "No sell orders found"
+      ) : (
+        <>
+          Lowest set price:{" "}
+          <span className={STYLES.priceValue}>{priceResult.price}p</span>
+          <div className={STYLES.warframeMarketLink}>
+            <a href={priceResult.url} target="_blank" rel="noopener noreferrer">
+              View on Warframe Market
+            </a>
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -164,6 +201,11 @@ const formatDetails = (uniqueName: string, displayName: string) => {
     <>
       {isVaulted}
       {isInPrimeResurgence}
+      <div className={STYLES.priceContainer}>
+        <Suspense fallback={<span>Fetching price...</span>}>
+          <PriceDisplay uniqueName={uniqueName} />
+        </Suspense>
+      </div>
       {itemSources.length > 0 || ingredientElements.length === 0
         ? formattedItemSources
         : null}
