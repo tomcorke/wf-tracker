@@ -7,7 +7,7 @@ import { Section } from "../section";
 type ProfileData = {};
 
 const accountIdPattern = /^[a-f0-9]{24}$/;
-const getProfileDataUrl = (accountId: string) => "";
+const getProfileDataUrl = (accountId: string) => `dummy-url-${accountId}`;
 // `http://localhost:8080/https://content.warframe.com/dynamic/getProfileViewingData.php?playerId=${accountId}`;
 
 let profileDataPromise: Promise<ProfileData | null> | null = null;

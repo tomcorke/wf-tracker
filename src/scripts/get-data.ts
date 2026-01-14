@@ -11,7 +11,6 @@ import {
 import fs from "fs";
 import path from "path";
 import url from "url";
-import * as chalk from "chalk";
 
 (async () => {
   const {

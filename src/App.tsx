@@ -25,9 +25,6 @@ import metadata from "./data/build-metadata.json";
 import { ZAWS } from "./processed-data/zaws";
 import { KITGUNS } from "./processed-data/kitguns";
 import { AMPS } from "./processed-data/amps";
-import { MOA } from "./processed-data/moa";
-import { HOUNDS } from "./processed-data/hounds";
-import { Item } from "./components/item";
 import { MODULARCOMPANIONS } from "./processed-data/modularCompanions";
 
 const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
