@@ -187,7 +187,11 @@ export const getDataset = async () => {
       // /Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartA
       /\/Lotus\/Weapons\/Corpus\/OperatorAmplifiers\/Set[0-9]\/Barrel\/CorpAmpSet[0-9]BarrelPart[A-Z]/.test(
         w.uniqueName
-      )
+      ) ||
+      [
+        "/Lotus/Weapons/Sentients/OperatorAmplifiers/SentTrainingAmplifier/SentAmpTrainingBarrel",
+        "/Lotus/Weapons/Operator/Pistols/DrifterPistol/DrifterPistolPlayerWeapon",
+      ].includes(w.uniqueName)
   );
 
   const modularCompanions = nonSlotWeapons.filter(
