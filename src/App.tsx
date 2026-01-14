@@ -1,3 +1,6 @@
+import { useShallow } from "zustand/shallow";
+import { useState } from "react";
+
 import STYLES from "./App.module.css";
 
 import { ItemCollection } from "./components/itemCollection";
@@ -9,16 +12,23 @@ import { ARCHWINGS } from "./processed-data/archwings";
 import { ARCHWINGGUNS } from "./processed-data/archwingGuns";
 import { ARCHWINGMELEE } from "./processed-data/archwingMelee";
 import { SENTINELS } from "./processed-data/sentinels";
-import { KUBROWS } from "./processed-data/kubrows";
 import { NECRAMECHS } from "./processed-data/necramechs";
 import { SENTINELWEAPONS } from "./processed-data/sentinelWeapons";
+import { OTHERWEAPONS } from "./processed-data/otherWeapons";
+import { COMPANIONS } from "./processed-data/companions";
+
 import { Metadata } from "./components/Metadata";
-import { useState } from "react";
 import { DataSet } from "./data-types";
 import { useDataStore } from "./components/storage/data-store";
-import { useShallow } from "zustand/shallow";
 
 import metadata from "./data/build-metadata.json";
+import { ZAWS } from "./processed-data/zaws";
+import { KITGUNS } from "./processed-data/kitguns";
+import { AMPS } from "./processed-data/amps";
+import { MOA } from "./processed-data/moa";
+import { HOUNDS } from "./processed-data/hounds";
+import { Item } from "./components/item";
+import { MODULARCOMPANIONS } from "./processed-data/modularCompanions";
 
 const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
   const itemStates = useDataStore(
@@ -49,7 +59,7 @@ function App() {
   const [filterText, setFilterText] = useState("");
 
   return (
-    <>
+    <div className={STYLES.App}>
       <div className={STYLES.outer}>
         <div className={STYLES.header}>
           <div className={STYLES.filterInputWrapper}>
@@ -80,9 +90,10 @@ function App() {
                 ARCHWINGGUNS,
                 ARCHWINGMELEE,
                 SENTINELS,
-                KUBROWS,
+                COMPANIONS,
                 NECRAMECHS,
                 SENTINELWEAPONS,
+                OTHERWEAPONS,
               ]}
             />
           </div>
@@ -115,6 +126,11 @@ function App() {
               filter={filterText}
             />
             <ItemCollection
+              title="Necramechs"
+              itemDataSet={NECRAMECHS}
+              filter={filterText}
+            />
+            <ItemCollection
               title="Archwing Guns"
               itemDataSet={ARCHWINGGUNS}
               filter={filterText}
@@ -139,13 +155,31 @@ function App() {
           </div>
           <div className={STYLES.stacked}>
             <ItemCollection
-              title="Kubrows"
-              itemDataSet={KUBROWS}
+              title="Companions"
+              itemDataSet={COMPANIONS}
+              filter={filterText}
+              groupBy={(item) => item.name.split(" ")[1] || item.name}
+            />
+            <ItemCollection
+              title="Modular Companions"
+              itemDataSet={MODULARCOMPANIONS}
+              filter={filterText}
+            />
+          </div>
+          <div className={STYLES.stacked}>
+            <ItemCollection
+              title="Zaws"
+              itemDataSet={ZAWS}
               filter={filterText}
             />
             <ItemCollection
-              title="Necramechs"
-              itemDataSet={NECRAMECHS}
+              title="Kitguns"
+              itemDataSet={KITGUNS}
+              filter={filterText}
+            />
+            <ItemCollection
+              title="Amps"
+              itemDataSet={AMPS}
               filter={filterText}
             />
           </div>
@@ -153,7 +187,7 @@ function App() {
         <div className={STYLES.tasksContainer}></div>
         <Metadata />
       </div>
-    </>
+    </div>
   );
 }
 

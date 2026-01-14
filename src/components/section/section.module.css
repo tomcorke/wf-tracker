@@ -1,0 +1,90 @@
+.Section {
+  --item-row-height: 20px;
+
+  --header-background-color: #222;
+  --details-background-color: #181818;
+  --vaulted-color: #96355f;
+  --prime-resurgence-color: #2e71be;
+  --mastered-color: #3c9672;
+
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 5px;
+  width: 250px;
+
+  .title {
+    font-size: 18px;
+    height: 40px;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &.removeItemPadding {
+    .row {
+      & > span,
+      & > div,
+      & > a {
+        padding: 0;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    gap: 5px;
+    background: var(--header-background-color);
+
+    min-width: 240px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    line-height: var(--item-row-height);
+
+    flex-shrink: 0;
+
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 14px;
+
+    a {
+      color: white;
+    }
+
+    & > span,
+    & > div,
+    & > a {
+      padding: 0 5px;
+    }
+
+    & > a {
+      color: cyan;
+    }
+
+    & > input,
+    & > button {
+      margin: 0;
+      border: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--header-background-color);
+      color: white;
+      padding: 0 5px;
+    }
+
+    & > button {
+      background: var(--mastered-color);
+      cursor: pointer;
+
+      &:disabled {
+        background: var(--vaulted-color);
+      }
+    }
+  }
+}

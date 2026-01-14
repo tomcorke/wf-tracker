@@ -4,11 +4,13 @@ import { ItemWithPrime } from "../item/item";
 import STYLES from "./itemCollection.module.css";
 import { useDataStore } from "../storage/data-store";
 import { DataSet } from "../../data-types";
+import { Section } from "../section";
 
 type ItemCollectionProps<K extends string, T> = {
   itemDataSet: DataSet<K, T>;
   title: string;
   filter?: string;
+  groupBy?: (item: T) => string;
 };
 
 const isPrime = <T extends { name: string }>(item: T): boolean =>
@@ -45,34 +47,21 @@ export const ItemCollection = <
   itemDataSet,
   title,
   filter,
+  groupBy,
 }: ItemCollectionProps<K, T>) => {
   const useFilter = filter && filter.trim().length > 0;
 
   const { items, primes } = itemDataSet;
 
-  const filteredItems = useFilter
+  let filteredItems = useFilter
     ? items.filter((item) =>
         item.name.toLowerCase().includes((filter || "").toLowerCase())
       )
     : items;
 
-  const collectionHasPrimes = filteredItems.some(isPrime);
-
-  if (!collectionHasPrimes) {
-    return (
-      <div className={STYLES.ItemCollection}>
-        <div className={STYLES.title}>
-          <span>{title}</span>
-          <CollectionCounter items={items} />
-        </div>
-        {filteredItems.map((item) => (
-          <Item
-            key={item.uniqueName}
-            uniqueName={item.uniqueName}
-            displayName={item.name}
-          />
-        ))}
-      </div>
+  if (groupBy) {
+    filteredItems = filteredItems.sort((a, b) =>
+      groupBy(a).localeCompare(groupBy(b))
     );
   }
 
@@ -93,11 +82,15 @@ export const ItemCollection = <
     });
 
   return (
-    <div className={STYLES.ItemCollection}>
-      <div className={STYLES.title}>
-        <span>{title}</span>
-        <CollectionCounter items={filteredItems} />
-      </div>
+    <Section
+      title={
+        <>
+          <span>{title}</span>
+          <CollectionCounter items={filteredItems} />
+        </>
+      }
+      removePadding
+    >
       {baseItems.map((baseItem) => {
         const primeItem = primes?.get(baseItem);
         if (primeItem) {
@@ -120,6 +113,6 @@ export const ItemCollection = <
           );
         }
       })}
-    </div>
+    </Section>
   );
 };

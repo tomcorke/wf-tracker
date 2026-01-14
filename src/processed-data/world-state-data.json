@@ -1,0 +1,257 @@
+{
+  "PrimeVaultTraders": [
+    {
+      "Manifest": [
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVVoltLokiPrimeDualPack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVMesaHydroidPrimeDualPack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVInarosAshPrimeDualPack"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VanguardVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VanguardVaultBBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VanguardVaultCBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VanguardVaultDBronze"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVMesaPrimeSinglePack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVAshPrimeSinglePack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVEmberPrimeSinglePack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVVoltPrimeSinglePack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVEmberFrostPrimeDualPack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVHydroidPrimeSinglePack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVLokiPrimeSinglePack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVInarosPrimeSinglePack"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVFrostPrimeSinglePack"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Cowgirl/MesaPrime"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVOperatorPrimeAccessories"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Cowgirl/MesaPrimeAltHelmet"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/MeleeDangles/PrimeDangleF"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Pistols/PrimeAkjagara/AkJagaraPrime"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Gunblade/RedeemerPrime/RedeemerPrimeWep"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Pirate/HydroidPrime"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVSpritsailPrimeArmorSet"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/MeleeDangles/PrimeDangleEMeleeDangle"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Swords/PrimeNamiSkyla/PrimeNamiSkyla"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Pistols/PrimeBallistica/PrimeBallistica"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/MesaPrimeBobbleHead"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/HydroidPrimeBobbleHead"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionMesaHydroidVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionMesaHydroidVaultBBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionMesaHydroidVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionMesaHydroidVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionMesaHydroidVaultBBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionMesaHydroidVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Sandman/InarosPrime"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVMittahkPrimeArmorSet"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/PrimeInarosSyandana"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/LongGuns/PrimePanthera/PrimePanthera"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Swords/PrimeKaryst/PrimeKrisDagger"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Ninja/AshPrime"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVUndaPrimeSentAccessories"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/YamakoPrimeScarf"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Sentinels/SentinelPowersuits/PrimeCarrierPowerSuit"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/LongGuns/PrimeVectis/PrimeVectisRifle"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/InarosPrimeBobbleHead"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/AshPrimeBobbleHead"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionInarosAshVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionInarosAshVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionInarosAshVaultBBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionInarosAshVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionInarosAshVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionInarosAshVaultBBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Volt/VoltPrime"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/MeleeDangles/KazeruPrimeMeleeDangle"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVEdoPrimeArmorSet"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Archwing/PrimeJetPack/PrimeJetPack"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Loki/LokiPrime"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/MeleeDangles/PrimeMeleeDangle"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVSummusPrimeSentAccessories"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Staff/PrimeBo/PrimeBoWeapon"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Sentinels/SentinelPowersuits/PrimeWyrmPowerSuit"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/VoltPrimeBobbleHead"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/LokiPrimeBobbleHead"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionLokiVoltVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionLokiVoltVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionLokiVoltVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionLokiVoltVaultABronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Pistols/PrimeSicarus/PrimeSicarusPistol"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Ember/EmberPrime"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Glaives/PrimeGlaive/PrimeGlaiveWeapon"
+        },
+        {
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVTitanPrimeSet"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/PrimeFlameScarf"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Powersuits/Frost/FrostPrime"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Rifle/LatronPrime"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Scythe/ReaperWeapon"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/PrimeScarf"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/EmberPrimeBobbleHead"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/FrostPrimeBobbleHead"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionQBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionQBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionQBronze"
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionQBronze"
+        }
+      ]
+    }
+  ]
+}

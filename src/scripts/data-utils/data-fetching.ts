@@ -11,6 +11,7 @@ import {
   SentinelDataSchema,
   WarframeDataSchema,
   WeaponDataSchema,
+  WorldStateSchema,
 } from "../../data-types.ts";
 
 // https://wiki.warframe.com/w/Public_Export
@@ -115,7 +116,7 @@ export const getDataset = async () => {
     (c) => c.productCategory === "Sentinels"
   );
 
-  const kubrows = allCompanions.filter(
+  const companions = allCompanions.filter(
     (c) => c.productCategory === "KubrowPets"
   );
 
@@ -159,6 +160,47 @@ export const getDataset = async () => {
     (w) => w.productCategory === "SentinelWeapons"
   );
 
+  const nonSlotWeapons = allWeapons.filter(
+    (w) =>
+      (w.productCategory === "LongGuns" || w.productCategory === "Pistols") &&
+      w.slot === undefined
+  );
+
+  const zaws = nonSlotWeapons.filter(
+    (w) =>
+      w.uniqueName.includes("/Lotus/Weapons/Ostron/Melee/ModularMelee") &&
+      w.uniqueName.includes("/Tip/Tip")
+  );
+
+  const kitguns = nonSlotWeapons.filter(
+    (w) =>
+      w.uniqueName.includes(
+        "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/"
+      ) || w.uniqueName.includes("/InfKitGun/Barrels/")
+  );
+
+  const amps = nonSlotWeapons.filter(
+    (w) =>
+      /\/Lotus\/Weapons\/Sentients\/OperatorAmplifiers\/Set[0-9]\/Barrel\/SentAmpSet[0-9]BarrelPart[A-Z]/.test(
+        w.uniqueName
+      ) ||
+      // /Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartA
+      /\/Lotus\/Weapons\/Corpus\/OperatorAmplifiers\/Set[0-9]\/Barrel\/CorpAmpSet[0-9]BarrelPart[A-Z]/.test(
+        w.uniqueName
+      )
+  );
+
+  const modularCompanions = nonSlotWeapons.filter(
+    (w) =>
+      // /Lotus/Types/Friendly/Pets/MoaPets
+      w.uniqueName.startsWith(
+        "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetHead"
+      ) ||
+      w.uniqueName.startsWith(
+        "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartHead"
+      )
+  );
+
   const allResources = z
     .array(MiscItemSchema)
     .parse(dataRecord.Resources.ExportResources);
@@ -171,12 +213,16 @@ export const getDataset = async () => {
       )
   );
 
+  const relics = z
+    .array(MiscItemSchema)
+    .parse(dataRecord.RelicArcane.ExportRelicArcane);
+
   return {
     warframes,
     archwings,
     necramechs,
     sentinels,
-    kubrows,
+    companions,
     specialCompanions,
     primaryWeapons,
     secondaryWeapons,
@@ -191,6 +237,12 @@ export const getDataset = async () => {
     allFrames,
     allCompanions,
     allWeapons,
+    nonSlotWeapons,
+    zaws,
+    kitguns,
+    amps,
+    modularCompanions,
+    relics,
   };
 };
 
@@ -299,6 +351,17 @@ export const getDropTableData = async (relevantItemNames: Set<string>) => {
           sourceParts.push(subCategory);
         }
 
+        let part = "-";
+        while (part !== "") {
+          part = cell.first().text().trim();
+          if (part) {
+            sourceParts.push(part);
+          } else {
+            break;
+          }
+          cell = cell.next("td");
+        }
+
         const dropData: DropData = { source: sourceParts, type: header };
         const existingData = dropTableData.get(itemName) || [];
         if (
@@ -313,4 +376,161 @@ export const getDropTableData = async (relevantItemNames: Set<string>) => {
   }
 
   return dropTableData;
+};
+
+export const processWikiVendorData = () => {
+  const wikiData = fs.readFileSync(
+    path.join(
+      path.dirname(url.fileURLToPath(import.meta.url)),
+      "../../data/wiki-vendor-data.txt"
+    ),
+    "utf-8"
+  );
+
+  const wikiDataLines = wikiData.split("\n");
+  const mappedWikiDataLines: string[] = [];
+
+  let inOfferingsArray = false;
+  let inComplexOffering = false;
+  let complexOfferingLines: string[] = [];
+  let complexOfferingDepth = 0;
+
+  const isNumericString = (value: unknown) => {
+    return /^-?\d+(\.\d+)?$/.test(String(value));
+  };
+
+  const isQuotedString = (value: unknown) => {
+    return /^["'].*["']$/.test(String(value));
+  };
+
+  const handleSingleLineOffering = (line: string) => {
+    // convert to JSON-like array
+    let _line = line;
+    _line = _line.replace(/^(\s*)\{(.+)\}(.*)$/, "$1[$2]$3");
+
+    // extract named properties
+    const namedElements = Array.from(_line.matchAll(/(\w+): ([^,}\]]+)/g));
+    // and remove from JSON-like array
+    for (const n of namedElements) {
+      _line = _line.replace(n[0], "");
+    }
+    // parse array, removing trailing commas
+    _line = _line.replace(/,\s*$/, "");
+    while (/, [\]\}]/.test(_line)) {
+      _line = _line.replace(/, ([\]\}])/, "$1");
+    }
+    const elements = JSON.parse(_line);
+
+    const indentation = _line.match(/^(\s*)/)![1];
+    const columns = ["Name", "Type", "Price", "Limit"];
+    const offeringData: any = {};
+    for (let i = 0; i < columns.length; i++) {
+      if (elements[i]) {
+        offeringData[columns[i]] = elements[i];
+      }
+    }
+    for (const match of namedElements) {
+      offeringData[match[1]] = match[2].trim();
+    }
+    return `${indentation}{ ${Object.entries(offeringData)
+      .map(
+        ([k, v]) =>
+          `${JSON.stringify(k)}: ${
+            isNumericString(v) || isQuotedString(v) ? v : JSON.stringify(v)
+          }`
+      )
+      .join(", ")} },`;
+  };
+
+  for (const line of wikiDataLines) {
+    let _line = line;
+    if (_line.trim().startsWith("--")) {
+      _line = _line.replace(/--(.+)/, "/* $1 */");
+      mappedWikiDataLines.push(_line);
+      continue;
+    }
+    if (_line.trim() === "return {") {
+      _line = "export const wikiVendorData: WikiVendorData = {";
+      mappedWikiDataLines.push(_line);
+      continue;
+    }
+    if (/[a-zA-Z0-9\- ]+ = ./.test(_line)) {
+      _line = _line.replace(/([a-zA-Z0-9\- ]+) = (.)/g, "$1: $2");
+    }
+    if (/\[["'][a-zA-Z0-9\-' ]+["']\] = ./.test(_line)) {
+      _line = _line.replace(
+        /\[["']([a-zA-Z0-9\-' ]+)["']\] = (.)/g,
+        '"$1": $2'
+      );
+    }
+
+    if (/Ranks: \{ \[0\] = .+\},?/.test(_line)) {
+      const rankNames = _line.match(/Ranks: \{ \[0\] = ([^}]+) \},?/);
+      const rankArray = rankNames![1]
+        .split(", ")
+        .map((r) => r.trim().replace(/"(.+)"/, "$1"));
+      const indentation = _line.match(/^(\s*)/)![1];
+      _line =
+        indentation +
+        "Ranks: [" +
+        rankArray.map((r) => `"${r}"`).join(", ") +
+        "],";
+    }
+
+    if (/\w+: \{ .+\},?/.test(_line)) {
+      _line = _line.replace(/(\w+): \{ (.+) \},?/, "$1: [ $2 ],");
+    }
+
+    if (_line.trim() === "Offerings: {") {
+      _line = _line.replace("Offerings: {", "Offerings: [");
+      inOfferingsArray = true;
+    }
+
+    if (inOfferingsArray) {
+      if (/\{.+\},?/.test(_line)) {
+        _line = handleSingleLineOffering(_line);
+      }
+
+      if (/^},?$/.test(_line.trim()) && !inComplexOffering) {
+        _line = _line.replace("},", "],");
+        inOfferingsArray = false;
+      }
+
+      if (_line.trim() === "{" && !inComplexOffering) {
+        inComplexOffering = true;
+      }
+
+      if (inComplexOffering) {
+        if (_line.trim() === "{") {
+          complexOfferingDepth += 1;
+        }
+
+        if (/^},?$/.test(_line.trim())) {
+          complexOfferingDepth -= 1;
+        }
+
+        complexOfferingLines.push(_line);
+
+        if (complexOfferingDepth === 0) {
+          const asSingleLine = complexOfferingLines
+            .join(" ")
+            .replace(/(\S)\s\s+/g, "$1 ");
+          // mappedWikiDataLines.push(asSingleLine);
+          mappedWikiDataLines.push(handleSingleLineOffering(asSingleLine));
+          inComplexOffering = false;
+          complexOfferingLines = [];
+        }
+
+        continue;
+      }
+    }
+    mappedWikiDataLines.push(_line);
+  }
+  return mappedWikiDataLines;
+};
+
+export const getWorldStateData = async () => {
+  const response = await fetch("https://api.warframe.com/cdn/worldState.php");
+  const data = await response.json();
+  return WorldStateSchema.parse(data);
 };

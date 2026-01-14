@@ -14,16 +14,6 @@
   overflow: hidden;
   font-size: 14px;
 
-  a {
-    color: white;
-    &[href] {
-      &::after {
-        content: " 🔗";
-        display: inline-block;
-      }
-    }
-  }
-
   .Item {
     min-height: var(--item-row-height);
     max-height: var(--item-row-height);
@@ -35,6 +25,8 @@
     gap: 5px;
     background: var(--header-background-color);
     padding: 0 5px;
+
+    min-width: 240px;
 
     cursor: pointer;
 
@@ -182,6 +174,7 @@
 
   .sourceList {
     margin: 5px 0;
+    font-size: 12px;
 
     .sourceListTitle {
       display: flex;
@@ -196,5 +189,26 @@
         list-style-type: disc;
       }
     }
+
+    .sourceRelic {
+      font-weight: bold;
+
+      &.vaulted {
+        color: var(--vaulted-color);
+      }
+      &.primeResurgence {
+        color: var(--prime-resurgence-color);
+      }
+    }
+
+    .sourceSeparator {
+      opacity: 0.6;
+    }
+  }
+
+  .meta {
+    font: 12px monospace;
+    word-break: break-word;
+    opacity: 0.6;
   }
 }

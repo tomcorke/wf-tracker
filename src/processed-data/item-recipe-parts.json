@@ -10516,5 +10516,1001 @@
       "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/InfUziWeaponReceiverBlueprint",
       "name": "Zymos Receiver Blueprint"
     }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartBodyA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartBodyABlueprint",
+      "name": "Adlet Core Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedCritterMutagenA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedCritterMutagenABlueprint",
+      "name": "ADRA MUTAGEN Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetPayloadAegron": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetPayloadAegronBlueprint",
+      "name": "Aegron Gyro Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetEngineArcotek": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetEngineArcotekBlueprint",
+      "name": "Alcrom Core Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set2/Grip/SentAmpSet2GripPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set2/Grip/SentAmpSet2GripPartABlueprint",
+      "name": "Anspatha Brace Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusA/HoverboardCorpusAEngine": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusA/HoverboardCorpusAEngineBlueprint",
+      "name": "Arc Twelve Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Infested/Pistols/InfKitGun/Clips/InfSmallClip/InfModularClipSmallCritStatPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/Infested/Pistols/InfKitGun/Clips/InfSmallClip/InfModularClipSmallCritStatBlueprint",
+      "name": "Arcroid Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedPredatorMutagenC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedPredatorMutagenCBlueprint",
+      "name": "ARIOLI MUTAGEN Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetPayloadThermocor": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetPayloadThermocorBlueprint",
+      "name": "Atheca Gyro Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardSolarisA/HoverboardSolarisADeck": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardSolarisA/HoverboardSolarisADeckBlueprint",
+      "name": "Bad Baby Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipOne": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipOneBlueprint",
+      "name": "Balla Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritICapIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritICapIClipPartBlueprint",
+      "name": "Bashrack Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardSolarisA/HoverboardSolarisAFront": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardSolarisA/HoverboardSolarisAFrontBlueprint",
+      "name": "Beaky Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCapIIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCapIIClipPartBlueprint",
+      "name": "Bellows Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartHeadB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartHeadBBlueprint",
+      "name": "Bhaira Hound Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Primary/SUModularPrimarySet1/Handles/SUModularPrimaryHandleAPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Primary/SUModularPrimarySet1/Handles/SUModularPrimaryHandleAPartBlueprint",
+      "name": "Brash Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartABlueprint",
+      "name": "Cantic Prism Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/SUModularSecondaryBarrelAPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/SUModularSecondaryBarrelAPartBlueprint",
+      "name": "Catchmoon Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartLegsA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartLegsABlueprint",
+      "name": "Cela Bracket Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Grip/CorpAmpSet1GripPartC": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Grip/CorpAmpSet1GripPartCBlueprint",
+      "name": "Certus Brace Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedPredatorMutagenB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedPredatorMutagenBBlueprint",
+      "name": "CHITEN MUTAGEN Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Grip/SentAmpSet1GripPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Grip/SentAmpSet1GripPartABlueprint",
+      "name": "Clapkra Brace Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardSolarisA/HoverboardSolarisAEngine": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardSolarisA/HoverboardSolarisAEngineBlueprint",
+      "name": "Coldfusor Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipFour": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipFourBlueprint",
+      "name": "Cyath Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCapIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCapIClipPartBlueprint",
+      "name": "Deepbreath Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipFive": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipFiveBlueprint",
+      "name": "Dehtat Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedCritterAntigenB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedCritterAntigenBBlueprint",
+      "name": "DESUS ANTIGEN Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBFront": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBFrontBlueprint",
+      "name": "Dink-A-Donk Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Chassis/CorpAmpSet1ChassisPartB": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Chassis/CorpAmpSet1ChassisPartBBlueprint",
+      "name": "Dissic Scaffold Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Tip/TipEleven": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Tip/TipElevenBlueprint",
+      "name": "Dokrahm Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartHeadA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartHeadABlueprint",
+      "name": "Dorma Hound Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetEngineThricore": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetEngineThricoreBlueprint",
+      "name": "Drex Core Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetLegA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetLegABlueprint",
+      "name": "Drimper Bracket Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIStatusII": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIStatusIIBlueprint",
+      "name": "Ekwana II Jai Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIStatusII": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIStatusIIBlueprint",
+      "name": "Ekwana II Ruhang Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIStatusI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIStatusIBlueprint",
+      "name": "Ekwana Jai Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIIStatusI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIIStatusIBlueprint",
+      "name": "Ekwana Jai II Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIStatusI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIStatusIBlueprint",
+      "name": "Ekwana Ruhang Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIIStatusI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIIStatusIBlueprint",
+      "name": "Ekwana Ruhang II Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedPredatorAntigenA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedPredatorAntigenABlueprint",
+      "name": "ELASMUN ANTIGEN Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedCritterMutagenB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedCritterMutagenBBlueprint",
+      "name": "ELSA MUTAGEN Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Chassis/CorpAmpSet1ChassisPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Chassis/CorpAmpSet1ChassisPartABlueprint",
+      "name": "Exard Scaffold Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBJet": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBJetBlueprint",
+      "name": "Fatboys Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardInfestedB/HoverboardInfestedBDeck": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardInfestedB/HoverboardInfestedBDeckBlueprint",
+      "name": "Feverspine Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusA/HoverboardCorpusADeck": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusA/HoverboardCorpusADeckBlueprint",
+      "name": "Flatbelly Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatIIReloadIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatIIReloadIClipPartBlueprint",
+      "name": "Flutterfire Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartTailC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartTailCBlueprint",
+      "name": "Frak Stabilizer Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartBodyB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartBodyBBlueprint",
+      "name": "Garmr Core Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetLegD": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetLegDBlueprint",
+      "name": "Gauth Bracket Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/SUModularSecondaryBarrelDPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/SUModularSecondaryBarrelDPartBlueprint",
+      "name": "Gaze Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Handle/SUModularSecondaryHandleDPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Handle/SUModularSecondaryHandleDPartBlueprint",
+      "name": "Gibber Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartC": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartCBlueprint",
+      "name": "Granmu Prism Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardInfestedB/HoverboardInfestedBEngine": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardInfestedB/HoverboardInfestedBEngineBlueprint",
+      "name": "Gristlebuck Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetPayloadDarta": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetPayloadDartaBlueprint",
+      "name": "Harpen Gyro Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Handle/SUModularSecondaryHandleCPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Handle/SUModularSecondaryHandleCPartBlueprint",
+      "name": "Haymaker Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartHeadC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartHeadCBlueprint",
+      "name": "Hec Hound Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetPayloadHextra": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetPayloadHextraBlueprint",
+      "name": "Hextra Gyro Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusC/HoverboardCorpusCEngine": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusC/HoverboardCorpusCEngineBlueprint",
+      "name": "Highbrow Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartTailB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartTailBBlueprint",
+      "name": "Hinta Stabilizer Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetLegMelee": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetLegMeleeBlueprint",
+      "name": "Hona Bracket Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBEngine": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBEngineBlueprint",
+      "name": "Hothead Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedPredatorAntigenC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedPredatorAntigenCBlueprint",
+      "name": "IBEXAN ANTIGEN Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedPredatorAntigenB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedPredatorAntigenBBlueprint",
+      "name": "IRANON ANTIGEN Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIBlueprint",
+      "name": "Jai Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedII": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIIBlueprint",
+      "name": "Jai II Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleFive": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleFiveBlueprint",
+      "name": "Jayap Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetLegC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetLegCBlueprint",
+      "name": "Jonsin Bracket Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Grip/SentAmpSet1GripPartB": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Grip/SentAmpSet1GripPartBBlueprint",
+      "name": "Juttni Brace Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritIIReloadIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritIIReloadIClipPartBlueprint",
+      "name": "Killstream Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartC": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartCBlueprint",
+      "name": "Klamora Prism Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Chassis/SentAmpSet1ChassisPartC": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Chassis/SentAmpSet1ChassisPartCBlueprint",
+      "name": "Klebrik Scaffold Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Handle/HandleNine": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Handle/HandleNineBlueprint",
+      "name": "Korb Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetEngineKrisys": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetEngineKrisysBlueprint",
+      "name": "Krisys Core Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipSix": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipSixBlueprint",
+      "name": "Kronsh Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleSix": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleSixBlueprint",
+      "name": "Kroostra Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleThree": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleThreeBlueprint",
+      "name": "Kwath Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleTwo": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleTwoBlueprint",
+      "name": "Laka Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetHeadLambeo": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetHeadLambeoBlueprint",
+      "name": "Lambeo Moa Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartB": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartBBlueprint",
+      "name": "Lega Prism Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MeleeMoaPetEngine": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetEngineMeleeBlueprint",
+      "name": "Lehan Core Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedPredatorMutagenA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedPredatorMutagenABlueprint",
+      "name": "LEPTOSAM MUTAGEN Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Grip/SentAmpSet1GripPartC": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Grip/SentAmpSet1GripPartCBlueprint",
+      "name": "Lohrin Brace Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Handle/SUModularSecondaryHandleBPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Handle/SUModularSecondaryHandleBPartBlueprint",
+      "name": "Lovetap Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Infested/Pistols/InfKitGun/Clips/InfClipBig/InfModularClipBigPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/Infested/Pistols/InfKitGun/Clips/InfClipBig/InfModularClipBigBlueprint",
+      "name": "Macro Arcroid Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Infested/Pistols/InfKitGun/Clips/InfClipBig/InfModularClipBigCritStatPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/Infested/Pistols/InfKitGun/Clips/InfClipBig/InfModularClipBigCritStatBlueprint",
+      "name": "Macro Thymoid Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipThree": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipThreeBlueprint",
+      "name": "Mewan Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedPredatorMutagenD": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedPredatorMutagenDBlueprint",
+      "name": "MONACHOD MUTAGEN Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetPayloadMunitron": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetPayloadMunitronBlueprint",
+      "name": "Munit Gyro Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBDeck": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBDeckBlueprint",
+      "name": "Needlenose Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardInfestedB/HoverboardInfestedBFront": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardInfestedB/HoverboardInfestedBFrontBlueprint",
+      "name": "Nodulite Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetHeadMelee": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetHeadMeleeBlueprint",
+      "name": "Nychus Moa Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetHeadOloro": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetHeadOloroBlueprint",
+      "name": "Oloro Moa Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipTwo": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Tip/TipTwoBlueprint",
+      "name": "Ooltha Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Infested/Pistols/InfKitGun/Handles/InfPrimaryHandle/InfModularPrimaryHandlePart": [
+    {
+      "uniqueName": "/Lotus/Weapons/Infested/Pistols/InfKitGun/Handles/InfPrimaryHandle/InfModularPrimaryHandleBlueprint",
+      "name": "Palmaris Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetHeadPara": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetHeadParaBlueprint",
+      "name": "Para Moa Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Chassis/SentAmpSet1ChassisPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Chassis/SentAmpSet1ChassisPartABlueprint",
+      "name": "Pencha Scaffold Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleOne": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleOneBlueprint",
+      "name": "Peye Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set2/Chassis/SentAmpSet2ChassisPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set2/Chassis/SentAmpSet2ChassisPartABlueprint",
+      "name": "Phahd Scaffold Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetPayloadTazron": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetPayloadTazronBlueprint",
+      "name": "Phazor Gyro Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedCritterMutagenD": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedCritterMutagenDBlueprint",
+      "name": "PHIJAR MUTAGEN Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Grip/CorpAmpSet1GripPartB": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Grip/CorpAmpSet1GripPartBBlueprint",
+      "name": "Plaga Brace Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedCritterAntigenC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedCritterAntigenCBlueprint",
+      "name": "PLAGEN ANTIGEN Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMeleeInfested/Handles/InfestedHandleOne": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMeleeInfested/Handles/InfestedHandleOneBlueprint",
+      "name": "Plague Akwin Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMeleeInfested/Handles/InfestedHandleTwo": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMeleeInfested/Handles/InfestedHandleTwoBlueprint",
+      "name": "Plague Bokwin Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMeleeInfested/Tips/InfestedTipTwo": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMeleeInfested/Tips/InfestedTipTwoBlueprint",
+      "name": "Plague Keewar Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMeleeInfested/Tips/InfestedTipOne": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMeleeInfested/Tips/InfestedTipOneBlueprint",
+      "name": "Plague Kripath Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedCritterAntigenD": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedCritterAntigenDBlueprint",
+      "name": "POXI ANTIGEN Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Chassis/CorpAmpSet1ChassisPartC": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Chassis/CorpAmpSet1ChassisPartCBlueprint",
+      "name": "Propa Scaffold Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Tip/TipTen": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Tip/TipTenBlueprint",
+      "name": "Rabvee Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set2/Barrel/SentAmpSet2BarrelPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set2/Barrel/SentAmpSet2BarrelPartABlueprint",
+      "name": "Rahn Prism Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartBodyC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartBodyCBlueprint",
+      "name": "Raiju Core Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Handle/SUModularSecondaryHandleAPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Handle/SUModularSecondaryHandleAPartBlueprint",
+      "name": "Ramble Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatIICapIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatIICapIClipPartBlueprint",
+      "name": "Ramflare Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartABlueprint",
+      "name": "Raplak Prism Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/SUModularSecondaryBarrelCPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/SUModularSecondaryBarrelCPartBlueprint",
+      "name": "Rattleguts Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIBlueprint",
+      "name": "Ruhang Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageII": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIIBlueprint",
+      "name": "Ruhang II Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusC/HoverboardCorpusCDeck": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusC/HoverboardCorpusCDeckBlueprint",
+      "name": "Runway Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleFour": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Handle/HandleFourBlueprint",
+      "name": "Seekalla Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Tip/TipNine": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Tip/TipNineBlueprint",
+      "name": "Sepfahn Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Chassis/SentAmpSet1ChassisPartB": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Chassis/SentAmpSet1ChassisPartBBlueprint",
+      "name": "Shraksun Scaffold Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Primary/SUModularPrimarySet1/Handles/SUModularPrimaryHandleBPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Primary/SUModularPrimarySet1/Handles/SUModularPrimaryHandleBPartBlueprint",
+      "name": "Shrewd Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Handle/HandleTen": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee02/Handle/HandleTenBlueprint",
+      "name": "Shtung Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartB": [
+    {
+      "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartBBlueprint",
+      "name": "Shwaak Prism Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularReloadIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularReloadIClipPartBlueprint",
+      "name": "Slap Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritIReloadIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritIReloadIClipPartBlueprint",
+      "name": "Slapneedle Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatICapIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatICapIClipPartBlueprint",
+      "name": "Sparkfire Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritIICapIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritIICapIClipPartBlueprint",
+      "name": "Splat Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Infested/Pistols/InfKitGun/Barrels/InfBarrelEgg/InfModularBarrelEggPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/Infested/Pistols/InfKitGun/Barrels/InfBarrelEgg/InfModularBarrelEggBlueprint",
+      "name": "Sporelacer Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Primary/SUModularPrimarySet1/Handles/SUModularPrimaryHandleCPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Primary/SUModularPrimarySet1/Handles/SUModularPrimaryHandleCPartBlueprint",
+      "name": "Steadyslam Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardInfestedB/HoverboardInfestedBJet": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardInfestedB/HoverboardInfestedBJetBlueprint",
+      "name": "Steeba Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusA/HoverboardCorpusAJet": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusA/HoverboardCorpusAJetBlueprint",
+      "name": "Step Tens Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritICapIIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritICapIIClipPartBlueprint",
+      "name": "Stitch Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Grip/CorpAmpSet1GripPartA": [
+    {
+      "uniqueName": "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Grip/CorpAmpSet1GripPartABlueprint",
+      "name": "Suo Brace Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatIReloadIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatIReloadIClipPartBlueprint",
+      "name": "Swiftfire Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedPredatorAntigenD": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedPredatorAntigenDBlueprint",
+      "name": "TETHRON ANTIGEN Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusC/HoverboardCorpusCJet": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusC/HoverboardCorpusCJetBlueprint",
+      "name": "Thugs Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatICapIIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatICapIIClipPartBlueprint",
+      "name": "Thunderdrum Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Infested/Pistols/InfKitGun/Clips/InfSmallClip/InfModularClipSmallPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/Infested/Pistols/InfKitGun/Clips/InfSmallClip/InfModularClipSmallBlueprint",
+      "name": "Thymoid Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetLegB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetLegBBlueprint",
+      "name": "Tian Bracket Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/SUModularSecondaryBarrelBPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/SUModularSecondaryBarrelBPartBlueprint",
+      "name": "Tombfinger Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Primary/SUModularPrimarySet1/Handles/SUModularPrimaryHandleDPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Primary/SUModularPrimarySet1/Handles/SUModularPrimaryHandleDPartBlueprint",
+      "name": "Tremor Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetPayloadCryoxion": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetPayloadCryoxionBlueprint",
+      "name": "Trux Gyro Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardSolarisA/HoverboardSolarisAJet": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardSolarisA/HoverboardSolarisAJetBlueprint",
+      "name": "Twin Kavats Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusC/HoverboardCorpusCFront": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusC/HoverboardCorpusCFrontBlueprint",
+      "name": "Two-Sloops Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MeleeMoaPetPayload": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/MoaPetParts/MoaPetPayloadMeleeBlueprint",
+      "name": "Tyli Gyro Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Infested/Pistols/InfKitGun/Handles/InfSecondaryHandle/InfModularSecondaryHandlePart": [
+    {
+      "uniqueName": "/Lotus/Weapons/Infested/Pistols/InfKitGun/Handles/InfSecondaryHandle/InfModularSecondaryHandleBlueprint",
+      "name": "Ulnaris Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartLegsB": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartLegsBBlueprint",
+      "name": "Urga Bracket Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedICritII": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedICritIIBlueprint",
+      "name": "Vargeet II Jai Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageICritII": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageICritIIBlueprint",
+      "name": "Vargeet II Ruhang Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedICritI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedICritIBlueprint",
+      "name": "Vargeet Jai Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIICritI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceSpeedIICritIBlueprint",
+      "name": "Vargeet Jai II Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageICritI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageICritIBlueprint",
+      "name": "Vargeet Ruhang Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIICritI": [
+    {
+      "uniqueName": "/Lotus/Weapons/Ostron/Melee/ModularMelee01/Balance/BalanceDamageIICritIBlueprint",
+      "name": "Vargeet Ruhang II Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/Infested/Pistols/InfKitGun/Barrels/InfBarrelBeam/InfModularBarrelBeamPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/Infested/Pistols/InfKitGun/Barrels/InfBarrelBeam/InfModularBarrelBeamBlueprint",
+      "name": "Vermisplicer Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedCritterAntigenA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedCritterAntigenABlueprint",
+      "name": "VIROX ANTIGEN Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartTailA": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartTailABlueprint",
+      "name": "Wanz Stabilizer Blueprint"
+    }
+  ],
+  "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusA/HoverboardCorpusAFront": [
+    {
+      "uniqueName": "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusA/HoverboardCorpusAFrontBlueprint",
+      "name": "Wingnut Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/CreaturePets/CreaturePetParts/Deimos/InfestedCritterMutagenC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/DeimosRecipes/Pets/InfestedCritterMutagenCBlueprint",
+      "name": "ZARIM MUTAGEN Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularReloadIIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularReloadIIClipPartBlueprint",
+      "name": "Zip Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatIReloadIIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularStatIReloadIIClipPartBlueprint",
+      "name": "Zipfire Blueprint"
+    }
+  ],
+  "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritIReloadIIClipPart": [
+    {
+      "uniqueName": "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Clip/SUModularCritIReloadIIClipPartBlueprint",
+      "name": "Zipneedle Blueprint"
+    }
+  ],
+  "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartLegsC": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/ZanukaPetParts/ZanukaPetPartLegsCBlueprint",
+      "name": "Zubb Bracket Blueprint"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Utility/EnergyEfficiencyOnHeadshot": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/SolarisRecipes/Arcanes/EnergyEfficiencyOnHeadshotBlueprint",
+      "name": "Pax Bolt Blueprint"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Utility/BulletToBattery": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/SolarisRecipes/Arcanes/BulletToBatteryBlueprint",
+      "name": "Pax Charge Blueprint"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Offensive/EyeInTheSky": [
+    {
+      "uniqueName": "/Lotus/Types/Recipes/SolarisRecipes/Arcanes/EyeInTheSkyBlueprint",
+      "name": "Pax Soar Blueprint"
+    }
   ]
 }

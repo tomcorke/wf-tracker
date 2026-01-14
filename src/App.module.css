@@ -17,6 +17,18 @@ body > div {
   height: calc(100vh - 0.7em);
 }
 
+.App {
+  a {
+    color: white;
+    &[href] {
+      &::after {
+        content: " 🔗";
+        display: inline-block;
+      }
+    }
+  }
+}
+
 .header {
   display: flex;
   flex-flow: row nowrap;

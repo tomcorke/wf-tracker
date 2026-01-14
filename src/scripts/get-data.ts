@@ -2,10 +2,16 @@ import {
   listUnusedItemCategories,
   writeCategoryFile,
 } from "./data-utils/utils.ts";
-import { getDataset, getDropTableData } from "./data-utils/data-fetching.ts";
+import {
+  getDataset,
+  getDropTableData,
+  getWorldStateData,
+  processWikiVendorData,
+} from "./data-utils/data-fetching.ts";
 import fs from "fs";
 import path from "path";
 import url from "url";
+import * as chalk from "chalk";
 
 (async () => {
   const {
@@ -13,7 +19,7 @@ import url from "url";
     archwings,
     necramechs,
     sentinels,
-    kubrows,
+    companions,
     specialCompanions,
     primaryWeapons,
     secondaryWeapons,
@@ -28,6 +34,12 @@ import url from "url";
     allFrames,
     allCompanions,
     allWeapons,
+    nonSlotWeapons,
+    zaws,
+    kitguns,
+    amps,
+    modularCompanions,
+    relics,
   } = await getDataset();
 
   listUnusedItemCategories(dataRecord, allFrames, allCompanions, allWeapons);
@@ -37,7 +49,7 @@ import url from "url";
     ["archwings", "WarframeData", archwings],
     ["necramechs", "WarframeData", necramechs],
     ["sentinels", "SentinelData", sentinels],
-    ["kubrows", "SentinelData", kubrows],
+    ["companions", "SentinelData", companions],
     ["specialCompanions", "SentinelData", specialCompanions],
     ["primaryWeapons", "WeaponData", primaryWeapons],
     ["secondaryWeapons", "WeaponData", secondaryWeapons],
@@ -48,6 +60,12 @@ import url from "url";
     ["crewShipWeapons", "WeaponData", crewShipWeapons],
     ["sentinelWeapons", "WeaponData", sentinelWeapons],
     ["recipeParts", "MiscItem", recipeParts],
+    ["otherWeapons", "WeaponData", nonSlotWeapons],
+    ["zaws", "WeaponData", zaws],
+    ["kitguns", "WeaponData", kitguns],
+    ["amps", "WeaponData", amps],
+    ["modularCompanions", "WeaponData", modularCompanions],
+    ["relics", "MiscItem", relics],
   ];
 
   for (const [datasetName, datasetType, items] of datasets) {
@@ -198,153 +216,7 @@ import url from "url";
   );
 
   // load wiki data text and reformat to JS object
-  const wikiData = fs.readFileSync(
-    path.join(
-      path.dirname(url.fileURLToPath(import.meta.url)),
-      "../data/wiki-vendor-data.txt"
-    ),
-    "utf-8"
-  );
-
-  const wikiDataLines = wikiData.split("\n");
-  const mappedWikiDataLines: string[] = [];
-
-  let inOfferingsArray = false;
-  let inComplexOffering = false;
-  let complexOfferingLines: string[] = [];
-  let complexOfferingDepth = 0;
-
-  const isNumericString = (value: unknown) => {
-    return /^-?\d+(\.\d+)?$/.test(String(value));
-  };
-
-  const isQuotedString = (value: unknown) => {
-    return /^["'].*["']$/.test(String(value));
-  };
-
-  const handleSingleLineOffering = (line: string) => {
-    // convert to JSON-like array
-    let _line = line;
-    _line = _line.replace(/^(\s*)\{(.+)\}(.*)$/, "$1[$2]$3");
-
-    // extract named properties
-    const namedElements = Array.from(_line.matchAll(/(\w+): ([^,}\]]+)/g));
-    // and remove from JSON-like array
-    for (const n of namedElements) {
-      _line = _line.replace(n[0], "");
-    }
-    // parse array, removing trailing commas
-    _line = _line.replace(/,\s*$/, "");
-    while (/, [\]\}]/.test(_line)) {
-      _line = _line.replace(/, ([\]\}])/, "$1");
-    }
-    const elements = JSON.parse(_line);
-
-    const indentation = _line.match(/^(\s*)/)![1];
-    const columns = ["Name", "Type", "Price", "Limit"];
-    const offeringData: any = {};
-    for (let i = 0; i < columns.length; i++) {
-      if (elements[i]) {
-        offeringData[columns[i]] = elements[i];
-      }
-    }
-    for (const match of namedElements) {
-      offeringData[match[1]] = match[2].trim();
-    }
-    return `${indentation}{ ${Object.entries(offeringData)
-      .map(
-        ([k, v]) =>
-          `${JSON.stringify(k)}: ${
-            isNumericString(v) || isQuotedString(v) ? v : JSON.stringify(v)
-          }`
-      )
-      .join(", ")} },`;
-  };
-
-  for (const line of wikiDataLines) {
-    let _line = line;
-    if (_line.trim().startsWith("--")) {
-      _line = _line.replace(/--(.+)/, "/* $1 */");
-      mappedWikiDataLines.push(_line);
-      continue;
-    }
-    if (_line.trim() === "return {") {
-      _line = "export const wikiVendorData: WikiVendorData = {";
-      mappedWikiDataLines.push(_line);
-      continue;
-    }
-    if (/[a-zA-Z0-9\- ]+ = ./.test(_line)) {
-      _line = _line.replace(/([a-zA-Z0-9\- ]+) = (.)/g, "$1: $2");
-    }
-    if (/\[["'][a-zA-Z0-9\-' ]+["']\] = ./.test(_line)) {
-      _line = _line.replace(
-        /\[["']([a-zA-Z0-9\-' ]+)["']\] = (.)/g,
-        '"$1": $2'
-      );
-    }
-
-    if (/Ranks: \{ \[0\] = .+\},?/.test(_line)) {
-      const rankNames = _line.match(/Ranks: \{ \[0\] = ([^}]+) \},?/);
-      const rankArray = rankNames![1]
-        .split(", ")
-        .map((r) => r.trim().replace(/"(.+)"/, "$1"));
-      const indentation = _line.match(/^(\s*)/)![1];
-      _line =
-        indentation +
-        "Ranks: [" +
-        rankArray.map((r) => `"${r}"`).join(", ") +
-        "],";
-    }
-
-    if (/\w+: \{ .+\},?/.test(_line)) {
-      _line = _line.replace(/(\w+): \{ (.+) \},?/, "$1: [ $2 ],");
-    }
-
-    if (_line.trim() === "Offerings: {") {
-      _line = _line.replace("Offerings: {", "Offerings: [");
-      inOfferingsArray = true;
-    }
-
-    if (inOfferingsArray) {
-      if (/\{.+\},?/.test(_line)) {
-        _line = handleSingleLineOffering(_line);
-      }
-
-      if (/^},?$/.test(_line.trim()) && !inComplexOffering) {
-        _line = _line.replace("},", "],");
-        inOfferingsArray = false;
-      }
-
-      if (_line.trim() === "{" && !inComplexOffering) {
-        inComplexOffering = true;
-      }
-
-      if (inComplexOffering) {
-        if (_line.trim() === "{") {
-          complexOfferingDepth += 1;
-        }
-
-        if (/^},?$/.test(_line.trim())) {
-          complexOfferingDepth -= 1;
-        }
-
-        complexOfferingLines.push(_line);
-
-        if (complexOfferingDepth === 0) {
-          const asSingleLine = complexOfferingLines
-            .join(" ")
-            .replace(/(\S)\s\s+/g, "$1 ");
-          // mappedWikiDataLines.push(asSingleLine);
-          mappedWikiDataLines.push(handleSingleLineOffering(asSingleLine));
-          inComplexOffering = false;
-          complexOfferingLines = [];
-        }
-
-        continue;
-      }
-    }
-    mappedWikiDataLines.push(_line);
-  }
+  const mappedWikiDataLines: string[] = processWikiVendorData();
 
   fs.writeFileSync(
     path.join(
@@ -374,5 +246,71 @@ import url from "url";
 };
 
 ${mappedWikiDataLines.join("\n")}`
+  );
+
+  const worldStateData = await getWorldStateData();
+  fs.writeFileSync(
+    path.join(
+      path.dirname(url.fileURLToPath(import.meta.url)),
+      "../processed-data/world-state-data.json"
+    ),
+    JSON.stringify(worldStateData, null, 2)
+  );
+
+  type Relic = { name: string; uniqueName: string };
+
+  const relicNames = new Set<string>();
+  const relicUniqueNames = new Set<string>();
+  const relicsByName = new Map<string, Relic>();
+  const relicsByUniqueName = new Map<string, Relic>();
+  for (const relic of relics) {
+    if (!relic.name.includes("Relic")) {
+      continue;
+    }
+    relicNames.add(relic.name);
+    relicUniqueNames.add(relic.uniqueName);
+    relicsByName.set(relic.name, relic);
+    relicsByUniqueName.set(relic.uniqueName, relic);
+  }
+
+  const relicStates = new Map<string, "available" | "resurgence" | "vaulted">();
+  for (const relicName of relicNames) {
+    relicStates.set(relicName, "vaulted");
+  }
+  for (const [itemName] of dropTableData.entries()) {
+    if (relicNames.has(itemName)) {
+      relicStates.set(itemName, "available");
+    }
+  }
+  for (const tradeItem of worldStateData.PrimeVaultTraders.flatMap(
+    (t) => t.Manifest
+  )) {
+    const uniqueName =
+      tradeItem.ItemType.split("/Lotus/StoreItems/").join("/Lotus/");
+    const relicName = relicsByUniqueName.get(uniqueName)?.name;
+    console.log(uniqueName, relicName);
+    if (relicName) {
+      relicStates.set(relicName, "resurgence");
+    }
+  }
+
+  fs.writeFileSync(
+    path.join(
+      path.dirname(url.fileURLToPath(import.meta.url)),
+      "../processed-data/relic-states.json"
+    ),
+    JSON.stringify(
+      Object.fromEntries(
+        Array.from(relicStates.entries()).sort((a, b) => {
+          const valueCompare = b[1].localeCompare(a[1]);
+          if (valueCompare !== 0) {
+            return valueCompare;
+          }
+          return a[0].localeCompare(b[0]);
+        })
+      ),
+      null,
+      2
+    )
   );
 })();

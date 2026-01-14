@@ -47,3 +47,15 @@ export const MiscItemSchema = z.object({
 });
 
 export type MiscItem = z.infer<typeof MiscItemSchema>;
+
+export const WorldStateSchema = z.object({
+  PrimeVaultTraders: z.array(
+    z.object({
+      Manifest: z.array(
+        z.object({
+          ItemType: z.string(),
+        })
+      ),
+    })
+  ),
+});

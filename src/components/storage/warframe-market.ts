@@ -16,8 +16,8 @@ const ItemDataSchema = z.object({
   slug: z.string(),
   gameRef: z.string(),
   tags: z.array(z.string()),
-  setRoot: z.boolean(),
-  setParts: z.array(z.string()),
+  setRoot: z.boolean().optional(),
+  setParts: z.array(z.string()).optional(),
   quantityInSet: z.number().optional(),
   tradeable: z.boolean().optional(),
 });
@@ -111,11 +111,17 @@ const getItemSetData = async (uniqueName: string) => {
   if (!warframeMarketItemSetDataCache.has(foundItem.id)) {
     const itemResponse = await fetch(`${BASE_URL}/item/${foundItem.slug}/set`);
     const itemData = await itemResponse.json();
-    const parsedItemSetData = WarframeMarketV2ItemSetDataSchema.parse(itemData);
-    warframeMarketItemSetDataCache.set(
-      foundItem.id,
-      parsedItemSetData.data.items
-    );
+    try {
+      const parsedItemSetData =
+        WarframeMarketV2ItemSetDataSchema.parse(itemData);
+      warframeMarketItemSetDataCache.set(
+        foundItem.id,
+        parsedItemSetData.data.items
+      );
+    } catch (e) {
+      console.error("Error parsing item set data:", e, itemData);
+      throw e;
+    }
   }
 
   return warframeMarketItemSetDataCache.get(foundItem.id);
@@ -157,15 +163,30 @@ const getItemPrice = async (itemSlug: string): Promise<number | null> => {
     ...sellOrders.map((order) => order.platinum)
   );
 
+  const getMedianPriceFromLowest5 = () => {
+    const sortedPrices = sellOrders
+      .map((order) => order.platinum)
+      .sort((a, b) => a - b)
+      .slice(0, 5);
+    const mid = Math.floor(sortedPrices.length / 2);
+    if (sortedPrices.length % 2 === 0) {
+      return (sortedPrices[mid - 1] + sortedPrices[mid]) / 2;
+    } else {
+      return sortedPrices[mid];
+    }
+  };
+
+  const medianPrice = getMedianPriceFromLowest5();
+
   warframeMarketItemPriceCache.set(itemSlug, {
-    price: lowestPriceOrder,
+    price: medianPrice,
     timestamp: now,
   });
 
   console.log(
-    `Warframe Market: Lowest price for item "${itemSlug}" is ${lowestPriceOrder}p. Price range of ${lowestPriceOrder}p - ${highestPriceOrder}p from ${sellOrders.length} orders.`
+    `Warframe Market: Median price for item "${itemSlug}" is ${medianPrice}p. Price range of ${lowestPriceOrder}p - ${highestPriceOrder}p from ${sellOrders.length} orders.`
   );
-  return lowestPriceOrder;
+  return medianPrice;
 };
 
 type WarframeMarketItemPriceData = { slug: string; url: string; price: number };

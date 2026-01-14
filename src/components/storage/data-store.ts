@@ -10,9 +10,9 @@ import { ARCHWINGS } from "../../processed-data/archwings";
 import { ARCHWINGGUNS } from "../../processed-data/archwingGuns";
 import { ARCHWINGMELEE } from "../../processed-data/archwingMelee";
 import { SENTINELS } from "../../processed-data/sentinels";
-import { KUBROWS } from "../../processed-data/kubrows";
 import { NECRAMECHS } from "../../processed-data/necramechs";
 import { SENTINELWEAPONS } from "../../processed-data/sentinelWeapons";
+import { ZAWS } from "../../processed-data/zaws";
 
 const datasets = [
   WARFRAMES,
@@ -23,14 +23,12 @@ const datasets = [
   ARCHWINGGUNS,
   ARCHWINGMELEE,
   SENTINELS,
-  KUBROWS,
   NECRAMECHS,
   SENTINELWEAPONS,
+  ZAWS,
 ] as any[];
 
 export type ItemState = {
-  owned: boolean;
-  wanted: boolean;
   mastered: boolean;
 };
 

@@ -1,4 +1,4 @@
-import { Suspense, use } from "react";
+import { JSX, Suspense, use } from "react";
 import { getItemRecipeParts } from "../../processed-data/itemRecipes";
 // import { Button } from "../button";
 import { ItemState, useDataStore, useItemData } from "../storage/data-store";
@@ -14,6 +14,7 @@ import {
   useWarframeMarket,
   WarframeMarketDataStore,
 } from "../storage/warframe-market";
+import relicStates from "../../processed-data/relic-states.json";
 
 const formatName = (name: string) => {
   return name.replace("<ARCHWING>", "");
@@ -30,26 +31,31 @@ const BaseItem = ({ children }: PropsWithChildren<{}>) => {
 
 const ItemComponent = ({
   itemName,
-  displayName,
+  display,
   itemState,
   setItemState,
   className,
   onClick,
+  onMouseEnter,
 }: {
   itemName: string;
-  displayName: string;
+  display: string | JSX.Element;
   itemState: ItemState;
   setItemState: (itemName: string, newState: Partial<ItemState>) => void;
   className: string;
   onClick: (event: React.MouseEvent<unknown, MouseEvent>) => void;
+  onMouseEnter?: (event: React.MouseEvent<unknown, MouseEvent>) => void;
 }) => (
   <div
     className={classNames(className, {
       [STYLES.mastered]: itemState.mastered,
     })}
     onClick={onClick}
+    onMouseEnter={onMouseEnter}
   >
-    <div className={STYLES.name}>{formatName(displayName)}</div>
+    <div className={STYLES.name}>
+      {typeof display == "string" ? formatName(display) : display}
+    </div>
     <div className={STYLES.controls}>
       <input
         type="checkbox"
@@ -71,17 +77,66 @@ type ItemProps = {
   displayName: string;
 };
 
-const formatSources = (sources: { source: string[]; type: string }[]) => {
+const transformSourceSections = (section: string): string | JSX.Element => {
+  if (/^\w+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(section)) {
+    return section.match(/([0-9]{1,2}\.[0-9]{2}%)/)![1];
+  }
+  if (/ Relic$/.test(section)) {
+    const relicState = relicStates[section as keyof typeof relicStates];
+    if (relicState) {
+      if (relicState === "vaulted") {
+        return (
+          <span className={classNames(STYLES.sourceRelic, STYLES.vaulted)}>
+            {section}
+          </span>
+        );
+      } else if (relicState === "resurgence") {
+        return (
+          <span
+            className={classNames(STYLES.sourceRelic, STYLES.primeResurgence)}
+          >
+            {section}
+          </span>
+        );
+      }
+    }
+  }
+  return section;
+};
+
+const interleave = <T,>(arr: T[], separator: T): T[] => {
+  return arr.flatMap((item, index) =>
+    index < arr.length - 1 ? [item, separator] : [item]
+  );
+};
+
+type Source<T> = { source: T[]; type: string };
+const formatSources = (sources: Source<string>[]) => {
   if (sources.length === 0) {
     return <div className={STYLES.sourceList}>No sources in known data</div>;
   }
+
+  const mappedSources: Source<string | JSX.Element>[] = [];
+  const uniqueMainSources = new Set<string>();
+  for (const source of sources) {
+    const mainSourceKey = source.source[0];
+    const transformed = source.source.map(transformSourceSections);
+    if (!uniqueMainSources.has(mainSourceKey)) {
+      mappedSources.push({ source: transformed, type: source.type });
+      uniqueMainSources.add(mainSourceKey);
+    }
+  }
+
   return (
     <div className={STYLES.sourceList}>
       {/* <div className={STYLES.sourceListTitle}>Sources:</div> */}
       <ul>
-        {sources.map((source, index) => (
+        {mappedSources.map((source, index) => (
           <li key={index}>
-            {source.source.join(" > ")}
+            {interleave(
+              source.source,
+              <span className={STYLES.sourceSeparator}> &gt; </span>
+            )}
             {/* ({source.type}) */}
           </li>
         ))}
@@ -96,7 +151,7 @@ const priceFetchPromises: Record<
 > = {};
 
 const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
-  const { getItemSetPrice, getItemPrice } = useWarframeMarket();
+  const { getItemSetPrice } = useWarframeMarket();
   if (!priceFetchPromises[uniqueName]) {
     priceFetchPromises[uniqueName] = getItemSetPrice(uniqueName);
     setTimeout(() => delete priceFetchPromises[uniqueName], 5 * 60 * 1000); // cache for 5 minutes
@@ -119,6 +174,25 @@ const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
         </>
       )}
     </div>
+  );
+};
+
+const SimplePriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
+  const { getItemSetPrice } = useWarframeMarket();
+  if (!priceFetchPromises[uniqueName]) {
+    priceFetchPromises[uniqueName] = getItemSetPrice(uniqueName);
+    setTimeout(() => delete priceFetchPromises[uniqueName], 5 * 60 * 1000); // cache for 5 minutes
+  }
+  const priceResult = use(priceFetchPromises[uniqueName]);
+  return (
+    <span className={STYLES.priceDisplay}>
+      {priceResult === "item-not-found" || !priceResult ? null : priceResult ===
+        "no-sell-orders" ? (
+        "No sell orders found"
+      ) : (
+        <span className={STYLES.priceValue}>{priceResult.price}p</span>
+      )}
+    </span>
   );
 };
 
@@ -215,11 +289,7 @@ const formatDetails = (uniqueName: string, displayName: string) => {
           <ul>{ingredientElements}</ul>
         </div>
       ) : null}
-      <div
-        style={{ font: "9px monospace", wordBreak: "break-word", opacity: 0.7 }}
-      >
-        {uniqueName}
-      </div>
+      <div className={STYLES.meta}>{uniqueName}</div>
     </>
   );
 };
@@ -248,7 +318,7 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
     <BaseItem>
       <ItemComponent
         itemName={uniqueName}
-        displayName={displayName}
+        display={displayName}
         itemState={itemState}
         setItemState={setItemState}
         className={classNames(STYLES.Item, {
@@ -314,12 +384,14 @@ export const ItemWithPrime = ({
 
   const showDetails = detailsContent !== null;
 
+  const [showPriceInTitle, setShowPriceInTitle] = useState(false);
+
   return (
     <BaseItem>
       <div className={classNames(STYLES.Item, STYLES.split)}>
         <ItemComponent
           itemName={baseUniqueName}
-          displayName={baseDisplayName}
+          display={baseDisplayName}
           itemState={baseItemState}
           setItemState={setItemState}
           className={STYLES.splitItemSection}
@@ -332,7 +404,15 @@ export const ItemWithPrime = ({
         />
         <ItemComponent
           itemName={primeUniqueName}
-          displayName={"Prime"}
+          display={
+            showPriceInTitle ? (
+              <>
+                Prime: <SimplePriceDisplay uniqueName={primeUniqueName} />
+              </>
+            ) : (
+              "Prime"
+            )
+          }
           itemState={primeItemState}
           setItemState={setItemState}
           className={classNames(STYLES.splitItemSection, {
@@ -344,6 +424,11 @@ export const ItemWithPrime = ({
               return openWikiForItem(primeDisplayName);
             }
             togglePrimeDetails();
+          }}
+          onMouseEnter={(e) => {
+            if (e.shiftKey) {
+              setShowPriceInTitle(true);
+            }
           }}
         />
       </div>
