@@ -205,6 +205,14 @@ export const getDataset = async () => {
       )
   );
 
+  const kdrives = nonSlotWeapons.filter(
+    (w) =>
+      // /Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBDeck
+      w.uniqueName.startsWith(
+        "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/"
+      ) && w.uniqueName.endsWith("Deck")
+  );
+
   const allResources = z
     .array(MiscItemSchema)
     .parse(dataRecord.Resources.ExportResources);
@@ -247,6 +255,7 @@ export const getDataset = async () => {
     amps,
     modularCompanions,
     relics,
+    kdrives,
   };
 };
 

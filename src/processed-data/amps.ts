@@ -24,6 +24,12 @@ export const lotus_Weapons_Corpus_OperatorAmplifiers_Set1_Barrel_CorpAmpSet1Barr
   "productCategory": "Pistols"
 };
 
+export const lotus_Weapons_Sentients_OperatorAmplifiers_SentTrainingAmplifier_SentAmpTrainingBarrel: WeaponData = {
+  "name": "Mote Prism",
+  "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/SentTrainingAmplifier/SentAmpTrainingBarrel",
+  "productCategory": "Pistols"
+};
+
 export const lotus_Weapons_Sentients_OperatorAmplifiers_Set2_Barrel_SentAmpSet2BarrelPartA: WeaponData = {
   "name": "Rahn Prism",
   "uniqueName": "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set2/Barrel/SentAmpSet2BarrelPartA",
@@ -47,6 +53,7 @@ export const ampsByName = {
   "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartC": lotus_Weapons_Sentients_OperatorAmplifiers_Set1_Barrel_SentAmpSet1BarrelPartC,
   "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartC": lotus_Weapons_Corpus_OperatorAmplifiers_Set1_Barrel_CorpAmpSet1BarrelPartC,
   "/Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartB": lotus_Weapons_Corpus_OperatorAmplifiers_Set1_Barrel_CorpAmpSet1BarrelPartB,
+  "/Lotus/Weapons/Sentients/OperatorAmplifiers/SentTrainingAmplifier/SentAmpTrainingBarrel": lotus_Weapons_Sentients_OperatorAmplifiers_SentTrainingAmplifier_SentAmpTrainingBarrel,
   "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set2/Barrel/SentAmpSet2BarrelPartA": lotus_Weapons_Sentients_OperatorAmplifiers_Set2_Barrel_SentAmpSet2BarrelPartA,
   "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartA": lotus_Weapons_Sentients_OperatorAmplifiers_Set1_Barrel_SentAmpSet1BarrelPartA,
   "/Lotus/Weapons/Sentients/OperatorAmplifiers/Set1/Barrel/SentAmpSet1BarrelPartB": lotus_Weapons_Sentients_OperatorAmplifiers_Set1_Barrel_SentAmpSet1BarrelPartB,
@@ -59,6 +66,7 @@ export const ampsList: WeaponData[] = [
   lotus_Weapons_Sentients_OperatorAmplifiers_Set1_Barrel_SentAmpSet1BarrelPartC,
   lotus_Weapons_Corpus_OperatorAmplifiers_Set1_Barrel_CorpAmpSet1BarrelPartC,
   lotus_Weapons_Corpus_OperatorAmplifiers_Set1_Barrel_CorpAmpSet1BarrelPartB,
+  lotus_Weapons_Sentients_OperatorAmplifiers_SentTrainingAmplifier_SentAmpTrainingBarrel,
   lotus_Weapons_Sentients_OperatorAmplifiers_Set2_Barrel_SentAmpSet2BarrelPartA,
   lotus_Weapons_Sentients_OperatorAmplifiers_Set1_Barrel_SentAmpSet1BarrelPartA,
   lotus_Weapons_Sentients_OperatorAmplifiers_Set1_Barrel_SentAmpSet1BarrelPartB,

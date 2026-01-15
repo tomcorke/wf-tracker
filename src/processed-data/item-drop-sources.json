@@ -4230,7 +4230,7 @@
       "type": "cetusRewards"
     }
   ],
-  "/Lotus/Types/Game/Projections/T1VoidProjectionWispHildrynVaultABronze": [
+  "/Lotus/Types/Game/Projections/T1VoidProjectionGyrePrimeBBronze": [
     {
       "source": [
         "Mercury/Apollodorus (Survival)",
@@ -37498,7 +37498,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Hunhullus (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37506,7 +37506,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Dactolyst (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37514,7 +37514,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Vanguard (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     }
@@ -37524,7 +37524,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Hunhullus (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37532,7 +37532,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Dactolyst (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37540,7 +37540,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Vanguard (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     }
@@ -37550,7 +37550,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Hunhullus (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37558,7 +37558,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Dactolyst (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37566,7 +37566,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Vanguard (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     }
@@ -37576,7 +37576,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Hunhullus (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37584,7 +37584,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Dactolyst (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37592,7 +37592,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Vanguard (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     }
@@ -37602,7 +37602,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Hunhullus (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37610,7 +37610,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Dactolyst (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37618,7 +37618,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Vanguard (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     }
@@ -37628,7 +37628,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Hunhullus (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37636,7 +37636,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Dactolyst (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     },
@@ -37644,7 +37644,7 @@
       "source": [
         "Dark Refractory, Deimos/Recall: Vanguard (The Perita Rebellion)",
         "Rotation A",
-        "Rare (4.90%)"
+        "Rare (5.71%)"
       ],
       "type": "missionRewards"
     }
@@ -44884,6 +44884,34 @@
     {
       "source": [
         "Lith H6 Relic",
+        "Uncommon (16.67%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (25.33%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (23.33%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (20.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
         "Uncommon (16.67%)"
       ],
       "type": "relicRewards"
@@ -56996,28 +57024,28 @@
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (25.33%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (23.33%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (20.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (16.67%)"
       ],
       "type": "relicRewards"
@@ -71918,6 +71946,34 @@
     },
     {
       "source": [
+        "Lith L6 Relic",
+        "Uncommon (11.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (13.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (17.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (20.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
         "Lith X1 Relic",
         "Uncommon (11.00%)"
       ],
@@ -74086,28 +74142,28 @@
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (25.33%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (23.33%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (20.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (16.67%)"
       ],
       "type": "relicRewards"
@@ -86488,6 +86544,34 @@
     {
       "source": [
         "Lith G13 Relic",
+        "Uncommon (20.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (11.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (13.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (17.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
         "Uncommon (20.00%)"
       ],
       "type": "relicRewards"
@@ -104088,6 +104172,34 @@
     },
     {
       "source": [
+        "Lith L6 Relic",
+        "Rare (2.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Rare (4.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Rare (6.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (10.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
         "Neo L2 Relic",
         "Rare (2.00%)"
       ],
@@ -116172,6 +116284,34 @@
     },
     {
       "source": [
+        "Lith L6 Relic",
+        "Uncommon (25.33%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (23.33%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (20.00%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
+        "Lith L6 Relic",
+        "Uncommon (16.67%)"
+      ],
+      "type": "relicRewards"
+    },
+    {
+      "source": [
         "Lith N16 Relic",
         "Uncommon (25.33%)"
       ],
@@ -126196,28 +126336,28 @@
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (25.33%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (23.33%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (20.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (16.67%)"
       ],
       "type": "relicRewards"
@@ -129060,28 +129200,28 @@
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (11.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (13.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (17.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (20.00%)"
       ],
       "type": "relicRewards"
@@ -138924,28 +139064,28 @@
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Rare (2.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Rare (4.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Rare (6.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (10.00%)"
       ],
       "type": "relicRewards"
@@ -138982,28 +139122,28 @@
   "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeLightningGunBarrel": [
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (11.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (13.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (17.00%)"
       ],
       "type": "relicRewards"
     },
     {
       "source": [
-        "Lith L6 Relic",
+        "Lith L7 Relic",
         "Uncommon (20.00%)"
       ],
       "type": "relicRewards"
@@ -148643,6 +148783,159 @@
       "type": "transientRewards"
     }
   ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Offensive/DamageForBonusArmour": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Utility/FreezeEnemiesOnRoll": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Offensive/MultishotForMaxEnergy": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Defensive/ShieldMaxForAbilityStrength": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Defensive/MaxDPSTakenForArmour": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Defensive/StealDefensiveStatsOnRoll": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Offensive/RadialDamageOnMaxRadiationStackHit": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Utility/AbilityDurationOnCast": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Upgrades/CosmeticEnhancers/Offensive/SplitStatusProcsOnStackedStatusHit": [
+    {
+      "source": [
+        "The Descendia: Infernum 6 and 13 Arcane Rewards (Steel Path)",
+        "Uncommon (11.11%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Types/Recipes/WarframeRecipes/UrielChassisBlueprint": [
+    {
+      "source": [
+        "Roathe",
+        "Uncommon (12.50%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Types/Recipes/WarframeRecipes/UrielHelmetBlueprint": [
+    {
+      "source": [
+        "Roathe",
+        "Uncommon (12.50%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Types/Recipes/WarframeRecipes/UrielSystemsBlueprint": [
+    {
+      "source": [
+        "Roathe",
+        "Uncommon (12.50%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Types/Recipes/Weapons/WeaponParts/VinquibusBarrelBlueprint": [
+    {
+      "source": [
+        "Roathe",
+        "Uncommon (12.50%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Types/Recipes/Weapons/WeaponParts/VinquibusBladeBlueprint": [
+    {
+      "source": [
+        "Roathe",
+        "Uncommon (12.50%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Types/Recipes/Weapons/WeaponParts/VinquibusReceiverBlueprint": [
+    {
+      "source": [
+        "Roathe",
+        "Uncommon (12.50%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Types/Recipes/Weapons/WeaponParts/VinquibusStockBlueprint": [
+    {
+      "source": [
+        "Roathe",
+        "Uncommon (12.50%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
+  "/Lotus/Weapons/Tenno/Bayonet/TnBayonetRifleBlueprint": [
+    {
+      "source": [
+        "Roathe",
+        "Uncommon (12.50%)"
+      ],
+      "type": "transientRewards"
+    }
+  ],
   "/Lotus/Types/Recipes/WarframeRecipes/GlassChassisBlueprint": [
     {
       "source": [
@@ -152963,6 +153256,15 @@
     },
     {
       "source": [
+        "Argon Plating",
+        "Source",
+        "5.00%",
+        "Common (37.94%)"
+      ],
+      "type": "modByDrop"
+    },
+    {
+      "source": [
         "15 Endo",
         "Source",
         "5.00%",
@@ -152990,15 +153292,6 @@
     },
     {
       "source": [
-        "Argon Plating",
-        "Source",
-        "5.00%",
-        "Common (37.94%)"
-      ],
-      "type": "modByDrop"
-    },
-    {
-      "source": [
         "Region Resource",
         "Source",
         "7.00%",
@@ -153010,7 +153303,7 @@
   "/Lotus/Powersuits/Dragon/Dragon": [
     {
       "source": [
-        "Berserker Fury",
+        "Flow",
         "Source",
         "3.00%",
         "Uncommon (20.00%)"
@@ -153019,7 +153312,7 @@
     },
     {
       "source": [
-        "Flow",
+        "Decisive Judgement",
         "Source",
         "3.00%",
         "Uncommon (20.00%)"
@@ -153046,7 +153339,7 @@
     },
     {
       "source": [
-        "Decisive Judgement",
+        "Berserker Fury",
         "Source",
         "3.00%",
         "Uncommon (20.00%)"

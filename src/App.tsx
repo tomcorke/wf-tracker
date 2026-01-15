@@ -26,6 +26,7 @@ import { ZAWS } from "./processed-data/zaws";
 import { KITGUNS } from "./processed-data/kitguns";
 import { AMPS } from "./processed-data/amps";
 import { MODULARCOMPANIONS } from "./processed-data/modularCompanions";
+import { KDRIVES } from "./processed-data/kdrives";
 
 const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
   const itemStates = useDataStore(
@@ -177,6 +178,11 @@ function App() {
             <ItemCollection
               title="Amps"
               itemDataSet={AMPS}
+              filter={filterText}
+            />
+            <ItemCollection
+              title="K-Drives"
+              itemDataSet={KDRIVES}
               filter={filterText}
             />
           </div>

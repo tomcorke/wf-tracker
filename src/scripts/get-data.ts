@@ -39,6 +39,7 @@ import url from "url";
     amps,
     modularCompanions,
     relics,
+    kdrives,
   } = await getDataset();
 
   listUnusedItemCategories(dataRecord, allFrames, allCompanions, allWeapons);
@@ -65,6 +66,7 @@ import url from "url";
     ["amps", "WeaponData", amps],
     ["modularCompanions", "WeaponData", modularCompanions],
     ["relics", "MiscItem", relics],
+    ["kdrives", "WeaponData", kdrives],
   ];
 
   for (const [datasetName, datasetType, items] of datasets) {
@@ -287,7 +289,7 @@ ${mappedWikiDataLines.join("\n")}`
     const uniqueName =
       tradeItem.ItemType.split("/Lotus/StoreItems/").join("/Lotus/");
     const relicName = relicsByUniqueName.get(uniqueName)?.name;
-    console.log(uniqueName, relicName);
+    // console.log(uniqueName, relicName);
     if (relicName) {
       relicStates.set(relicName, "resurgence");
     }
