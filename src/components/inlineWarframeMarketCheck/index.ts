@@ -1,1 +1,0 @@
-export { InlineWFM } from "./inlineWFM";

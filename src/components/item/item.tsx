@@ -78,7 +78,7 @@ type ItemProps = {
 };
 
 const transformSourceSections = (section: string): string | JSX.Element => {
-  if (/^\w+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(section)) {
+  if (/^.+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(section)) {
     return section.match(/([0-9]{1,2}\.[0-9]{2}%)/)![1];
   }
   if (/ Relic$/.test(section)) {
