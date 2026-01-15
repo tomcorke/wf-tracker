@@ -119,7 +119,10 @@ const formatSources = (sources: Source<string>[]) => {
   const mappedSources: Source<string | JSX.Element>[] = [];
   const uniqueMainSources = new Set<string>();
   for (const source of sources) {
-    const mainSourceKey = source.source[0];
+    let mainSourceKey = source.source[0];
+    if (/^Rotation [A-Z]$/.test(source.source[1])) {
+      mainSourceKey += `|${source.source[1]}`;
+    }
     const transformed = source.source.map(transformSourceSections);
     if (!uniqueMainSources.has(mainSourceKey)) {
       mappedSources.push({ source: transformed, type: source.type });
@@ -177,13 +180,21 @@ const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
   );
 };
 
-const SimplePriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
-  const { getItemSetPrice } = useWarframeMarket();
-  if (!priceFetchPromises[uniqueName]) {
-    priceFetchPromises[uniqueName] = getItemSetPrice(uniqueName);
-    setTimeout(() => delete priceFetchPromises[uniqueName], 5 * 60 * 1000); // cache for 5 minutes
+const SimplePriceDisplay = ({
+  uniqueName,
+  useSet = true,
+}: {
+  uniqueName: string;
+  useSet?: boolean;
+}) => {
+  const { getItemSetPrice, getItemPrice } = useWarframeMarket();
+  const priceCacheKey = useSet ? `<SET>${uniqueName}` : uniqueName;
+  const getPriceFunction = useSet ? getItemSetPrice : getItemPrice;
+  if (!priceFetchPromises[priceCacheKey]) {
+    priceFetchPromises[priceCacheKey] = getPriceFunction(uniqueName);
+    setTimeout(() => delete priceFetchPromises[priceCacheKey], 5 * 60 * 1000); // cache for 5 minutes
   }
-  const priceResult = use(priceFetchPromises[uniqueName]);
+  const priceResult = use(priceFetchPromises[priceCacheKey]);
   return (
     <span className={STYLES.priceDisplay}>
       {priceResult === "item-not-found" || !priceResult ? null : priceResult ===
@@ -238,7 +249,12 @@ const formatDetails = (uniqueName: string, displayName: string) => {
           key={`${part.uniqueName}_section_${i}`}
           className={STYLES.ingredientSection}
         >
-          <div className={STYLES.ingredientName}>{part.name}</div>
+          <div className={STYLES.ingredientName}>
+            <span>{part.name}</span>
+            <Suspense fallback={<span>...</span>}>
+              <SimplePriceDisplay uniqueName={part.uniqueName} useSet={false} />
+            </Suspense>
+          </div>
           {formattedPartSources}
         </li>
       );

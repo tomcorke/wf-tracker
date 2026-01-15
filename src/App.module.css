@@ -11,12 +11,6 @@
   box-sizing: border-box;
 }
 
-body > div {
-  position: relative;
-  overflow: auto;
-  height: calc(100vh - 0.7em);
-}
-
 .App {
   a {
     color: white;
