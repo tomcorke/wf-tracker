@@ -186,6 +186,9 @@ function App() {
               filter={filterText}
             />
           </div>
+          {/* <div className={STYLES.stacked}>
+            <Section title="Syndicates">{[<div>Ostron</div>]}</Section>
+          </div> */}
         </div>
         <div className={STYLES.tasksContainer}></div>
         <Metadata />

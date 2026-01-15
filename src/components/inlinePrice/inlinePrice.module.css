@@ -1,0 +1,15 @@
+.InlinePrice {
+  .priceValue {
+    display: flex;
+    flex-flow: row nowrap;
+    word-break: keep-all;
+    text-decoration: none;
+
+    font-weight: bold;
+    color: cyan;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

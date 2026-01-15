@@ -170,7 +170,7 @@ const getItemPrice = async (itemSlug: string): Promise<number | null> => {
       .slice(0, 5);
     const mid = Math.floor(sortedPrices.length / 2);
     if (sortedPrices.length % 2 === 0) {
-      return (sortedPrices[mid - 1] + sortedPrices[mid]) / 2;
+      return Math.floor((sortedPrices[mid - 1] + sortedPrices[mid]) / 2);
     } else {
       return sortedPrices[mid];
     }
@@ -200,60 +200,88 @@ export type WarframeMarketDataStore = {
   ) => Promise<WarframeMarketItemPriceData | null | FailureCode>;
 };
 
+const priceFetchPromises: Record<
+  string,
+  Promise<Awaited<ReturnType<WarframeMarketDataStore["getItemSetPrice"]>>>
+> = {};
+
+const createExpiringPriceFetchPromise = (
+  uniqueName: string,
+  fetch: () => ReturnType<WarframeMarketDataStore["getItemPrice"]>
+) => {
+  const promise = Promise.resolve().then(() => fetch());
+  priceFetchPromises[uniqueName] = promise;
+  setTimeout(() => delete priceFetchPromises[uniqueName], 5 * 60 * 1000); // cache for 5 minutes
+  return promise;
+};
+
 export const useWarframeMarket = create<WarframeMarketDataStore>()(() => ({
-  getItemSetPrice: async (
+  getItemSetPrice: (
     uniqueName: string
   ): Promise<WarframeMarketItemPriceData | null | FailureCode> => {
-    const setData = await getItemSetData(uniqueName);
+    const cacheKey = `<SET>${uniqueName}`;
+    if (!priceFetchPromises[cacheKey]) {
+      createExpiringPriceFetchPromise(cacheKey, async () => {
+        const setData = await getItemSetData(uniqueName);
 
-    if (!setData) {
-      return "item-not-found";
+        if (!setData) {
+          return "item-not-found";
+        }
+
+        const setItem = setData.find((item) => item.setRoot);
+
+        if (!setItem) {
+          return "item-not-found";
+        }
+
+        const price = await getItemPrice(setItem.slug);
+
+        if (price === null) {
+          return "no-sell-orders";
+        }
+
+        return {
+          slug: setItem.slug,
+          url: `https://warframe.market/items/${setItem.slug}`,
+          price,
+        };
+      });
     }
 
-    const setItem = setData.find((item) => item.setRoot);
-
-    if (!setItem) {
-      return "item-not-found";
-    }
-
-    const price = await getItemPrice(setItem.slug);
-
-    if (price === null) {
-      return "no-sell-orders";
-    }
-
-    return {
-      slug: setItem.slug,
-      url: `https://warframe.market/items/${setItem.slug}`,
-      price,
-    };
+    return priceFetchPromises[cacheKey];
   },
-  getItemPrice: async (
+  getItemPrice: (
     uniqueName: string
   ): Promise<WarframeMarketItemPriceData | null | FailureCode> => {
-    const setData = await getItemSetData(uniqueName);
+    if (!priceFetchPromises[uniqueName]) {
+      createExpiringPriceFetchPromise(uniqueName, async () => {
+        const setData = await getItemSetData(uniqueName);
 
-    if (!setData) {
-      return "item-not-found";
+        if (!setData) {
+          return "item-not-found";
+        }
+
+        const itemData = setData.find((item) => item.gameRef === uniqueName);
+
+        if (!itemData) {
+          return "item-not-found";
+        }
+
+        const price = await getItemPrice(itemData.slug);
+
+        if (price === null) {
+          return "no-sell-orders";
+        }
+
+        return {
+          slug: itemData.slug,
+          url: `https://warframe.market/items/${itemData.slug}`,
+          price,
+        };
+      });
     }
 
-    const itemData = setData.find((item) => item.gameRef === uniqueName);
-
-    if (!itemData) {
-      return "item-not-found";
-    }
-
-    const price = await getItemPrice(itemData.slug);
-
-    if (price === null) {
-      return "no-sell-orders";
-    }
-
-    return {
-      slug: itemData.slug,
-      url: `https://warframe.market/items/${itemData.slug}`,
-      price,
-    };
+    return priceFetchPromises[uniqueName];
   },
 }));
 

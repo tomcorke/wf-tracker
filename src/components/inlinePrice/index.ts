@@ -1,0 +1,1 @@
+export { InlinePrice } from "./inlinePrice";

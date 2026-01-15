@@ -10,11 +10,9 @@ import {
   primeResurgenceItems,
   vaultedPrimeItems,
 } from "../../processed-data/vaulted-items";
-import {
-  useWarframeMarket,
-  WarframeMarketDataStore,
-} from "../storage/warframe-market";
+import { useWarframeMarket } from "../storage/warframe-market";
 import relicStates from "../../processed-data/relic-states.json";
+import { InlinePrice } from "../inlinePrice";
 
 const formatName = (name: string) => {
   return name.replace("<ARCHWING>", "");
@@ -148,18 +146,9 @@ const formatSources = (sources: Source<string>[]) => {
   );
 };
 
-const priceFetchPromises: Record<
-  string,
-  Promise<Awaited<ReturnType<WarframeMarketDataStore["getItemSetPrice"]>>>
-> = {};
-
 const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
   const { getItemSetPrice } = useWarframeMarket();
-  if (!priceFetchPromises[uniqueName]) {
-    priceFetchPromises[uniqueName] = getItemSetPrice(uniqueName);
-    setTimeout(() => delete priceFetchPromises[uniqueName], 5 * 60 * 1000); // cache for 5 minutes
-  }
-  const priceResult = use(priceFetchPromises[uniqueName]);
+  const priceResult = use(getItemSetPrice(uniqueName));
   return (
     <div className={STYLES.priceDisplay}>
       {priceResult === "item-not-found" || !priceResult ? null : priceResult ===
@@ -180,59 +169,7 @@ const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
   );
 };
 
-const SimplePriceDisplay = ({
-  uniqueName,
-  useSet = true,
-}: {
-  uniqueName: string;
-  useSet?: boolean;
-}) => {
-  const { getItemSetPrice, getItemPrice } = useWarframeMarket();
-  const priceCacheKey = useSet ? `<SET>${uniqueName}` : uniqueName;
-  const getPriceFunction = useSet ? getItemSetPrice : getItemPrice;
-  if (!priceFetchPromises[priceCacheKey]) {
-    priceFetchPromises[priceCacheKey] = getPriceFunction(uniqueName);
-    setTimeout(() => delete priceFetchPromises[priceCacheKey], 5 * 60 * 1000); // cache for 5 minutes
-  }
-  const priceResult = use(priceFetchPromises[priceCacheKey]);
-  return (
-    <span className={STYLES.priceDisplay}>
-      {priceResult === "item-not-found" || !priceResult ? null : priceResult ===
-        "no-sell-orders" ? (
-        "No sell orders found"
-      ) : (
-        <span className={STYLES.priceValue}>{priceResult.price}p</span>
-      )}
-    </span>
-  );
-};
-
 const formatDetails = (uniqueName: string, displayName: string) => {
-  // old version to display all sources after all ingredients
-  // const ingredients = formatIngredients(getItemRecipeParts(uniqueName));
-  // const sources = formatSources([
-  //   ...getItemSources(uniqueName, displayName),
-  //   ...getItemRecipeParts(uniqueName).flatMap((part) =>
-  //     getItemSources(part.uniqueName, part.name)
-  //   ),
-  // ]);
-  // return (
-  //   <>
-  //     {ingredients}
-  //     {sources}
-  //     <div
-  //       style={{ font: "9px monospace", wordBreak: "break-word", opacity: 0.7 }}
-  //     >
-  //       {uniqueName}
-  //     </div>
-  //   </>
-  // );
-
-  // now we want to display sources for whole item
-  // then per ingredient:
-  //   list ingredient
-  //   sources for ingredient
-
   const itemSources = getItemSources(uniqueName, displayName);
   const formattedItemSources = formatSources(itemSources);
   const itemParts = getItemRecipeParts(uniqueName);
@@ -252,7 +189,7 @@ const formatDetails = (uniqueName: string, displayName: string) => {
           <div className={STYLES.ingredientName}>
             <span>{part.name}</span>
             <Suspense fallback={<span>...</span>}>
-              <SimplePriceDisplay uniqueName={part.uniqueName} useSet={false} />
+              <InlinePrice uniqueName={part.uniqueName} useSet={false} />
             </Suspense>
           </div>
           {formattedPartSources}
@@ -423,7 +360,7 @@ export const ItemWithPrime = ({
           display={
             showPriceInTitle ? (
               <>
-                Prime: <SimplePriceDisplay uniqueName={primeUniqueName} />
+                Prime: <InlinePrice uniqueName={primeUniqueName} />
               </>
             ) : (
               "Prime"

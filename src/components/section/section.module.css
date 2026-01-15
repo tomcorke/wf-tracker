@@ -53,18 +53,10 @@
     overflow: hidden;
     font-size: 14px;
 
-    a {
-      color: white;
-    }
-
     & > span,
     & > div,
     & > a {
       padding: 0 5px;
-    }
-
-    & > a {
-      color: cyan;
     }
 
     & > input,
