@@ -24,6 +24,14 @@
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #333;
+  width: 100%;
+  padding: 5px;
+  z-index: 1000;
+
   display: flex;
   flex-flow: row nowrap;
 
@@ -70,6 +78,8 @@
 }
 
 .container {
+  margin-top: 40px;
+
   display: flex;
   flex-flow: row nowrap;
 
