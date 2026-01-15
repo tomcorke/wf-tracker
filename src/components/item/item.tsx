@@ -6,10 +6,6 @@ import STYLES from "./item.module.css";
 import classNames from "classnames";
 import { PropsWithChildren, useCallback, useMemo, useState } from "react";
 import { getItemSources } from "../../processed-data/itemSources";
-import {
-  primeResurgenceItems,
-  vaultedPrimeItems,
-} from "../../processed-data/vaulted-items";
 import { useWarframeMarket } from "../storage/warframe-market";
 import relicStates from "../../processed-data/relic-states.json";
 import { InlinePrice } from "../inlinePrice";
@@ -169,7 +165,12 @@ const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
   );
 };
 
-const formatDetails = (uniqueName: string, displayName: string) => {
+const formatDetails = (
+  uniqueName: string,
+  displayName: string,
+  isVaulted: boolean,
+  isInPrimeResurgence: boolean
+) => {
   const itemSources = getItemSources(uniqueName, displayName);
   const formattedItemSources = formatSources(itemSources);
   const itemParts = getItemRecipeParts(uniqueName);
@@ -198,7 +199,7 @@ const formatDetails = (uniqueName: string, displayName: string) => {
     }
   );
 
-  const isVaulted = vaultedPrimeItems.has(displayName) ? (
+  const vaultedDisplay = isVaulted ? (
     <div className={STYLES.vaultedIndicator}>
       In{" "}
       <a
@@ -211,7 +212,7 @@ const formatDetails = (uniqueName: string, displayName: string) => {
     </div>
   ) : null;
 
-  const isInPrimeResurgence = primeResurgenceItems.has(displayName) ? (
+  const primeResurgenceDisplay = isInPrimeResurgence ? (
     <div className={STYLES.primeResurgenceIndicator}>
       Currently available in{" "}
       <a
@@ -226,8 +227,8 @@ const formatDetails = (uniqueName: string, displayName: string) => {
 
   return (
     <>
-      {isVaulted}
-      {isInPrimeResurgence}
+      {vaultedDisplay}
+      {primeResurgenceDisplay}
       <div className={STYLES.priceContainer}>
         <Suspense fallback={<span>Fetching price...</span>}>
           <PriceDisplay uniqueName={uniqueName} />
@@ -247,11 +248,34 @@ const formatDetails = (uniqueName: string, displayName: string) => {
   );
 };
 
+const getPrimeStatus = (uniqueName: string, displayName: string) => {
+  if (!displayName.includes("Prime")) {
+    return { isPrimeVaulted: false, isInPrimeResurgence: false };
+  }
+  const itemSources = getItemRecipeParts(uniqueName)
+    .map((part) => getItemSources(part.uniqueName, part.name))
+    .flat();
+  const isPrimeVaulted = itemSources.every(
+    (source) =>
+      source.type === "relicRewards" &&
+      relicStates[source.source[0] as keyof typeof relicStates] === "vaulted"
+  );
+  const isInPrimeResurgence = itemSources.some(
+    (source) =>
+      source.type === "relicRewards" &&
+      relicStates[source.source[0] as keyof typeof relicStates] === "resurgence"
+  );
+
+  return { isPrimeVaulted, isInPrimeResurgence };
+};
+
 export const Item = ({ uniqueName, displayName }: ItemProps) => {
   const { itemState } = useItemData(uniqueName);
 
-  const isVaulted = vaultedPrimeItems.has(displayName);
-  const isInPrimeResurgence = primeResurgenceItems.has(displayName);
+  const { isPrimeVaulted, isInPrimeResurgence } = getPrimeStatus(
+    uniqueName,
+    displayName
+  );
 
   const setItemState = useDataStore((store) => store.setItemState);
 
@@ -263,7 +287,13 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
   );
 
   const detailsContent = useMemo(
-    () => formatDetails(uniqueName, displayName),
+    () =>
+      formatDetails(
+        uniqueName,
+        displayName,
+        isPrimeVaulted,
+        isInPrimeResurgence
+      ),
     [uniqueName, displayName]
   );
 
@@ -275,7 +305,7 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
         itemState={itemState}
         setItemState={setItemState}
         className={classNames(STYLES.Item, {
-          [STYLES.vaulted]: isVaulted,
+          [STYLES.vaulted]: isPrimeVaulted,
           [STYLES.primeResurgence]: isInPrimeResurgence,
         })}
         onClick={(e) => {
@@ -308,8 +338,13 @@ export const ItemWithPrime = ({
   const { itemState: baseItemState } = useItemData(baseUniqueName);
   const { itemState: primeItemState } = useItemData(primeUniqueName);
 
-  const isPrimeVaulted = vaultedPrimeItems.has(primeDisplayName);
-  const isInPrimeResurgence = primeResurgenceItems.has(primeDisplayName);
+  // const isPrimeVaulted = vaultedPrimeItems.has(primeDisplayName);
+  // const isInPrimeResurgence = primeResurgenceItems.has(primeDisplayName);
+
+  const { isPrimeVaulted, isInPrimeResurgence } = getPrimeStatus(
+    primeUniqueName,
+    primeDisplayName
+  );
 
   const setItemState = useDataStore((store) => store.setItemState);
 
@@ -328,9 +363,14 @@ export const ItemWithPrime = ({
   const detailsContent = useMemo(
     () =>
       detailsState === "base"
-        ? formatDetails(baseUniqueName, baseDisplayName)
+        ? formatDetails(baseUniqueName, baseDisplayName, false, false)
         : detailsState === "prime"
-        ? formatDetails(primeUniqueName, primeDisplayName)
+        ? formatDetails(
+            primeUniqueName,
+            primeDisplayName,
+            isPrimeVaulted,
+            isInPrimeResurgence
+          )
         : null,
     [detailsState, baseUniqueName, primeUniqueName]
   );
