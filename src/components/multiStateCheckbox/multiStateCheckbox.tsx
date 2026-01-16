@@ -18,8 +18,15 @@ export function MultiStateCheckbox<T extends string>({
   };
 
   return (
-    <div className={STYLES.MultiStateCheckbox} onClick={cycleState}>
-      MultiStateCheckbox. State: {value}
+    <div
+      className={STYLES.MultiStateCheckbox}
+      onClick={(e) => {
+        cycleState();
+        e.stopPropagation();
+      }}
+      data-value={value}
+    >
+      <div className={STYLES.inner}></div>
     </div>
   );
 }

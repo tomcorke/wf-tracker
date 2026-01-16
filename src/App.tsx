@@ -27,6 +27,8 @@ import { KITGUNS } from "./processed-data/kitguns";
 import { AMPS } from "./processed-data/amps";
 import { MODULARCOMPANIONS } from "./processed-data/modularCompanions";
 import { KDRIVES } from "./processed-data/kdrives";
+import { Section } from "./components/section";
+import { MultiStateCheckbox } from "./components/multiStateCheckbox";
 
 const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
   const itemStates = useDataStore(
@@ -57,6 +59,10 @@ function App() {
   const [filterText, setFilterText] = useState("");
 
   const [showOnlyFavourites, setShowOnlyFavourites] = useState(false);
+
+  const [testCheckState, setTestCheckState] = useState<"null" | "foo" | "bar">(
+    "null"
+  );
 
   return (
     <div className={STYLES.App}>
@@ -217,6 +223,32 @@ function App() {
               showOnlyFavourites={showOnlyFavourites}
             />
           </div>
+          {import.meta.env.MODE === "development" ? (
+            <div className={STYLES.stacked}>
+              <Section title="Dev mode">
+                {[
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      padding: "0 5px",
+                      flex: "row nowrap",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "1em",
+                    }}
+                  >
+                    Test checkbox{" "}
+                    <MultiStateCheckbox
+                      states={["null", "foo", "bar"]}
+                      onChange={(newValue) => setTestCheckState(newValue)}
+                      value={testCheckState}
+                    />
+                  </div>,
+                ]}
+              </Section>
+            </div>
+          ) : null}
           {/* <div className={STYLES.stacked}>
             <Section title="Syndicates">{[<div>Ostron</div>]}</Section>
           </div> */}

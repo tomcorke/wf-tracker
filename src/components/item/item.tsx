@@ -10,6 +10,7 @@ import { useWarframeMarket } from "../storage/warframe-market";
 import relicStates from "../../processed-data/relic-states.json";
 import { InlinePrice } from "../inlinePrice";
 import { useFavourites } from "../storage/favourites";
+import { MultiStateCheckbox } from "../multiStateCheckbox";
 
 const formatName = (name: string) => {
   return name.replace("<ARCHWING>", "");
@@ -45,7 +46,7 @@ const ItemComponent = ({
 
   return (
     <div
-      className={classNames(className, {
+      className={classNames(STYLES.ItemComponent, className, {
         [STYLES.mastered]: itemState.mastered,
       })}
       onClick={onClick}
@@ -68,7 +69,7 @@ const ItemComponent = ({
         {typeof display == "string" ? formatName(display) : display}
       </div>
       <div className={STYLES.controls}>
-        <input
+        {/* <input
           type="checkbox"
           className={STYLES.checkbox}
           checked={!!itemState.mastered}
@@ -77,6 +78,13 @@ const ItemComponent = ({
             setItemState(itemName, { mastered: !itemState.mastered });
             e.stopPropagation();
             return false;
+          }}
+        /> */}
+        <MultiStateCheckbox
+          states={["empty", "checked"]}
+          value={itemState.mastered ? "checked" : "empty"}
+          onChange={(newValue) => {
+            setItemState(itemName, { mastered: newValue === "checked" });
           }}
         />
       </div>
@@ -187,7 +195,9 @@ const formatDetails = (
   uniqueName: string,
   displayName: string,
   isVaulted: boolean,
-  isInPrimeResurgence: boolean
+  isInPrimeResurgence: boolean,
+  isFavourite: boolean,
+  toggleFavourite: () => void
 ) => {
   const itemSources = getItemSources(uniqueName, displayName);
   const formattedItemSources = formatSources(itemSources);
@@ -245,6 +255,9 @@ const formatDetails = (
 
   return (
     <>
+      <div className={STYLES.favouriteToggle} onClick={() => toggleFavourite()}>
+        {isFavourite ? "★ Marked as Favourite" : "☆ Mark as Favourite"}
+      </div>
       {vaultedDisplay}
       {primeResurgenceDisplay}
       <div className={STYLES.priceContainer}>
@@ -304,13 +317,17 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
     []
   );
 
+  const { isFavourite, toggleFavourite } = useFavourites();
+
   const detailsContent = useMemo(
     () =>
       formatDetails(
         uniqueName,
         displayName,
         isPrimeVaulted,
-        isInPrimeResurgence
+        isInPrimeResurgence,
+        isFavourite(uniqueName),
+        () => toggleFavourite(uniqueName)
       ),
     [uniqueName, displayName]
   );
@@ -378,16 +395,27 @@ export const ItemWithPrime = ({
     setDetailsState((prev) => (prev === "prime" ? "none" : "prime"));
   }, []);
 
+  const { isFavourite, toggleFavourite } = useFavourites();
+
   const detailsContent = useMemo(
     () =>
       detailsState === "base"
-        ? formatDetails(baseUniqueName, baseDisplayName, false, false)
+        ? formatDetails(
+            baseUniqueName,
+            baseDisplayName,
+            false,
+            false,
+            isFavourite(baseUniqueName),
+            () => toggleFavourite(baseUniqueName)
+          )
         : detailsState === "prime"
         ? formatDetails(
             primeUniqueName,
             primeDisplayName,
             isPrimeVaulted,
-            isInPrimeResurgence
+            isInPrimeResurgence,
+            isFavourite(primeUniqueName),
+            () => toggleFavourite(primeUniqueName)
           )
         : null,
     [detailsState, baseUniqueName, primeUniqueName]
