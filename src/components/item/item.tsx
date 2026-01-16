@@ -9,6 +9,7 @@ import { getItemSources } from "../../processed-data/itemSources";
 import { useWarframeMarket } from "../storage/warframe-market";
 import relicStates from "../../processed-data/relic-states.json";
 import { InlinePrice } from "../inlinePrice";
+import { useFavourites } from "../storage/favourites";
 
 const formatName = (name: string) => {
   return name.replace("<ARCHWING>", "");
@@ -19,9 +20,9 @@ const openWikiForItem = (itemName: string) => {
   window.open(url.toString(), "_blank");
 };
 
-const BaseItem = ({ children }: PropsWithChildren<{}>) => {
-  return <div className={STYLES.ItemWrapper}>{children}</div>;
-};
+const BaseItem = ({ children }: PropsWithChildren<{}>) => (
+  <div className={STYLES.ItemWrapper}>{children}</div>
+);
 
 const ItemComponent = ({
   itemName,
@@ -39,32 +40,49 @@ const ItemComponent = ({
   className: string;
   onClick: (event: React.MouseEvent<unknown, MouseEvent>) => void;
   onMouseEnter?: (event: React.MouseEvent<unknown, MouseEvent>) => void;
-}) => (
-  <div
-    className={classNames(className, {
-      [STYLES.mastered]: itemState.mastered,
-    })}
-    onClick={onClick}
-    onMouseEnter={onMouseEnter}
-  >
-    <div className={STYLES.name}>
-      {typeof display == "string" ? formatName(display) : display}
-    </div>
-    <div className={STYLES.controls}>
-      <input
-        type="checkbox"
-        className={STYLES.checkbox}
-        checked={!!itemState.mastered}
-        readOnly
+}) => {
+  const { isFavourite, toggleFavourite } = useFavourites();
+
+  return (
+    <div
+      className={classNames(className, {
+        [STYLES.mastered]: itemState.mastered,
+      })}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+    >
+      <div
+        className={classNames(STYLES.name, {
+          [STYLES.favourite]: isFavourite(itemName),
+        })}
         onClick={(e) => {
-          setItemState(itemName, { mastered: !itemState.mastered });
-          e.stopPropagation();
-          return false;
+          if (e.shiftKey) {
+            toggleFavourite(itemName);
+            e.preventDefault();
+            e.stopPropagation();
+            window.getSelection()?.empty();
+            return false;
+          }
         }}
-      />
+      >
+        {typeof display == "string" ? formatName(display) : display}
+      </div>
+      <div className={STYLES.controls}>
+        <input
+          type="checkbox"
+          className={STYLES.checkbox}
+          checked={!!itemState.mastered}
+          readOnly
+          onClick={(e) => {
+            setItemState(itemName, { mastered: !itemState.mastered });
+            e.stopPropagation();
+            return false;
+          }}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 type ItemProps = {
   uniqueName: string;
@@ -377,8 +395,6 @@ export const ItemWithPrime = ({
 
   const showDetails = detailsContent !== null;
 
-  const [showPriceInTitle, setShowPriceInTitle] = useState(false);
-
   return (
     <BaseItem>
       <div className={classNames(STYLES.Item, STYLES.split)}>
@@ -397,15 +413,7 @@ export const ItemWithPrime = ({
         />
         <ItemComponent
           itemName={primeUniqueName}
-          display={
-            showPriceInTitle ? (
-              <>
-                Prime: <InlinePrice uniqueName={primeUniqueName} />
-              </>
-            ) : (
-              "Prime"
-            )
-          }
+          display={"Prime"}
           itemState={primeItemState}
           setItemState={setItemState}
           className={classNames(STYLES.splitItemSection, {
@@ -417,11 +425,6 @@ export const ItemWithPrime = ({
               return openWikiForItem(primeDisplayName);
             }
             togglePrimeDetails();
-          }}
-          onMouseEnter={(e) => {
-            if (e.shiftKey) {
-              setShowPriceInTitle(true);
-            }
           }}
         />
       </div>

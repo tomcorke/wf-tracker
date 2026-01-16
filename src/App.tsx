@@ -56,26 +56,41 @@ const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
 function App() {
   const [filterText, setFilterText] = useState("");
 
+  const [showOnlyFavourites, setShowOnlyFavourites] = useState(false);
+
   return (
     <div className={STYLES.App}>
       <div className={STYLES.outer}>
         <div className={STYLES.header}>
-          <div className={STYLES.filterInputWrapper}>
-            <input
-              className={STYLES.filterInput}
-              type="text"
-              placeholder="Filter items..."
-              value={filterText}
-              onChange={(e) => setFilterText(e.target.value)}
-            />
-            {filterText ? (
-              <div
-                className={STYLES.clearInput}
-                onClick={() => setFilterText("")}
-              >
-                ×
-              </div>
-            ) : null}
+          <div className={STYLES.filterGroup}>
+            <div className={STYLES.filterInputWrapper}>
+              <input
+                className={STYLES.filterInput}
+                type="text"
+                placeholder="Filter items..."
+                value={filterText}
+                onChange={(e) => setFilterText(e.target.value)}
+              />
+              {filterText ? (
+                <div
+                  className={STYLES.clearInput}
+                  onClick={() => setFilterText("")}
+                >
+                  ×
+                </div>
+              ) : null}
+            </div>
+            <div className={STYLES.favouritesFilter}>
+              <label>
+                <input
+                  type="checkbox"
+                  id="favouritesToggle"
+                  checked={showOnlyFavourites}
+                  onChange={(e) => setShowOnlyFavourites(e.target.checked)}
+                />
+                Favourites Only
+              </label>
+            </div>
           </div>
           <div className={STYLES.share}>
             <ShareLink
@@ -101,42 +116,50 @@ function App() {
             title="Warframes"
             itemDataSet={WARFRAMES}
             filter={filterText}
+            showOnlyFavourites={showOnlyFavourites}
           />
           <ItemCollection
             title="Primary Weapons"
             itemDataSet={PRIMARYWEAPONS}
             filter={filterText}
+            showOnlyFavourites={showOnlyFavourites}
           />
           <ItemCollection
             title="Secondary Weapons"
             itemDataSet={SECONDARYWEAPONS}
             filter={filterText}
+            showOnlyFavourites={showOnlyFavourites}
           />
           <ItemCollection
             title="Melee Weapons"
             itemDataSet={MELEEWEAPONS}
             filter={filterText}
+            showOnlyFavourites={showOnlyFavourites}
           />
           <div className={STYLES.stacked}>
             <ItemCollection
               title="Archwings"
               itemDataSet={ARCHWINGS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
             <ItemCollection
               title="Necramechs"
               itemDataSet={NECRAMECHS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
             <ItemCollection
               title="Archwing Guns"
               itemDataSet={ARCHWINGGUNS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
             <ItemCollection
               title="Archwing Melee"
               itemDataSet={ARCHWINGMELEE}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
           </div>
           <div className={STYLES.stacked}>
@@ -144,11 +167,13 @@ function App() {
               title="Sentinels"
               itemDataSet={SENTINELS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
             <ItemCollection
               title="Sentinel Weapons"
               itemDataSet={SENTINELWEAPONS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
           </div>
           <div className={STYLES.stacked}>
@@ -156,12 +181,14 @@ function App() {
               title="Companions"
               itemDataSet={COMPANIONS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
               groupBy={(item) => item.name.split(" ")[1] || item.name}
             />
             <ItemCollection
               title="Modular Companions"
               itemDataSet={MODULARCOMPANIONS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
           </div>
           <div className={STYLES.stacked}>
@@ -169,21 +196,25 @@ function App() {
               title="Zaws"
               itemDataSet={ZAWS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
             <ItemCollection
               title="Kitguns"
               itemDataSet={KITGUNS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
             <ItemCollection
               title="Amps"
               itemDataSet={AMPS}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
             <ItemCollection
               title="K-Drives"
               itemDataSet={KDRIVES}
               filter={filterText}
+              showOnlyFavourites={showOnlyFavourites}
             />
           </div>
           {/* <div className={STYLES.stacked}>

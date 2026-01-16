@@ -37,6 +37,13 @@
 
   justify-content: space-between;
 
+  .filterGroup {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: baseline;
+    gap: 2em;
+  }
+
   .filterInputWrapper {
     position: relative;
     gap: 5px;
@@ -67,6 +74,17 @@
       color: white;
       max-height: 20px;
       cursor: pointer;
+    }
+  }
+
+  .favouritesFilter {
+    font-size: 18px;
+
+    & > label {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: baseline;
+      gap: 5px;
     }
   }
 

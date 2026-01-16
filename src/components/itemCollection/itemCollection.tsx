@@ -5,11 +5,13 @@ import STYLES from "./itemCollection.module.css";
 import { useDataStore } from "../storage/data-store";
 import { DataSet } from "../../data-types";
 import { Section } from "../section";
+import { useFavourites } from "../storage/favourites";
 
 type ItemCollectionProps<K extends string, T> = {
   itemDataSet: DataSet<K, T>;
   title: string;
   filter?: string;
+  showOnlyFavourites?: boolean;
   groupBy?: (item: T) => string;
 };
 
@@ -48,6 +50,7 @@ export const ItemCollection = <
   title,
   filter,
   groupBy,
+  showOnlyFavourites,
 }: ItemCollectionProps<K, T>) => {
   const useFilter = filter && filter.trim().length > 0;
 
@@ -58,6 +61,14 @@ export const ItemCollection = <
         item.name.toLowerCase().includes((filter || "").toLowerCase())
       )
     : items;
+
+  const { favourites } = useFavourites();
+
+  if (showOnlyFavourites) {
+    filteredItems = filteredItems.filter((item) =>
+      favourites.includes(item.uniqueName)
+    );
+  }
 
   if (groupBy) {
     filteredItems = filteredItems.sort((a, b) =>

@@ -57,6 +57,18 @@
     .name {
       flex-grow: 1;
       white-space: nowrap;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      gap: 5px;
+
+      &.favourite {
+        &:before {
+          content: "★ ";
+          color: gold;
+          display: inline-block;
+        }
+      }
     }
 
     .controls {
