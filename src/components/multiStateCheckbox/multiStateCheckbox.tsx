@@ -1,9 +1,9 @@
 import STYLES from "./multiStateCheckbox.module.css";
 
-type MultiStateCheckboxProps<T> = {
-  states: T[];
-  value: T;
-  onChange: (newValue: T) => void;
+type MultiStateCheckboxProps<T extends string> = {
+  states: (T | undefined)[];
+  value: T | undefined;
+  onChange: (newValue: T | undefined) => void;
 };
 
 export function MultiStateCheckbox<T extends string>({
@@ -24,7 +24,7 @@ export function MultiStateCheckbox<T extends string>({
         cycleState();
         e.stopPropagation();
       }}
-      data-value={value}
+      data-value={String(value)}
     >
       <div className={STYLES.inner}></div>
     </div>

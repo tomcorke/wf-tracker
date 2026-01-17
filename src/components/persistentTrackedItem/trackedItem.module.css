@@ -1,0 +1,71 @@
+.PersistentTrackedItem {
+  width: 100%;
+
+  --mastered-color: #3c9672;
+
+  &.highlighted {
+    background: linear-gradient(
+      to right,
+      var(--mastered-color),
+      transparent 200%
+    );
+  }
+
+  &.syndicateHighlight {
+    background: linear-gradient(to right, rgb(167, 147, 35), transparent 200%);
+  }
+
+  --standing-rank-bg: var(--mastered-color); /*rgb(51, 110, 64);*/
+
+  &.rank-1 {
+    background: linear-gradient(
+      to right,
+      var(--standing-rank-bg),
+      var(--standing-rank-bg) 15%,
+      transparent 25%
+    );
+  }
+
+  &.rank-2 {
+    background: linear-gradient(
+      to right,
+      var(--standing-rank-bg),
+      var(--standing-rank-bg) 35%,
+      transparent 45%
+    );
+  }
+
+  &.rank-3 {
+    background: linear-gradient(
+      to right,
+      var(--standing-rank-bg),
+      var(--standing-rank-bg) 55%,
+      transparent 65%
+    );
+  }
+
+  &.rank-4 {
+    background: linear-gradient(
+      to right,
+      var(--standing-rank-bg),
+      var(--standing-rank-bg) 75%,
+      transparent 85%
+    );
+  }
+
+  &.rank-5 {
+    background: linear-gradient(
+      to right,
+      var(--standing-rank-bg),
+      var(--standing-rank-bg) 95%,
+      transparent 100%
+    );
+  }
+
+  label {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

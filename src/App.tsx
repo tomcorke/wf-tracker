@@ -29,14 +29,19 @@ import { MODULARCOMPANIONS } from "./processed-data/modularCompanions";
 import { KDRIVES } from "./processed-data/kdrives";
 import { Section } from "./components/section";
 import { MultiStateCheckbox } from "./components/multiStateCheckbox";
+import { PersistentTrackedItem } from "./components/persistentTrackedItem";
 
 const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
   const itemStates = useDataStore(
     useShallow((store) =>
       datasets.flatMap((ds) =>
-        ds.items.map((item) =>
-          store.itemStates[item.uniqueName]?.mastered ? true : false
-        )
+        ds.items.map((item) => {
+          const value = store.itemStates[item.uniqueName];
+          const isMastered =
+            value === "mastered" ||
+            (typeof value === "object" && (value as any)?.mastered);
+          return isMastered;
+        })
       )
     )
   );
@@ -59,10 +64,6 @@ function App() {
   const [filterText, setFilterText] = useState("");
 
   const [showOnlyFavourites, setShowOnlyFavourites] = useState(false);
-
-  const [testCheckState, setTestCheckState] = useState<"null" | "foo" | "bar">(
-    "null"
-  );
 
   return (
     <div className={STYLES.App}>
@@ -223,35 +224,60 @@ function App() {
               showOnlyFavourites={showOnlyFavourites}
             />
           </div>
-          {import.meta.env.MODE === "development" ? (
-            <div className={STYLES.stacked}>
+          <div className={STYLES.stacked}>
+            <Section title="Syndicates">
+              {[
+                "Cetus - Ostron",
+                "Cetus - Quills",
+                "Fortuna - Solaris United",
+                "Fortuna - Vox Solaris",
+                "Fortuna - Ventkids",
+                "Necralisk - Entrati",
+                "Necralisk - Cavia",
+                "Necralisk - Necraloid",
+                "Crysalith - Holdfasts",
+                "Hollvania - The Hex",
+              ].flatMap((syndicate) => [
+                <PersistentTrackedItem
+                  key={`syndicate-${syndicate}-rank`}
+                  label={`${syndicate} - Rank`}
+                  itemKey={`syndicate-${syndicate}-rank`}
+                  states={[
+                    "rank-0",
+                    "rank-1",
+                    "rank-2",
+                    "rank-3",
+                    "rank-4",
+                    "rank-5",
+                  ]}
+                  highlight={(state) => state === "rank-5"}
+                  highlightClassName="syndicateHighlight"
+                  initialValue={"rank-0"}
+                />,
+                <PersistentTrackedItem
+                  key={`syndicate-${syndicate}-daily`}
+                  label={`${syndicate} - Standing`}
+                  itemKey={`syndicate-${syndicate}`}
+                  states={["syndicate-full"]}
+                  highlight={(state) => state === "syndicate-full"}
+                  highlightClassName="syndicateHighlight"
+                  initialValue={undefined}
+                />,
+              ])}
+            </Section>
+            {import.meta.env.MODE === "development" ? (
               <Section title="Dev mode">
                 {[
-                  <div
-                    style={{
-                      display: "flex",
-                      width: "100%",
-                      padding: "0 5px",
-                      flex: "row nowrap",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      gap: "1em",
-                    }}
-                  >
-                    Test checkbox{" "}
-                    <MultiStateCheckbox
-                      states={["null", "foo", "bar"]}
-                      onChange={(newValue) => setTestCheckState(newValue)}
-                      value={testCheckState}
-                    />
-                  </div>,
+                  <PersistentTrackedItem
+                    label="Test Label"
+                    itemKey="test-value"
+                    states={["mastered"]}
+                    initialValue={undefined}
+                  />,
                 ]}
               </Section>
-            </div>
-          ) : null}
-          {/* <div className={STYLES.stacked}>
-            <Section title="Syndicates">{[<div>Ostron</div>]}</Section>
-          </div> */}
+            ) : null}
+          </div>
         </div>
         <div className={STYLES.tasksContainer}></div>
         <Metadata />

@@ -9,6 +9,7 @@
 
   border: 1px solid #333;
 
+  &[data-value="undefined"],
   &[data-value="null"],
   &[data-value="empty"] {
     --display: " ";
@@ -21,11 +22,50 @@
     --color: orangered;
   }
 
-  &[data-value="checked"] {
+  &[data-value="checked"],
+  &[data-value="mastered"],
+  &[data-value="complete"] {
     /* tick */
     --display: "✓";
     --color: limegreen;
   }
+
+  &[data-value="syndicate-full"] {
+    --display: "█";
+    --display: "✓";
+    --color: gold;
+  }
+
+  &[data-value="rank-0"] {
+    --display: "-";
+    --color: grey;
+  }
+
+  &[data-value="rank-1"] {
+    --display: "1";
+    --color: gold;
+  }
+
+  &[data-value="rank-2"] {
+    --display: "2";
+    --color: gold;
+  }
+
+  &[data-value="rank-3"] {
+    --display: "3";
+    --color: gold;
+  }
+
+  &[data-value="rank-4"] {
+    --display: "4";
+    --color: gold;
+  }
+
+  &[data-value="rank-5"] {
+    --display: "5";
+    --color: gold;
+  }
+
   .inner {
     width: 100%;
     height: 100%;

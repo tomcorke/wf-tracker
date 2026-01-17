@@ -25,6 +25,8 @@ const BaseItem = ({ children }: PropsWithChildren<{}>) => (
   <div className={STYLES.ItemWrapper}>{children}</div>
 );
 
+type RichItemState = { mastered?: boolean };
+
 const ItemComponent = ({
   itemName,
   display,
@@ -36,7 +38,7 @@ const ItemComponent = ({
 }: {
   itemName: string;
   display: string | JSX.Element;
-  itemState: ItemState;
+  itemState: RichItemState;
   setItemState: (itemName: string, newState: Partial<ItemState>) => void;
   className: string;
   onClick: (event: React.MouseEvent<unknown, MouseEvent>) => void;
@@ -84,7 +86,10 @@ const ItemComponent = ({
           states={["empty", "checked"]}
           value={itemState.mastered ? "checked" : "empty"}
           onChange={(newValue) => {
-            setItemState(itemName, { mastered: newValue === "checked" });
+            setItemState(
+              itemName,
+              newValue === "checked" ? "mastered" : undefined
+            );
           }}
         />
       </div>
@@ -301,7 +306,7 @@ const getPrimeStatus = (uniqueName: string, displayName: string) => {
 };
 
 export const Item = ({ uniqueName, displayName }: ItemProps) => {
-  const { itemState } = useItemData(uniqueName);
+  const itemState = useItemData(uniqueName);
 
   const { isPrimeVaulted, isInPrimeResurgence } = getPrimeStatus(
     uniqueName,
@@ -370,8 +375,8 @@ export const ItemWithPrime = ({
   primeUniqueName,
   primeDisplayName,
 }: ItemWithPrimeProps) => {
-  const { itemState: baseItemState } = useItemData(baseUniqueName);
-  const { itemState: primeItemState } = useItemData(primeUniqueName);
+  const baseItemState = useItemData(baseUniqueName);
+  const primeItemState = useItemData(primeUniqueName);
 
   // const isPrimeVaulted = vaultedPrimeItems.has(primeDisplayName);
   // const isInPrimeResurgence = primeResurgenceItems.has(primeDisplayName);

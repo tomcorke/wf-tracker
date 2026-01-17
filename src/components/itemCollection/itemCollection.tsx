@@ -27,11 +27,13 @@ const CollectionCounter = <T extends { uniqueName: string }>({
 
   const masteredCount = useDataStore(
     useShallow((state) =>
-      items.reduce(
-        (count, item) =>
-          count + (state.itemStates[item.uniqueName]?.mastered ? 1 : 0),
-        0
-      )
+      items.reduce((count, item) => {
+        const value = state.itemStates[item.uniqueName];
+        const isMastered =
+          value === "mastered" ||
+          (typeof value === "object" && (value as any)?.mastered);
+        return count + (isMastered ? 1 : 0);
+      }, 0)
     )
   );
 
