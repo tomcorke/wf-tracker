@@ -28,8 +28,9 @@ import { AMPS } from "./processed-data/amps";
 import { MODULARCOMPANIONS } from "./processed-data/modularCompanions";
 import { KDRIVES } from "./processed-data/kdrives";
 import { Section } from "./components/section";
-import { MultiStateCheckbox } from "./components/multiStateCheckbox";
 import { PersistentTrackedItem } from "./components/persistentTrackedItem";
+import { MultiStateCheckbox } from "./components/multiStateCheckbox";
+import { ItemCollectionProps } from "./components/itemCollection/itemCollection";
 
 const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
   const itemStates = useDataStore(
@@ -41,9 +42,9 @@ const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
             value === "mastered" ||
             (typeof value === "object" && (value as any)?.mastered);
           return isMastered;
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
   const asBinaryString = itemStates
     .map((state) => (state ? "1" : "0"))
@@ -64,6 +65,16 @@ function App() {
   const [filterText, setFilterText] = useState("");
 
   const [showOnlyFavourites, setShowOnlyFavourites] = useState(false);
+  const [showOnlyUnmastered, setShowOnlyUnmastered] = useState(false);
+
+  const filters = { filterText, showOnlyFavourites, showOnlyUnmastered };
+
+  const FilteredItemCollection = <
+    K extends string,
+    T extends { uniqueName: string; name: string },
+  >(
+    props: Omit<ItemCollectionProps<K, T>, "filters">,
+  ) => <ItemCollection {...props} filters={filters} />;
 
   return (
     <div className={STYLES.App}>
@@ -87,15 +98,30 @@ function App() {
                 </div>
               ) : null}
             </div>
-            <div className={STYLES.favouritesFilter}>
+            <div className={STYLES.toggleFilter}>
               <label>
-                <input
-                  type="checkbox"
-                  id="favouritesToggle"
-                  checked={showOnlyFavourites}
-                  onChange={(e) => setShowOnlyFavourites(e.target.checked)}
+                <MultiStateCheckbox
+                  states={[undefined, "checked"]}
+                  value={showOnlyFavourites ? "checked" : undefined}
+                  onChange={(state) =>
+                    setShowOnlyFavourites(state === "checked")
+                  }
+                  large
                 />
                 Favourites Only
+              </label>
+            </div>
+            <div className={STYLES.toggleFilter}>
+              <label>
+                <MultiStateCheckbox
+                  states={[undefined, "checked"]}
+                  value={showOnlyUnmastered ? "checked" : undefined}
+                  onChange={(state) =>
+                    setShowOnlyUnmastered(state === "checked")
+                  }
+                  large
+                />
+                Unchecked Only
               </label>
             </div>
           </div>
@@ -119,110 +145,57 @@ function App() {
           </div>
         </div>
         <div className={STYLES.container}>
-          <ItemCollection
-            title="Warframes"
-            itemDataSet={WARFRAMES}
-            filter={filterText}
-            showOnlyFavourites={showOnlyFavourites}
-          />
-          <ItemCollection
+          <FilteredItemCollection title="Warframes" itemDataSet={WARFRAMES} />
+          <FilteredItemCollection
             title="Primary Weapons"
             itemDataSet={PRIMARYWEAPONS}
-            filter={filterText}
-            showOnlyFavourites={showOnlyFavourites}
           />
-          <ItemCollection
+          <FilteredItemCollection
             title="Secondary Weapons"
             itemDataSet={SECONDARYWEAPONS}
-            filter={filterText}
-            showOnlyFavourites={showOnlyFavourites}
           />
-          <ItemCollection
+          <FilteredItemCollection
             title="Melee Weapons"
             itemDataSet={MELEEWEAPONS}
-            filter={filterText}
-            showOnlyFavourites={showOnlyFavourites}
           />
           <div className={STYLES.stacked}>
-            <ItemCollection
-              title="Archwings"
-              itemDataSet={ARCHWINGS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
-            />
-            <ItemCollection
+            <FilteredItemCollection title="Archwings" itemDataSet={ARCHWINGS} />
+            <FilteredItemCollection
               title="Necramechs"
               itemDataSet={NECRAMECHS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
             />
-            <ItemCollection
+            <FilteredItemCollection
               title="Archwing Guns"
               itemDataSet={ARCHWINGGUNS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
             />
-            <ItemCollection
+            <FilteredItemCollection
               title="Archwing Melee"
               itemDataSet={ARCHWINGMELEE}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
             />
           </div>
           <div className={STYLES.stacked}>
-            <ItemCollection
-              title="Sentinels"
-              itemDataSet={SENTINELS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
-            />
-            <ItemCollection
+            <FilteredItemCollection title="Sentinels" itemDataSet={SENTINELS} />
+            <FilteredItemCollection
               title="Sentinel Weapons"
               itemDataSet={SENTINELWEAPONS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
             />
           </div>
           <div className={STYLES.stacked}>
-            <ItemCollection
+            <FilteredItemCollection
               title="Companions"
               itemDataSet={COMPANIONS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
               groupBy={(item) => item.name.split(" ")[1] || item.name}
             />
-            <ItemCollection
+            <FilteredItemCollection
               title="Modular Companions"
               itemDataSet={MODULARCOMPANIONS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
             />
           </div>
           <div className={STYLES.stacked}>
-            <ItemCollection
-              title="Zaws"
-              itemDataSet={ZAWS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
-            />
-            <ItemCollection
-              title="Kitguns"
-              itemDataSet={KITGUNS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
-            />
-            <ItemCollection
-              title="Amps"
-              itemDataSet={AMPS}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
-            />
-            <ItemCollection
-              title="K-Drives"
-              itemDataSet={KDRIVES}
-              filter={filterText}
-              showOnlyFavourites={showOnlyFavourites}
-            />
+            <FilteredItemCollection title="Zaws" itemDataSet={ZAWS} />
+            <FilteredItemCollection title="Kitguns" itemDataSet={KITGUNS} />
+            <FilteredItemCollection title="Amps" itemDataSet={AMPS} />
+            <FilteredItemCollection title="K-Drives" itemDataSet={KDRIVES} />
           </div>
           <div className={STYLES.stacked}>
             <Section title="Syndicates">

@@ -36,11 +36,12 @@
   flex-flow: row nowrap;
 
   justify-content: space-between;
+  align-items: center;
 
   .filterGroup {
     display: flex;
     flex-flow: row nowrap;
-    align-items: baseline;
+    align-items: center;
     gap: 2em;
   }
 
@@ -77,13 +78,16 @@
     }
   }
 
-  .favouritesFilter {
+  .toggleFilter {
     font-size: 18px;
+    display: flex;
+    height: 100%;
+    align-items: center;
 
     & > label {
       display: flex;
       flex-flow: row nowrap;
-      align-items: baseline;
+      align-items: center;
       gap: 5px;
     }
   }

@@ -1,15 +1,18 @@
+import classNames from "classnames";
 import STYLES from "./multiStateCheckbox.module.css";
 
 type MultiStateCheckboxProps<T extends string> = {
   states: (T | undefined)[];
   value: T | undefined;
   onChange: (newValue: T | undefined) => void;
+  large?: boolean;
 };
 
 export function MultiStateCheckbox<T extends string>({
   states,
   value,
   onChange,
+  large = false,
 }: MultiStateCheckboxProps<T>) {
   const cycleState = () => {
     const currentIndex = states.indexOf(value);
@@ -19,7 +22,9 @@ export function MultiStateCheckbox<T extends string>({
 
   return (
     <div
-      className={STYLES.MultiStateCheckbox}
+      className={classNames(STYLES.MultiStateCheckbox, {
+        [STYLES.large]: large,
+      })}
       onClick={(e) => {
         cycleState();
         e.stopPropagation();

@@ -7,11 +7,16 @@ import { DataSet } from "../../data-types";
 import { Section } from "../section";
 import { useFavourites } from "../storage/favourites";
 
-type ItemCollectionProps<K extends string, T> = {
+type Filters = {
+  filterText?: string;
+  showOnlyFavourites?: boolean;
+  showOnlyUnmastered?: boolean;
+};
+
+export type ItemCollectionProps<K extends string, T> = {
   itemDataSet: DataSet<K, T>;
   title: string;
-  filter?: string;
-  showOnlyFavourites?: boolean;
+  filters?: Filters;
   groupBy?: (item: T) => string;
 };
 
@@ -33,8 +38,8 @@ const CollectionCounter = <T extends { uniqueName: string }>({
           value === "mastered" ||
           (typeof value === "object" && (value as any)?.mastered);
         return count + (isMastered ? 1 : 0);
-      }, 0)
-    )
+      }, 0),
+    ),
   );
 
   return (
@@ -46,21 +51,26 @@ const CollectionCounter = <T extends { uniqueName: string }>({
 
 export const ItemCollection = <
   K extends string,
-  T extends { uniqueName: string; name: string }
+  T extends { uniqueName: string; name: string },
 >({
   itemDataSet,
   title,
-  filter,
+  filters = {},
   groupBy,
-  showOnlyFavourites,
 }: ItemCollectionProps<K, T>) => {
-  const useFilter = filter && filter.trim().length > 0;
+  const {
+    filterText,
+    showOnlyFavourites = false,
+    showOnlyUnmastered = false,
+  } = filters;
+
+  const useFilter = filterText && filterText.trim().length > 0;
 
   const { items, primes } = itemDataSet;
 
   let filteredItems = useFilter
     ? items.filter((item) =>
-        item.name.toLowerCase().includes((filter || "").toLowerCase())
+        item.name.toLowerCase().includes((filterText || "").toLowerCase()),
       )
     : items;
 
@@ -68,13 +78,22 @@ export const ItemCollection = <
 
   if (showOnlyFavourites) {
     filteredItems = filteredItems.filter((item) =>
-      favourites.includes(item.uniqueName)
+      favourites.includes(item.uniqueName),
     );
+  }
+  if (showOnlyUnmastered) {
+    filteredItems = filteredItems.filter((item) => {
+      const itemState = useDataStore.getState().itemStates[item.uniqueName];
+      const isMastered =
+        itemState === "mastered" ||
+        (typeof itemState === "object" && (itemState as any)?.mastered);
+      return !isMastered;
+    });
   }
 
   if (groupBy) {
     filteredItems = filteredItems.sort((a, b) =>
-      groupBy(a).localeCompare(groupBy(b))
+      groupBy(a).localeCompare(groupBy(b)),
     );
   }
 
@@ -82,7 +101,7 @@ export const ItemCollection = <
     .filter(
       (item) =>
         !isPrime(item) ||
-        !Array.from(primes?.values() || []).some((p) => p === item)
+        !Array.from(primes?.values() || []).some((p) => p === item),
     )
     .filter((item) => {
       if (primes) {
