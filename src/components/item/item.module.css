@@ -150,9 +150,19 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 1em;
+    position: relative;
+
+    .wikiLink {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 80%;
+      opacity: 70%;
+    }
 
     .favouriteToggle {
       cursor: pointer;
+      user-select: none;
     }
 
     .priceContainer {

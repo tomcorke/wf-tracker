@@ -1,5 +1,5 @@
 import { useShallow } from "zustand/shallow";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import STYLES from "./App.module.css";
 
@@ -33,19 +33,21 @@ import { MultiStateCheckbox } from "./components/multiStateCheckbox";
 import { ItemCollectionProps } from "./components/itemCollection/itemCollection";
 
 const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
-  const itemStates = useDataStore(
-    useShallow((store) =>
-      datasets.flatMap((ds) =>
-        ds.items.map((item) => {
-          const value = store.itemStates[item.uniqueName];
-          const isMastered =
-            value === "mastered" ||
-            (typeof value === "object" && (value as any)?.mastered);
-          return isMastered;
-        }),
-      ),
-    ),
-  );
+  const lastUpdated = useDataStore((store) => store.lastUpdated);
+
+  const itemStates = useMemo(() => {
+    const store = useDataStore.getState();
+    return datasets.flatMap((ds) =>
+      ds.items.map((item) => {
+        const value = store.itemStates[item.uniqueName];
+        const isMastered =
+          value === "mastered" ||
+          (typeof value === "object" && (value as any)?.mastered);
+        return isMastered;
+      }),
+    );
+  }, [lastUpdated]);
+
   const asBinaryString = itemStates
     .map((state) => (state ? "1" : "0"))
     .join("");

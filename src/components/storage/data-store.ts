@@ -7,6 +7,7 @@ export type ItemState = string | undefined;
 type TrackerDataStore = {
   itemStates: Record<string, ItemState>;
   setItemState: (itemName: string, newState: Partial<ItemState>) => void;
+  lastUpdated?: number;
 };
 
 export const useDataStore = create<TrackerDataStore>()(
@@ -16,25 +17,26 @@ export const useDataStore = create<TrackerDataStore>()(
       setItemState: (itemName: string, newState: Partial<ItemState>) => {
         const state = get();
 
-        // Migrate old states to new
-        // if they are currently stored in the format
-
         console.log("Setting item state", itemName, newState);
+
+        const newStateUpdateTime = Date.now();
+
         set({
           itemStates: {
             ...state.itemStates,
             [itemName]: newState,
           },
+          lastUpdated: newStateUpdateTime,
         });
       },
     }),
-    { name: "wf-tracker-data-store" }
-  )
+    { name: "wf-tracker-data-store" },
+  ),
 );
 
 export const useItemData = (itemName: string) => {
   const itemState = useDataStore(
-    useShallow((store) => store.itemStates[itemName])
+    useShallow((store) => store.itemStates[itemName]),
   );
 
   const mastered =

@@ -88,7 +88,7 @@ const ItemComponent = ({
           onChange={(newValue) => {
             setItemState(
               itemName,
-              newValue === "checked" ? "mastered" : undefined
+              newValue === "checked" ? "mastered" : undefined,
             );
           }}
         />
@@ -131,7 +131,7 @@ const transformSourceSections = (section: string): string | JSX.Element => {
 
 const interleave = <T,>(arr: T[], separator: T): T[] => {
   return arr.flatMap((item, index) =>
-    index < arr.length - 1 ? [item, separator] : [item]
+    index < arr.length - 1 ? [item, separator] : [item],
   );
 };
 
@@ -163,7 +163,7 @@ const formatSources = (sources: Source<string>[]) => {
           <li key={index}>
             {interleave(
               source.source,
-              <span className={STYLES.sourceSeparator}> &gt; </span>
+              <span className={STYLES.sourceSeparator}> &gt; </span>,
             )}
             {/* ({source.type}) */}
           </li>
@@ -201,8 +201,7 @@ const formatDetails = (
   displayName: string,
   isVaulted: boolean,
   isInPrimeResurgence: boolean,
-  isFavourite: boolean,
-  toggleFavourite: () => void
+  toggleFavourite: () => void,
 ) => {
   const itemSources = getItemSources(uniqueName, displayName);
   const formattedItemSources = formatSources(itemSources);
@@ -229,7 +228,7 @@ const formatDetails = (
           {formattedPartSources}
         </li>
       );
-    }
+    },
   );
 
   const vaultedDisplay = isVaulted ? (
@@ -260,8 +259,19 @@ const formatDetails = (
 
   return (
     <>
+      <div className={STYLES.wikiLink}>
+        <a
+          href={`https://wiki.warframe.com/?search=${encodeURIComponent(
+            displayName,
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Wiki
+        </a>
+      </div>
       <div className={STYLES.favouriteToggle} onClick={() => toggleFavourite()}>
-        {isFavourite ? "★ Marked as Favourite" : "☆ Mark as Favourite"}
+        {"★ Toggle Favourite"}
       </div>
       {vaultedDisplay}
       {primeResurgenceDisplay}
@@ -294,12 +304,13 @@ const getPrimeStatus = (uniqueName: string, displayName: string) => {
   const isPrimeVaulted = itemSources.every(
     (source) =>
       source.type === "relicRewards" &&
-      relicStates[source.source[0] as keyof typeof relicStates] === "vaulted"
+      relicStates[source.source[0] as keyof typeof relicStates] === "vaulted",
   );
   const isInPrimeResurgence = itemSources.some(
     (source) =>
       source.type === "relicRewards" &&
-      relicStates[source.source[0] as keyof typeof relicStates] === "resurgence"
+      relicStates[source.source[0] as keyof typeof relicStates] ===
+        "resurgence",
   );
 
   return { isPrimeVaulted, isInPrimeResurgence };
@@ -310,7 +321,7 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
 
   const { isPrimeVaulted, isInPrimeResurgence } = getPrimeStatus(
     uniqueName,
-    displayName
+    displayName,
   );
 
   const setItemState = useDataStore((store) => store.setItemState);
@@ -319,7 +330,7 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
 
   const toggleShowDetails = useCallback(
     () => setShowDetails((prev) => !prev),
-    []
+    [],
   );
 
   const { isFavourite, toggleFavourite } = useFavourites();
@@ -331,10 +342,9 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
         displayName,
         isPrimeVaulted,
         isInPrimeResurgence,
-        isFavourite(uniqueName),
-        () => toggleFavourite(uniqueName)
+        () => toggleFavourite(uniqueName),
       ),
-    [uniqueName, displayName]
+    [uniqueName, displayName, isFavourite(uniqueName)],
   );
 
   return (
@@ -383,13 +393,13 @@ export const ItemWithPrime = ({
 
   const { isPrimeVaulted, isInPrimeResurgence } = getPrimeStatus(
     primeUniqueName,
-    primeDisplayName
+    primeDisplayName,
   );
 
   const setItemState = useDataStore((store) => store.setItemState);
 
   const [detailsState, setDetailsState] = useState<"none" | "base" | "prime">(
-    "none"
+    "none",
   );
 
   const toggleBaseDetails = useCallback(() => {
@@ -400,31 +410,34 @@ export const ItemWithPrime = ({
     setDetailsState((prev) => (prev === "prime" ? "none" : "prime"));
   }, []);
 
-  const { isFavourite, toggleFavourite } = useFavourites();
+  const { toggleFavourite } = useFavourites();
 
-  const detailsContent = useMemo(
+  const baseDetailsContent = useMemo(
     () =>
-      detailsState === "base"
-        ? formatDetails(
-            baseUniqueName,
-            baseDisplayName,
-            false,
-            false,
-            isFavourite(baseUniqueName),
-            () => toggleFavourite(baseUniqueName)
-          )
-        : detailsState === "prime"
-        ? formatDetails(
-            primeUniqueName,
-            primeDisplayName,
-            isPrimeVaulted,
-            isInPrimeResurgence,
-            isFavourite(primeUniqueName),
-            () => toggleFavourite(primeUniqueName)
-          )
-        : null,
-    [detailsState, baseUniqueName, primeUniqueName]
+      formatDetails(baseUniqueName, baseDisplayName, false, false, () =>
+        toggleFavourite(baseUniqueName),
+      ),
+    [baseUniqueName],
   );
+
+  const primeDetailsContent = useMemo(
+    () =>
+      formatDetails(
+        primeUniqueName,
+        primeDisplayName,
+        isPrimeVaulted,
+        isInPrimeResurgence,
+        () => toggleFavourite(primeUniqueName),
+      ),
+    [primeUniqueName],
+  );
+
+  const detailsContent =
+    detailsState === "base"
+      ? baseDetailsContent
+      : detailsState === "prime"
+        ? primeDetailsContent
+        : null;
 
   const showDetails = detailsContent !== null;
 
