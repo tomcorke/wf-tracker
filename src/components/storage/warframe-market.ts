@@ -38,11 +38,13 @@ const OrderDataSchema = z.object({
   visible: z.boolean(),
 });
 
-const WarframeMarketOrdersDataSchema = z.object({
-  data: z.object({
-    sell: z.array(OrderDataSchema),
-  }),
-});
+const WarframeMarketOrdersDataSchema = z
+  .object({
+    data: z.object({
+      sell: z.array(OrderDataSchema),
+    }),
+  })
+  .or(z.object({ error: z.string() }));
 
 let warframeMarketItemList: Promise<
   z.infer<typeof WarframeMarketV2ItemsSchema>
@@ -59,20 +61,19 @@ type ItemPriceCacheData = {
 };
 
 const warframeMarketItemPriceCache = new Map<string, ItemPriceCacheData>();
-const BASE_URL = "https://corsproxy.io/?url=https://api.warframe.market/v2";
+const BASE_URL = "https://api.warframe.market/v2";
 
 const USE_STATIC_WARFRAME_MARKET_ITEMS = true;
 
 const getWarframeMarketItemsList = async () => {
   if (warframeMarketItemList === null) {
     if (USE_STATIC_WARFRAME_MARKET_ITEMS) {
-      const warframeMarketItemListImportData = await import(
-        "./warframe-market-items.json"
-      );
+      const warframeMarketItemListImportData =
+        await import("./warframe-market-items.json");
       warframeMarketItemList = new Promise((resolve, reject) => {
         try {
           const parsedData = WarframeMarketV2ItemsSchema.parse(
-            warframeMarketItemListImportData.default
+            warframeMarketItemListImportData.default,
           );
           resolve(parsedData);
         } catch (error) {
@@ -103,24 +104,31 @@ const getItemSetData = async (uniqueName: string) => {
 
   if (!foundItem) {
     console.log(
-      `Warframe Market: Item with uniqueName "${uniqueName}" not found.`
+      `Warframe Market: Item with uniqueName "${uniqueName}" not found.`,
     );
     return null;
   }
 
   if (!warframeMarketItemSetDataCache.has(foundItem.id)) {
-    const itemResponse = await fetch(`${BASE_URL}/item/${foundItem.slug}/set`);
-    const itemData = await itemResponse.json();
     try {
-      const parsedItemSetData =
-        WarframeMarketV2ItemSetDataSchema.parse(itemData);
-      warframeMarketItemSetDataCache.set(
-        foundItem.id,
-        parsedItemSetData.data.items
+      const itemResponse = await fetch(
+        `${BASE_URL}/item/${foundItem.slug}/set`,
       );
+      const itemData = await itemResponse.json();
+      try {
+        const parsedItemSetData =
+          WarframeMarketV2ItemSetDataSchema.parse(itemData);
+        warframeMarketItemSetDataCache.set(
+          foundItem.id,
+          parsedItemSetData.data.items,
+        );
+      } catch (e) {
+        console.error("Error parsing item set data:", e, itemData);
+        throw e;
+      }
     } catch (e) {
-      console.error("Error parsing item set data:", e, itemData);
-      throw e;
+      console.error("Error fetching item set data:", e);
+      return null;
     }
   }
 
@@ -136,67 +144,91 @@ const getItemPrice = async (itemSlug: string): Promise<number | null> => {
   if (cachedPriceData && now - cachedPriceData.timestamp < STALE_AGE) {
     return cachedPriceData.price;
   }
-
-  const ordersResponse = await fetch(`${BASE_URL}/orders/item/${itemSlug}/top`);
-
-  const ordersData = await ordersResponse.json();
-  const parsedOrdersData = WarframeMarketOrdersDataSchema.parse(ordersData);
-  const sellOrders = parsedOrdersData.data.sell.filter(
-    (order) => order.visible && order.quantity > 0
-  );
-
-  if (sellOrders.length === 0) {
-    warframeMarketItemPriceCache.set(itemSlug, {
-      price: -1,
-      timestamp: now,
-    });
-    console.log(
-      `Warframe Market: No sell orders found for item "${itemSlug}".`
+  try {
+    const ordersResponse = await fetch(
+      `${BASE_URL}/orders/item/${itemSlug}/top`,
     );
+
+    const ordersData = await ordersResponse.json();
+
+    if (!ordersData) {
+      return null;
+    }
+
+    try {
+      const parsedOrdersData = WarframeMarketOrdersDataSchema.parse(ordersData);
+
+      if ("error" in parsedOrdersData) {
+        console.log(
+          `Warframe Market: Error fetching orders for item "${itemSlug}": ${parsedOrdersData.error}`,
+        );
+        return null;
+      }
+
+      const sellOrders = parsedOrdersData.data.sell.filter(
+        (order) => order.visible && order.quantity > 0,
+      );
+
+      if (sellOrders.length === 0) {
+        warframeMarketItemPriceCache.set(itemSlug, {
+          price: -1,
+          timestamp: now,
+        });
+        console.log(
+          `Warframe Market: No sell orders found for item "${itemSlug}".`,
+        );
+        return null;
+      }
+
+      const lowestPriceOrder = Math.min(
+        ...sellOrders.map((order) => order.platinum),
+      );
+      const highestPriceOrder = Math.max(
+        ...sellOrders.map((order) => order.platinum),
+      );
+
+      const getMedianPriceFromLowest5 = () => {
+        const sortedPrices = sellOrders
+          .map((order) => order.platinum)
+          .sort((a, b) => a - b)
+          .slice(0, 5);
+        const mid = Math.floor(sortedPrices.length / 2);
+        if (sortedPrices.length % 2 === 0) {
+          return Math.floor((sortedPrices[mid - 1] + sortedPrices[mid]) / 2);
+        } else {
+          return sortedPrices[mid];
+        }
+      };
+
+      const medianPrice = getMedianPriceFromLowest5();
+
+      warframeMarketItemPriceCache.set(itemSlug, {
+        price: medianPrice,
+        timestamp: now,
+      });
+
+      console.log(
+        `Warframe Market: Median price for item "${itemSlug}" is ${medianPrice}p. Price range of ${lowestPriceOrder}p - ${highestPriceOrder}p from ${sellOrders.length} orders.`,
+      );
+      return medianPrice;
+    } catch (e) {
+      console.error("Error parsing orders data:", e, ordersData);
+      throw e;
+    }
+  } catch (e) {
+    console.error("Error fetching orders data:", e);
     return null;
   }
-
-  const lowestPriceOrder = Math.min(
-    ...sellOrders.map((order) => order.platinum)
-  );
-  const highestPriceOrder = Math.max(
-    ...sellOrders.map((order) => order.platinum)
-  );
-
-  const getMedianPriceFromLowest5 = () => {
-    const sortedPrices = sellOrders
-      .map((order) => order.platinum)
-      .sort((a, b) => a - b)
-      .slice(0, 5);
-    const mid = Math.floor(sortedPrices.length / 2);
-    if (sortedPrices.length % 2 === 0) {
-      return Math.floor((sortedPrices[mid - 1] + sortedPrices[mid]) / 2);
-    } else {
-      return sortedPrices[mid];
-    }
-  };
-
-  const medianPrice = getMedianPriceFromLowest5();
-
-  warframeMarketItemPriceCache.set(itemSlug, {
-    price: medianPrice,
-    timestamp: now,
-  });
-
-  console.log(
-    `Warframe Market: Median price for item "${itemSlug}" is ${medianPrice}p. Price range of ${lowestPriceOrder}p - ${highestPriceOrder}p from ${sellOrders.length} orders.`
-  );
-  return medianPrice;
 };
 
 type WarframeMarketItemPriceData = { slug: string; url: string; price: number };
 type FailureCode = "item-not-found" | "no-sell-orders";
 export type WarframeMarketDataStore = {
   getItemSetPrice: (
-    uniqueName: string
+    uniqueName: string,
   ) => Promise<WarframeMarketItemPriceData | null | FailureCode>;
   getItemPrice: (
-    uniqueName: string
+    uniqueName: string,
   ) => Promise<WarframeMarketItemPriceData | null | FailureCode>;
 };
 
@@ -207,7 +239,7 @@ const priceFetchPromises: Record<
 
 const createExpiringPriceFetchPromise = (
   uniqueName: string,
-  fetch: () => ReturnType<WarframeMarketDataStore["getItemPrice"]>
+  fetch: () => ReturnType<WarframeMarketDataStore["getItemPrice"]>,
 ) => {
   const promise = Promise.resolve().then(() => fetch());
   priceFetchPromises[uniqueName] = promise;
@@ -217,7 +249,7 @@ const createExpiringPriceFetchPromise = (
 
 export const useWarframeMarket = create<WarframeMarketDataStore>()(() => ({
   getItemSetPrice: (
-    uniqueName: string
+    uniqueName: string,
   ): Promise<WarframeMarketItemPriceData | null | FailureCode> => {
     const cacheKey = `<SET>${uniqueName}`;
     if (!priceFetchPromises[cacheKey]) {
@@ -251,7 +283,7 @@ export const useWarframeMarket = create<WarframeMarketDataStore>()(() => ({
     return priceFetchPromises[cacheKey];
   },
   getItemPrice: (
-    uniqueName: string
+    uniqueName: string,
   ): Promise<WarframeMarketItemPriceData | null | FailureCode> => {
     if (!priceFetchPromises[uniqueName]) {
       createExpiringPriceFetchPromise(uniqueName, async () => {

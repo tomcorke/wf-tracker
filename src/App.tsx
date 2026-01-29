@@ -1,4 +1,3 @@
-import { useShallow } from "zustand/shallow";
 import { useMemo, useState } from "react";
 
 import STYLES from "./App.module.css";
