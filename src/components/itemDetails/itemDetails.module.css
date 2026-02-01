@@ -24,11 +24,6 @@
     &:has(.priceDisplay:empty) {
       display: none;
     }
-
-    .priceValue {
-      font-weight: bold;
-      color: cyan;
-    }
   }
 
   .vaultedIndicator {

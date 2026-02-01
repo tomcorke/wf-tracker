@@ -7,7 +7,7 @@ export const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
   const { getItemSetPrice } = useWarframeMarket();
   const priceResult = use(getItemSetPrice(uniqueName));
   return (
-    <div className={STYLES.priceDisplay}>
+    <div className={STYLES.PriceDisplay}>
       {priceResult === "item-not-found" || !priceResult ? null : priceResult ===
         "no-sell-orders" ? (
         "No sell orders found"

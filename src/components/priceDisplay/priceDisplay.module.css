@@ -1,2 +1,6 @@
 .PriceDisplay {
+  .priceValue {
+    font-weight: bold;
+    color: cyan;
+  }
 }
