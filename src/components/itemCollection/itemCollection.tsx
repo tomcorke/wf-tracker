@@ -6,6 +6,7 @@ import { useDataStore } from "../storage/data-store";
 import { DataSet } from "../../data-types";
 import { Section } from "../section";
 import { useFavourites } from "../storage/favourites";
+import { itemDetailsAsText } from "../itemDetails";
 
 type Filters = {
   filterText?: string;
@@ -49,6 +50,16 @@ const CollectionCounter = <T extends { uniqueName: string }>({
   );
 };
 
+const itemDetailsAsTextCache = new Map<string, string>();
+
+const getItemDetailsAsText = (uniqueName: string, displayName: string) => {
+  if (!itemDetailsAsTextCache.has(uniqueName)) {
+    const text = itemDetailsAsText({ uniqueName, displayName });
+    itemDetailsAsTextCache.set(uniqueName, text);
+  }
+  return itemDetailsAsTextCache.get(uniqueName)!;
+};
+
 export const ItemCollection = <
   K extends string,
   T extends { uniqueName: string; name: string },
@@ -69,8 +80,12 @@ export const ItemCollection = <
   const { items, primes } = itemDataSet;
 
   let filteredItems = useFilter
-    ? items.filter((item) =>
-        item.name.toLowerCase().includes((filterText || "").toLowerCase()),
+    ? items.filter(
+        (item) =>
+          item.name.toLowerCase().includes((filterText || "").toLowerCase()) ||
+          getItemDetailsAsText(item.uniqueName, item.name)
+            .toLowerCase()
+            .includes((filterText || "").toLowerCase()),
       )
     : items;
 

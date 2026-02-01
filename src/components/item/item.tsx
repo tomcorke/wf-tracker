@@ -1,16 +1,14 @@
-import { JSX, Suspense, use } from "react";
+import { JSX, useMemo } from "react";
 import { getItemRecipeParts } from "../../processed-data/itemRecipes";
-// import { Button } from "../button";
 import { ItemState, useDataStore, useItemData } from "../storage/data-store";
 import STYLES from "./item.module.css";
 import classNames from "classnames";
-import { PropsWithChildren, useCallback, useMemo, useState } from "react";
+import { PropsWithChildren, useCallback, useState } from "react";
 import { getItemSources } from "../../processed-data/itemSources";
-import { useWarframeMarket } from "../storage/warframe-market";
 import relicStates from "../../processed-data/relic-states.json";
-import { InlinePrice } from "../inlinePrice";
 import { useFavourites } from "../storage/favourites";
 import { MultiStateCheckbox } from "../multiStateCheckbox";
+import { ItemDetails } from "../itemDetails";
 
 const formatName = (name: string) => {
   return name.replace("<ARCHWING>", "");
@@ -102,198 +100,6 @@ type ItemProps = {
   displayName: string;
 };
 
-const transformSourceSections = (section: string): string | JSX.Element => {
-  if (/^.+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(section)) {
-    return section.match(/([0-9]{1,2}\.[0-9]{2}%)/)![1];
-  }
-  if (/ Relic$/.test(section)) {
-    const relicState = relicStates[section as keyof typeof relicStates];
-    if (relicState) {
-      if (relicState === "vaulted") {
-        return (
-          <span className={classNames(STYLES.sourceRelic, STYLES.vaulted)}>
-            {section}
-          </span>
-        );
-      } else if (relicState === "resurgence") {
-        return (
-          <span
-            className={classNames(STYLES.sourceRelic, STYLES.primeResurgence)}
-          >
-            {section}
-          </span>
-        );
-      }
-    }
-  }
-  return section;
-};
-
-const interleave = <T,>(arr: T[], separator: T): T[] => {
-  return arr.flatMap((item, index) =>
-    index < arr.length - 1 ? [item, separator] : [item],
-  );
-};
-
-type Source<T> = { source: T[]; type: string };
-const formatSources = (sources: Source<string>[]) => {
-  if (sources.length === 0) {
-    return <div className={STYLES.sourceList}>No sources in known data</div>;
-  }
-
-  const mappedSources: Source<string | JSX.Element>[] = [];
-  const uniqueMainSources = new Set<string>();
-  for (const source of sources) {
-    let mainSourceKey = source.source[0];
-    if (/^Rotation [A-Z]$/.test(source.source[1])) {
-      mainSourceKey += `|${source.source[1]}`;
-    }
-    const transformed = source.source.map(transformSourceSections);
-    if (!uniqueMainSources.has(mainSourceKey)) {
-      mappedSources.push({ source: transformed, type: source.type });
-      uniqueMainSources.add(mainSourceKey);
-    }
-  }
-
-  return (
-    <div className={STYLES.sourceList}>
-      {/* <div className={STYLES.sourceListTitle}>Sources:</div> */}
-      <ul>
-        {mappedSources.map((source, index) => (
-          <li key={index}>
-            {interleave(
-              source.source,
-              <span className={STYLES.sourceSeparator}> &gt; </span>,
-            )}
-            {/* ({source.type}) */}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-const PriceDisplay = ({ uniqueName }: { uniqueName: string }) => {
-  const { getItemSetPrice } = useWarframeMarket();
-  const priceResult = use(getItemSetPrice(uniqueName));
-  return (
-    <div className={STYLES.priceDisplay}>
-      {priceResult === "item-not-found" || !priceResult ? null : priceResult ===
-        "no-sell-orders" ? (
-        "No sell orders found"
-      ) : (
-        <>
-          Lowest set price:{" "}
-          <span className={STYLES.priceValue}>{priceResult.price}p</span>
-          <div className={STYLES.warframeMarketLink}>
-            <a href={priceResult.url} target="_blank" rel="noopener noreferrer">
-              View on Warframe Market
-            </a>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
-
-const formatDetails = (
-  uniqueName: string,
-  displayName: string,
-  isVaulted: boolean,
-  isInPrimeResurgence: boolean,
-  toggleFavourite: () => void,
-) => {
-  const itemSources = getItemSources(uniqueName, displayName);
-  const formattedItemSources = formatSources(itemSources);
-  const itemParts = getItemRecipeParts(uniqueName);
-  const itemPartSources = itemParts.map((part) => ({
-    part,
-    sources: getItemSources(part.uniqueName, part.name),
-  }));
-
-  const ingredientElements = itemPartSources.map(
-    ({ part, sources: partSources }, i) => {
-      const formattedPartSources = formatSources(partSources);
-      return (
-        <li
-          key={`${part.uniqueName}_section_${i}`}
-          className={STYLES.ingredientSection}
-        >
-          <div className={STYLES.ingredientName}>
-            <span>{part.name}</span>
-            <Suspense fallback={<span>...</span>}>
-              <InlinePrice uniqueName={part.uniqueName} useSet={false} />
-            </Suspense>
-          </div>
-          {formattedPartSources}
-        </li>
-      );
-    },
-  );
-
-  const vaultedDisplay = isVaulted ? (
-    <div className={STYLES.vaultedIndicator}>
-      In{" "}
-      <a
-        href="https://wiki.warframe.com/w/Prime_Vault"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Prime Vault
-      </a>
-    </div>
-  ) : null;
-
-  const primeResurgenceDisplay = isInPrimeResurgence ? (
-    <div className={STYLES.primeResurgenceIndicator}>
-      Currently available in{" "}
-      <a
-        href="https://wiki.warframe.com/w/Prime_Resurgence"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Prime Resurgence
-      </a>
-    </div>
-  ) : null;
-
-  return (
-    <>
-      <div className={STYLES.wikiLink}>
-        <a
-          href={`https://wiki.warframe.com/?search=${encodeURIComponent(
-            displayName,
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Wiki
-        </a>
-      </div>
-      <div className={STYLES.favouriteToggle} onClick={() => toggleFavourite()}>
-        {"★ Toggle Favourite"}
-      </div>
-      {vaultedDisplay}
-      {primeResurgenceDisplay}
-      <div className={STYLES.priceContainer}>
-        <Suspense fallback={<span>Fetching price...</span>}>
-          <PriceDisplay uniqueName={uniqueName} />
-        </Suspense>
-      </div>
-      {itemSources.length > 0 || ingredientElements.length === 0
-        ? formattedItemSources
-        : null}
-      {ingredientElements.length > 0 ? (
-        <div className={STYLES.ingredientList}>
-          <div className={STYLES.ingredientListTitle}>Blueprints/Parts:</div>
-          <ul>{ingredientElements}</ul>
-        </div>
-      ) : null}
-      <div className={STYLES.meta}>{uniqueName}</div>
-    </>
-  );
-};
-
 const getPrimeStatus = (uniqueName: string, displayName: string) => {
   if (!displayName.includes("Prime")) {
     return { isPrimeVaulted: false, isInPrimeResurgence: false };
@@ -319,9 +125,9 @@ const getPrimeStatus = (uniqueName: string, displayName: string) => {
 export const Item = ({ uniqueName, displayName }: ItemProps) => {
   const itemState = useItemData(uniqueName);
 
-  const { isPrimeVaulted, isInPrimeResurgence } = getPrimeStatus(
-    uniqueName,
-    displayName,
+  const { isPrimeVaulted, isInPrimeResurgence } = useMemo(
+    () => getPrimeStatus(uniqueName, displayName),
+    [uniqueName, displayName],
   );
 
   const setItemState = useDataStore((store) => store.setItemState);
@@ -333,18 +139,16 @@ export const Item = ({ uniqueName, displayName }: ItemProps) => {
     [],
   );
 
-  const { isFavourite, toggleFavourite } = useFavourites();
+  const { toggleFavourite } = useFavourites();
 
-  const detailsContent = useMemo(
-    () =>
-      formatDetails(
-        uniqueName,
-        displayName,
-        isPrimeVaulted,
-        isInPrimeResurgence,
-        () => toggleFavourite(uniqueName),
-      ),
-    [uniqueName, displayName, isFavourite(uniqueName)],
+  const detailsContent = (
+    <ItemDetails
+      uniqueName={uniqueName}
+      displayName={displayName}
+      isVaulted={isPrimeVaulted}
+      isInPrimeResurgence={isInPrimeResurgence}
+      onToggleFavourite={() => toggleFavourite(uniqueName)}
+    />
   );
 
   return (
@@ -391,9 +195,9 @@ export const ItemWithPrime = ({
   // const isPrimeVaulted = vaultedPrimeItems.has(primeDisplayName);
   // const isInPrimeResurgence = primeResurgenceItems.has(primeDisplayName);
 
-  const { isPrimeVaulted, isInPrimeResurgence } = getPrimeStatus(
-    primeUniqueName,
-    primeDisplayName,
+  const { isPrimeVaulted, isInPrimeResurgence } = useMemo(
+    () => getPrimeStatus(primeUniqueName, primeDisplayName),
+    [primeUniqueName, primeDisplayName],
   );
 
   const setItemState = useDataStore((store) => store.setItemState);
@@ -412,24 +216,21 @@ export const ItemWithPrime = ({
 
   const { toggleFavourite } = useFavourites();
 
-  const baseDetailsContent = useMemo(
-    () =>
-      formatDetails(baseUniqueName, baseDisplayName, false, false, () =>
-        toggleFavourite(baseUniqueName),
-      ),
-    [baseUniqueName],
+  const baseDetailsContent = (
+    <ItemDetails
+      uniqueName={baseUniqueName}
+      displayName={baseDisplayName}
+      onToggleFavourite={() => toggleFavourite(baseUniqueName)}
+    />
   );
-
-  const primeDetailsContent = useMemo(
-    () =>
-      formatDetails(
-        primeUniqueName,
-        primeDisplayName,
-        isPrimeVaulted,
-        isInPrimeResurgence,
-        () => toggleFavourite(primeUniqueName),
-      ),
-    [primeUniqueName],
+  const primeDetailsContent = (
+    <ItemDetails
+      uniqueName={primeUniqueName}
+      displayName={primeDisplayName}
+      isVaulted={isPrimeVaulted}
+      isInPrimeResurgence={isInPrimeResurgence}
+      onToggleFavourite={() => toggleFavourite(primeUniqueName)}
+    />
   );
 
   const detailsContent =
@@ -474,9 +275,7 @@ export const ItemWithPrime = ({
           }}
         />
       </div>
-      {showDetails ? (
-        <div className={STYLES.ItemDetails}>{detailsContent}</div>
-      ) : null}
+      {showDetails ? detailsContent : null}
     </BaseItem>
   );
 };
