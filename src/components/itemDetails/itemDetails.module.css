@@ -52,16 +52,6 @@
       margin-bottom: 5px;
     }
 
-    .ingredientSection {
-      .ingredientName {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1em;
-      }
-    }
-
     ul {
       margin: 0;
       padding: 0 0 0 20px;
@@ -71,6 +61,33 @@
         font: 12px monospace;
         word-break: break-word;
         /* opacity: 0.6; */
+      }
+    }
+
+    .ingredientListItems {
+      padding: 0;
+
+      .ingredientSection {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        .ingredientName {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 1em;
+
+          .checkbox {
+          }
+
+          .price {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
       }
     }
   }

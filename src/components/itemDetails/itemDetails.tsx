@@ -161,9 +161,11 @@ export const ItemDetails = ({
           className={STYLES.ingredientSection}
         >
           <div className={STYLES.ingredientName}>
-            <PersistentSimpleCheckbox
-              storageKey={`${part.uniqueName}__part_${i}__owned`}
-            />
+            <div className={STYLES.checkbox}>
+              <PersistentSimpleCheckbox
+                storageKey={`${part.uniqueName}__part_${i}__owned`}
+              />
+            </div>
             <span>
               {/* <MultiStateCheckbox
                 states={[undefined, "owned"]}
@@ -172,9 +174,11 @@ export const ItemDetails = ({
               />{" "} */}
               {part.name}
             </span>
-            <Suspense fallback={<span>...</span>}>
-              <InlinePrice uniqueName={part.uniqueName} useSet={false} />
-            </Suspense>
+            <div className={STYLES.price}>
+              <Suspense fallback={<span>...</span>}>
+                <InlinePrice uniqueName={part.uniqueName} useSet={false} />
+              </Suspense>
+            </div>
           </div>
           {formattedPartSources}
         </li>
@@ -240,7 +244,7 @@ export const ItemDetails = ({
       {ingredientElements.length > 0 ? (
         <div className={STYLES.ingredientList}>
           <div className={STYLES.ingredientListTitle}>Blueprints/Parts:</div>
-          <ul>{ingredientElements}</ul>
+          <ul className={STYLES.ingredientListItems}>{ingredientElements}</ul>
         </div>
       ) : null}
       <div className={STYLES.meta}>{uniqueName}</div>

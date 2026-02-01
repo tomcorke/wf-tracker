@@ -2,7 +2,6 @@ import classNames from "classnames";
 import STYLES from "./multiStateCheckbox.module.css";
 import { useDataStore } from "../storage/data-store";
 import { useShallow } from "zustand/shallow";
-import { use } from "react";
 
 type MultiStateCheckboxProps<T extends string> = {
   states: (T | undefined)[];
