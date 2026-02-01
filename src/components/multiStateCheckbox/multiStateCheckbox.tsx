@@ -1,5 +1,8 @@
 import classNames from "classnames";
 import STYLES from "./multiStateCheckbox.module.css";
+import { useDataStore } from "../storage/data-store";
+import { useShallow } from "zustand/shallow";
+import { use } from "react";
 
 type MultiStateCheckboxProps<T extends string> = {
   states: (T | undefined)[];
@@ -33,5 +36,45 @@ export function MultiStateCheckbox<T extends string>({
     >
       <div className={STYLES.inner}></div>
     </div>
+  );
+}
+
+export function PersistentMultiStateCheckbox<T extends string>({
+  states,
+  initialValue,
+  large = false,
+  storageKey,
+}: Pick<MultiStateCheckboxProps<T>, "states" | "large"> & {
+  initialValue: T | undefined;
+  storageKey: string;
+}) {
+  const setItemState = useDataStore((store) => store.setItemState);
+  const itemState = useDataStore(
+    useShallow((store) => store.itemStates[storageKey] || initialValue),
+  );
+
+  return (
+    <MultiStateCheckbox
+      states={states}
+      value={itemState as T}
+      onChange={(newValue) => setItemState(storageKey, newValue)}
+      large={large}
+    />
+  );
+}
+
+export function PersistentSimpleCheckbox({
+  initialValue = undefined,
+  storageKey,
+}: Pick<MultiStateCheckboxProps<"checked">, "large"> & {
+  initialValue?: "checked";
+  storageKey: string;
+}) {
+  return (
+    <PersistentMultiStateCheckbox<"checked">
+      states={[undefined, "checked"]}
+      initialValue={initialValue}
+      storageKey={storageKey}
+    />
   );
 }

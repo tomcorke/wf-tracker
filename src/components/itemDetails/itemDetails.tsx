@@ -6,6 +6,7 @@ import classNames from "classnames";
 import relicStates from "../../processed-data/relic-states.json";
 import { getItemSources } from "../../processed-data/itemSources";
 import { getItemRecipeParts } from "../../processed-data/itemRecipes";
+import { PersistentSimpleCheckbox } from "../multiStateCheckbox";
 
 const transformSourceSections = (section: string): string | JSX.Element => {
   if (/^.+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(section)) {
@@ -160,6 +161,9 @@ export const ItemDetails = ({
           className={STYLES.ingredientSection}
         >
           <div className={STYLES.ingredientName}>
+            <PersistentSimpleCheckbox
+              storageKey={`${part.uniqueName}__part_${i}__owned`}
+            />
             <span>
               {/* <MultiStateCheckbox
                 states={[undefined, "owned"]}

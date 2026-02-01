@@ -1,1 +1,5 @@
-export { MultiStateCheckbox } from "./multiStateCheckbox";
+export {
+  MultiStateCheckbox,
+  PersistentMultiStateCheckbox,
+  PersistentSimpleCheckbox,
+} from "./multiStateCheckbox";
