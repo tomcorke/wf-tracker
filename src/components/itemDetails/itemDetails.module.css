@@ -110,14 +110,20 @@
       }
     }
 
-    .sourceRelic {
-      font-weight: bold;
+    .source {
+      .sourceRelic {
+        font-weight: bold;
 
-      &.vaulted {
-        color: var(--vaulted-color);
+        &.vaulted {
+          color: var(--vaulted-color);
+        }
+        &.primeResurgence {
+          color: var(--prime-resurgence-color);
+        }
       }
-      &.primeResurgence {
-        color: var(--prime-resurgence-color);
+
+      &.sourceCurrentRotation {
+        color: lime;
       }
     }
 

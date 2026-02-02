@@ -7,6 +7,7 @@ import relicStates from "../../processed-data/relic-states.json";
 import { getItemSources } from "../../processed-data/itemSources";
 import { getItemRecipeParts } from "../../processed-data/itemRecipes";
 import { PersistentSimpleCheckbox } from "../multiStateCheckbox";
+import { OracleData, useOracle } from "../storage/oracle";
 
 const transformSourceSections = (section: string): string | JSX.Element => {
   if (/^.+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(section)) {
@@ -41,8 +42,27 @@ const interleave = <T,>(arr: T[], separator: T): T[] => {
   );
 };
 
+const getRotationFromSources = (sourceParts: unknown[]): string | null => {
+  const rotationStringMap = {
+    "Rotation A": "A",
+    "Rotation B": "B",
+    "Rotation C": "C",
+  } as const;
+
+  for (const part of sourceParts) {
+    if (typeof part === "string" && part in rotationStringMap) {
+      return rotationStringMap[part as keyof typeof rotationStringMap];
+    }
+  }
+
+  return null;
+};
+
 type Source<T> = { source: T[]; type: string };
-const formatSources = (sources: Source<string>[]) => {
+const formatSources = (
+  sources: Source<string>[],
+  oracleData: OracleData | null,
+) => {
   if (sources.length === 0) {
     return <div className={STYLES.sourceList}>No sources in known data</div>;
   }
@@ -65,15 +85,48 @@ const formatSources = (sources: Source<string>[]) => {
     <div className={STYLES.sourceList}>
       {/* <div className={STYLES.sourceListTitle}>Sources:</div> */}
       <ul>
-        {mappedSources.map((source, index) => (
-          <li key={index}>
-            {interleave(
-              source.source,
-              <span className={STYLES.sourceSeparator}> &gt; </span>,
-            )}
-            {/* ({source.type}) */}
-          </li>
-        ))}
+        {mappedSources.map((source, index) => {
+          let isCurrentRotation = false;
+          if (oracleData) {
+            // Isolation Vaults
+            if (
+              source.source.some(
+                (s) => typeof s === "string" && s.includes("Isolation Vault"),
+              )
+            ) {
+              const rotation = getRotationFromSources(source.source);
+              if (rotation && oracleData.vaultRot === rotation) {
+                isCurrentRotation = true;
+              }
+            } else if (
+              ["Bounty", "Rotation"].every((term) =>
+                source.source.some(
+                  (s) => typeof s === "string" && s.includes(term),
+                ),
+              )
+            ) {
+              const rotation = getRotationFromSources(source.source);
+              if (rotation && oracleData.rot === rotation) {
+                isCurrentRotation = true;
+              }
+            }
+          }
+
+          return (
+            <li
+              key={index}
+              className={classNames(STYLES.source, {
+                [STYLES.sourceCurrentRotation]: isCurrentRotation,
+              })}
+            >
+              {interleave(
+                source.source,
+                <span className={STYLES.sourceSeparator}> &gt; </span>,
+              )}
+              {/* ({source.type}) */}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -140,7 +193,10 @@ export const ItemDetails = ({
   onToggleFavourite,
 }: ItemDetailsProps) => {
   const itemSources = getItemSources(uniqueName, displayName);
-  const formattedItemSources = formatSources(itemSources);
+
+  const oracleData = useOracle((store) => store.oracleData);
+
+  const formattedItemSources = formatSources(itemSources, oracleData);
   const itemParts = getItemRecipeParts(uniqueName);
   const itemPartSources = itemParts.map((part) => ({
     part,
@@ -151,7 +207,7 @@ export const ItemDetails = ({
 
   const ingredientElements = itemPartSources.map(
     ({ part, sources: partSources }, i) => {
-      const formattedPartSources = formatSources(partSources);
+      const formattedPartSources = formatSources(partSources, oracleData);
 
       // const partKey = `${uniqueName}__part_${i}`;
       // const partState = useItemData(partKey);
