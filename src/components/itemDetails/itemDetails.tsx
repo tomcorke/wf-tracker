@@ -58,34 +58,6 @@ const getRotationFromSources = (sourceParts: unknown[]): string | null => {
   return null;
 };
 
-type RotationData = { mainSource: string; rotation: string; stage?: string };
-
-const parseRotationParts = (sourceParts: string[]): RotationData | null => {
-  if (/^Rotation [A-Z]$/.test(sourceParts[1])) {
-    const mainSource = sourceParts[0];
-    const rotation = sourceParts[1].split("Rotation ")[1];
-    const stageDetails = sourceParts[2];
-    if (/stage/i.test(stageDetails)) {
-      const stages = Array.from(
-        stageDetails.matchAll(/(([0-9] of [0-9])|(?<!of )([0-9]))/g),
-      );
-      if (stages.length > 0) {
-        return {
-          mainSource,
-          rotation,
-          stage: stages.map((s) => s[1]).join(", "),
-        };
-      } else {
-        return { mainSource, rotation, stage: stageDetails };
-      }
-    } else {
-      console.log(`No stages found in rotation data: ${stageDetails}`);
-    }
-    return { mainSource, rotation };
-  }
-  return null;
-};
-
 type Source<T> = { source: T[]; type: string };
 const formatSources = (
   sources: Source<string>[],
@@ -96,62 +68,10 @@ const formatSources = (
   }
 
   const mappedSources: Source<string | JSX.Element>[] = [];
-  const uniqueMainSources = new Set<string>();
-
-  const sourcesWithRotationData: {
-    source: Source<string>;
-    rotationData: RotationData;
-  }[] = [];
 
   for (const source of sources) {
-    const rotationData = parseRotationParts(source.source);
     const transformed = source.source.map(transformSourceSections);
-
-    if (rotationData) {
-      sourcesWithRotationData.push({ source, rotationData });
-    } else {
-      let mainSourceKey = source.source[0];
-      if (/^Rotation [A-Z]$/.test(source.source[1])) {
-        mainSourceKey += `|${source.source[1]}`;
-      }
-      if (!uniqueMainSources.has(mainSourceKey)) {
-        mappedSources.push({ source: transformed, type: source.type });
-        uniqueMainSources.add(mainSourceKey);
-      }
-    }
-  }
-
-  if (sourcesWithRotationData.length > 0) {
-    const grouped = new Map<
-      string,
-      { source: Source<string>; rotationData: RotationData }[]
-    >();
-    for (const entry of sourcesWithRotationData) {
-      const key = `${entry.rotationData.mainSource}|${entry.rotationData.rotation}`;
-      if (!grouped.has(key)) {
-        grouped.set(key, []);
-      }
-      grouped.get(key)!.push(entry);
-    }
-    for (const [_, groupEntries] of grouped.entries()) {
-      const representative = groupEntries[0];
-      const stages: string[] = [];
-      for (const entry of groupEntries) {
-        if (entry.rotationData.stage) {
-          stages.push(entry.rotationData.stage);
-        }
-      }
-      const combinedSourceParts = [
-        representative.rotationData.mainSource,
-        `Rotation ${representative.rotationData.rotation}`,
-        `Stages: ${stages.join(", ")}`,
-      ];
-      const transformed = combinedSourceParts.map(transformSourceSections);
-      mappedSources.push({
-        source: transformed,
-        type: representative.source.type,
-      });
-    }
+    mappedSources.push({ source: transformed, type: source.type });
   }
 
   return (
