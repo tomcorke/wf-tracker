@@ -46,6 +46,8 @@ export const useOracle = create<OracleDataStore>()(() => ({
   oracleData: null,
 }));
 
-oracleDataFetchPromise = fetchOracleData((newData) =>
-  useOracle.setState({ oracleData: newData }),
-);
+if (!oracleDataFetchPromise) {
+  oracleDataFetchPromise = fetchOracleData((newData) =>
+    useOracle.setState({ oracleData: newData }),
+  );
+}
