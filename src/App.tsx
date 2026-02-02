@@ -239,6 +239,33 @@ function App() {
                 />,
               ])}
             </Section>
+            <Section title="Weeklies">
+              {[
+                "1999 Calendar",
+                "Maroo - Ayatan Hunt",
+                "Clem",
+                "Check Acrithis Shop",
+                "Netracells",
+                "Temp Archimedia - Shard",
+                "Deep Archimedia - Shard",
+                "Teshin - Riven",
+                "Archon Hunt - Shard",
+                "Bird 3 - Shard",
+                "Iron Wake - Rivens & Kuva",
+                "Yonta - Rivens & Kuva",
+                "Circuit",
+                "Baro",
+              ].flatMap((weekly) => (
+                <PersistentTrackedItem
+                  key={`weekly-${weekly}`}
+                  itemKey={`weekly-${weekly}`}
+                  label={weekly}
+                  states={["complete"]}
+                  highlight={(state) => state === "complete"}
+                  initialValue={undefined}
+                />
+              ))}
+            </Section>
             {import.meta.env.MODE === "development" ? (
               <Section title="Dev mode">
                 {[
