@@ -10,8 +10,8 @@ import { PersistentSimpleCheckbox } from "../multiStateCheckbox";
 import { OracleData, useOracle } from "../storage/oracle";
 
 const transformSourceSections = (section: string): string | JSX.Element => {
-  if (/^.+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(section)) {
-    return section.match(/([0-9]{1,2}\.[0-9]{2}%)/)![1];
+  if (/^\w+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(section)) {
+    return section.match(/(\w+) \(([0-9]{1,2}\.[0-9]{2}%)\)/)![1];
   }
   if (/ Relic$/.test(section)) {
     const relicState = relicStates[section as keyof typeof relicStates];
@@ -69,7 +69,36 @@ const formatSources = (
 
   const mappedSources: Source<string | JSX.Element>[] = [];
 
+  const sourcesByRelic = new Map<
+    string,
+    { source: Source<string>; rate: number }
+  >();
+
   for (const source of sources) {
+    if (source.source.some((s) => / Relic$/.test(s))) {
+      const relicName = source.source.find((s) => / Relic$/.test(s));
+      const dropRateVerbose = source.source.find((s) =>
+        /^.+ \([0-9]{1,2}\.[0-9]{2}%\)$/.test(s),
+      );
+      if (relicName && dropRateVerbose) {
+        const dropRateNumeric = dropRateVerbose.match(
+          /([0-9]{1,2}\.[0-9]{2})%/,
+        )![1];
+        const dropRate = parseFloat(dropRateNumeric);
+        // keep lowest drop rate source for each relic
+        const existing = sourcesByRelic.get(relicName);
+        if (!existing || dropRate < existing.rate) {
+          sourcesByRelic.set(relicName, { source, rate: dropRate });
+        }
+        continue;
+      }
+    }
+
+    const transformed = source.source.map(transformSourceSections);
+    mappedSources.push({ source: transformed, type: source.type });
+  }
+
+  for (const { source } of sourcesByRelic.values()) {
     const transformed = source.source.map(transformSourceSections);
     mappedSources.push({ source: transformed, type: source.type });
   }
