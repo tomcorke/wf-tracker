@@ -1,16 +1,11 @@
 .Section {
-  --item-row-height: 20px;
-
-  --header-background-color: #222;
-  --details-background-color: #181818;
-  --vaulted-color: #96355f;
-  --prime-resurgence-color: #2e71be;
-  --mastered-color: #3c9672;
-
   display: flex;
   flex-flow: column nowrap;
   gap: 5px;
-  width: 250px;
+  width: var(--item-width, 240px);
+
+  /* display: grid;
+  grid-template-rows: 40px repeat(auto-fill, var(--item-row-height)); */
 
   .title {
     font-size: 18px;
@@ -44,7 +39,8 @@
     gap: 5px;
     background: var(--header-background-color);
 
-    min-width: 240px;
+    min-height: var(--item-row-height);
+    min-width: var(--item-width, 240px);
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -63,24 +59,13 @@
       padding: 0 5px;
     }
 
-    & > input,
-    & > button {
+    input[type="text"] {
       margin: 0;
       border: 0;
-      width: 100%;
       height: 100%;
       background: var(--header-background-color);
       color: white;
       padding: 0 5px;
-    }
-
-    & > button {
-      background: var(--mastered-color);
-      cursor: pointer;
-
-      &:disabled {
-        background: var(--vaulted-color);
-      }
     }
   }
 }

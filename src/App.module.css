@@ -5,6 +5,16 @@
   font-size: 24px;
   overflow-x: auto;
   scrollbar-width: thin;
+
+  --item-width: 240px;
+  --item-row-height: 20px;
+
+  --header-background-color: #222;
+  --details-background-color: #181818;
+  --vaulted-color: #96355f;
+  --prime-resurgence-color: #2e71be;
+  --mastered-color: #3c9672;
+  --syndicate-color: rgb(167, 147, 35);
 }
 
 * {

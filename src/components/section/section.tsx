@@ -12,18 +12,24 @@ type SectionProps = {
   title: JSX.Element | string;
   children?: Array<JSX.Element | string | null>;
   removePadding?: boolean;
+  classNames?: string[];
 };
 
 export const Section = ({
   title,
   children = [],
   removePadding,
+  classNames: extraClassNames = [],
 }: SectionProps) => {
   return (
     <div
-      className={classNames(STYLES.Section, {
-        [STYLES.removeItemPadding]: removePadding,
-      })}
+      className={classNames(
+        STYLES.Section,
+        {
+          [STYLES.removeItemPadding]: removePadding,
+        },
+        extraClassNames,
+      )}
     >
       <div className={STYLES.title}>{title}</div>
       {children.map((row, index) => {

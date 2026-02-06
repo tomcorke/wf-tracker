@@ -1,0 +1,56 @@
+.TodoList {
+  .add {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 5px;
+
+    input[type="text"] {
+      width: 100%;
+      flex-grow: 1;
+      background: transparent;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      flex-shrink: 1;
+    }
+  }
+
+  .item {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 5px;
+
+    input[type="text"] {
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &.completed {
+      background: linear-gradient(
+        to right,
+        var(--mastered-color),
+        transparent 200%
+      );
+    }
+
+    .title {
+      flex-grow: 1;
+    }
+
+    .actions {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 5px;
+      align-items: center;
+    }
+  }
+}

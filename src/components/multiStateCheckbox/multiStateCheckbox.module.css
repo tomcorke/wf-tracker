@@ -1,15 +1,22 @@
 .MultiStateCheckbox {
+  --normal-size: 16px;
+  --large-size: 24px;
+
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: var(--normal-size);
+  height: var(--normal-size);
+  min-width: var(--normal-size);
+  min-height: var(--normal-size);
   border-radius: 3px;
   background: #111;
   overflow: hidden;
   cursor: pointer;
 
   &.large {
-    width: 24px;
-    height: 24px;
+    width: var(--large-size);
+    height: var(--large-size);
+    min-width: var(--large-size);
+    min-height: var(--large-size);
     .inner {
       &::after {
         font-size: 20px;

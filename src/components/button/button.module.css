@@ -1,7 +1,7 @@
 .Button {
-  --background-color: #3c9672;
+  --button-background-color: var(--mastered-color);
 
-  background: var(--background-color);
+  background: var(--button-background-color);
   border: none;
   border-radius: 5px;
   color: white;
@@ -10,7 +10,24 @@
   padding: 3px 6px;
   cursor: pointer;
 
+  &.small {
+    font-size: 12px;
+    padding: 0 4px;
+    max-height: 16px;
+    border-radius: 3px;
+  }
+
+  &.bold {
+    font-weight: bold;
+  }
+
+  &.waitingForConfirmation {
+    --button-background-color: var(--vaulted-color);
+    background: var(--vaulted-color);
+  }
+
   &:hover {
-    background: hsl(from var(--background-color) h s calc(l - 10));
+    background: hsl(from var(--button-background-color) h s calc(l - 10));
+    outline: 1px solid white;
   }
 }

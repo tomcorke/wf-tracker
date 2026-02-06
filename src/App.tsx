@@ -30,6 +30,8 @@ import { Section } from "./components/section";
 import { PersistentTrackedItem } from "./components/persistentTrackedItem";
 import { MultiStateCheckbox } from "./components/multiStateCheckbox";
 import { ItemCollectionProps } from "./components/itemCollection/itemCollection";
+import { Button } from "./components/button";
+import { TodoList } from "./components/todoList";
 
 const ShareLink = ({ datasets }: { datasets: DataSet<any, any>[] }) => {
   const lastUpdated = useDataStore((store) => store.lastUpdated);
@@ -278,6 +280,9 @@ function App() {
                 ]}
               </Section>
             ) : null}
+          </div>
+          <div className={STYLES.stacked}>
+            <TodoList />
           </div>
         </div>
         <div className={STYLES.tasksContainer}></div>

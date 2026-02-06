@@ -1,12 +1,4 @@
 .ItemWrapper {
-  --item-row-height: 20px;
-
-  --header-background-color: #222;
-  --details-background-color: #181818;
-  --vaulted-color: #96355f;
-  --prime-resurgence-color: #2e71be;
-  --mastered-color: #3c9672;
-
   flex-shrink: 0;
 
   width: 100%;
@@ -40,7 +32,7 @@
     background: var(--header-background-color);
     padding: 0 5px;
 
-    min-width: 240px;
+    min-width: var(--item-width, 240px);
 
     cursor: pointer;
 

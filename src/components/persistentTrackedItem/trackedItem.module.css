@@ -1,7 +1,6 @@
 .PersistentTrackedItem {
   width: 100%;
-
-  --mastered-color: #3c9672;
+  /* --syndicate-color: gold; */
 
   &.highlighted {
     background: linear-gradient(
@@ -12,7 +11,11 @@
   }
 
   &.syndicateHighlight {
-    background: linear-gradient(to right, rgb(167, 147, 35), transparent 200%);
+    background: linear-gradient(
+      to right,
+      var(--syndicate-color),
+      transparent 200%
+    );
   }
 
   --standing-rank-bg: var(--mastered-color); /*rgb(51, 110, 64);*/
