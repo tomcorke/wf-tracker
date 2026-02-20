@@ -3,262 +3,70 @@
     {
       "Manifest": [
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVHarrowNekrosPrimeDualPack"
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVAtlasPrimeSinglePack"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVIvaraOberonPrimeDualPack"
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVAtlasVaubanPrimeDualPack"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVValkyrSarynPrimeDualPack"
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVVaubanPrimeSinglePack"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVGarudaKhoraPrimeDualPack"
+          "ItemType": "/Lotus/StoreItems/Powersuits/Brawler/AtlasPrime"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVHarrowPrimeSinglePack"
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/PrimeScarfAtlas"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVNekrosPrimeSinglePack"
+          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVOrcusPrimeSentAccessories"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVIvaraPrimeSinglePack"
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/PrimeTekko/PrimeTekko"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVOberonPrimeSinglePack"
+          "ItemType": "/Lotus/StoreItems/Types/Sentinels/SentinelPowersuits/PrimeDethCubePowerSuit"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVValkyrPrimeSinglePack"
+          "ItemType": "/Lotus/StoreItems/Powersuits/Trapper/TrapperPrime"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVSarynPrimeSinglePack"
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/PrimeScarfV"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVGarudaPrimeSinglePack"
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/MeleeDangles/CatenoPrimeMeleeDangle"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVKhoraPrimeSinglePack"
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/PrimeFragor/PrimeFragor"
         },
         {
-          "ItemType": "/Lotus/StoreItems/Powersuits/Priest/HarrowPrime"
+          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Pistols/PrimeAkstiletto/PrimeAkstiletto"
         },
         {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/PrimeNaveScarf"
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/AtlasPrimeBobbleHead"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVTemplarPrimeSuit"
+          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/VaubanPrimeBobbleHead"
         },
         {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/LongGuns/PrimeScourge/PrimeScourgeWeapon"
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionAtlasVaubanVaultABronze"
         },
         {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Pistols/PrimeKnell/PrimeKnellWeapon"
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionAtlasVaubanVaultBBronze"
         },
         {
-          "ItemType": "/Lotus/StoreItems/Powersuits/Necro/NekrosPrime"
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionAtlasVaubanVaultABronze"
         },
         {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/UruPrimeScarf"
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionAtlasVaubanVaultBBronze"
         },
         {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVAcanthusPrimeArmorSet"
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionAtlasVaubanVaultABronze"
         },
         {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/LongGuns/PrimeTigris/PrimeTigris"
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionAtlasVaubanVaultBBronze"
         },
         {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Swords/PrimeGalatine/PrimeGalatine"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/HarrowPrimeBobbleHead"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/NekrosPrimeBobbleHead"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionHarrowNekrosVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionHarrowNekrosVaultBBronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionHarrowNekrosVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionHarrowNekrosVaultBBronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionHarrowNekrosVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionHarrowNekrosVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionHarrowNekrosVaultBBronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Powersuits/Ranger/IvaraPrime"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/IvaraPrimeCape"
-        },
-        {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVAnasaAyatanPrimeArmorSet"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/LongGuns/PrimeBaza/PrimeBazaGun"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Pistols/PrimeAksomati/PrimeAksomati"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Powersuits/Paladin/PaladinPrime"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/PrimeOberonCape"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/MeleeDangles/SurakaPrimeDangle"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/PrimeSilvaAegis/PrimeSilvaAegis"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/LongGuns/PrimeSybaris/PrimeSybarisRifle"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/IvaraPrimeBobbleHead"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/OberonPrimeBobbleHead"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionIvaraOberonVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionIvaraOberonVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionIvaraOberonVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionIvaraOberonVaultBBronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionIvaraOberonVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionIvaraOberonVaultBBronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Powersuits/Berserker/ValkyrPrime"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Liset/LisetSkinPrime"
-        },
-        {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVSaitaPrimeSuit"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Bows/PrimeCernos/PrimeCernos"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/PrimeVenKa/PrimeVenkaClaws"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Powersuits/Saryn/SarynPrime"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Characters/Tenno/Accessory/Scarves/PrimeScarfD/Cloth/PrimeScarfDItem"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Sigils/PrimeAccessSigilSaryn"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/ThrowingWeapons/PrimeLiDagger/PrimeLiDagger"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Swords/PrimeKatana/PrimeNikana"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/SarynPrimeBobbleHead"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/ValkyrPrimeBobbleHead"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionSarynValkyrVaultBBronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionSarynValkyrVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionSarynValkyrVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionSarynValkyrVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionSarynValkyrVaultBBronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionSarynValkyrVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Powersuits/Garuda/GarudaPrime"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Effects/GarudaPrimeEphemera"
-        },
-        {
-          "ItemType": "/Lotus/Types/StoreItems/Packages/MegaPrimeVault/MPVKukriPrimeArmorSet"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/LongGuns/PrimeNagantaka/PrimeNagantakaWeapon"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Archwing/Primary/PrimeCorvas/PrimeCorvasWeapon"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Powersuits/Khora/KhoraPrime"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Khora/KhoraPrimeAltHelmet"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/KhoraPrimeSyandana"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/Emotes/KhoraPrimeEmote"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Pistols/PrimeHystrix/PrimeHystrixWeapon"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Weapons/Tenno/Melee/Swords/PrimeDualKeres/PrimeDualKeresWeapon"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/GarudaPrimeBobbleHead"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Items/ShipDecos/KhoraPrimeBobbleHead"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T1VoidProjectionGarudaKhoraVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T2VoidProjectionGarudaKhoraVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionGarudaKhoraVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T3VoidProjectionGarudaKhoraVaultBBronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionGarudaKhoraVaultABronze"
-        },
-        {
-          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionGarudaKhoraVaultBBronze"
+          "ItemType": "/Lotus/StoreItems/Types/Game/Projections/T4VoidProjectionAtlasVaubanVaultABronze"
         }
       ]
     }

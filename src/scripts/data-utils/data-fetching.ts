@@ -28,6 +28,7 @@ export const getDataset = async () => {
     .decompress(Buffer.from(dataBuffer))
     .toString()
     .split("\n")
+    .filter((line) => line.trim() !== "")
     .map((line) => line.trim());
 
   const INDEX_DATA_KEYS = [
@@ -53,10 +54,10 @@ export const getDataset = async () => {
     (acc, key) => ({
       ...acc,
       [key]: indexData.find((line) =>
-        new RegExp(`^Export${key}[._]`).test(line)
+        new RegExp(`^Export${key}[._]`).test(line),
       ),
     }),
-    {} as Record<(typeof INDEX_DATA_KEYS)[number], string | undefined>
+    {} as Record<(typeof INDEX_DATA_KEYS)[number], string | undefined>,
   );
 
   console.log(dataPaths);
@@ -74,7 +75,7 @@ export const getDataset = async () => {
       const res = await fetch(`${MANIFEST_BASE_URL}${path}`);
       const data = await res.json();
       return [key, data] as const;
-    })
+    }),
   );
 
   const dataRecord = Object.fromEntries(allData);
@@ -91,7 +92,7 @@ export const getDataset = async () => {
 
   fs.writeFileSync(
     path.resolve(dataCacheDir, "data.json"),
-    JSON.stringify(dataRecord, null, 2)
+    JSON.stringify(dataRecord, null, 2),
   );
 
   const allFrames = z
@@ -101,11 +102,11 @@ export const getDataset = async () => {
   const warframes = allFrames.filter((wf) => wf.productCategory === "Suits");
 
   const archwings = allFrames.filter(
-    (wf) => wf.productCategory === "SpaceSuits"
+    (wf) => wf.productCategory === "SpaceSuits",
   );
 
   const necramechs = allFrames.filter(
-    (wf) => wf.productCategory === "MechSuits"
+    (wf) => wf.productCategory === "MechSuits",
   );
 
   const allCompanions = z
@@ -113,15 +114,15 @@ export const getDataset = async () => {
     .parse(dataRecord.Sentinels.ExportSentinels);
 
   const sentinels = allCompanions.filter(
-    (c) => c.productCategory === "Sentinels"
+    (c) => c.productCategory === "Sentinels",
   );
 
   const companions = allCompanions.filter(
-    (c) => c.productCategory === "KubrowPets"
+    (c) => c.productCategory === "KubrowPets",
   );
 
   const specialCompanions = allCompanions.filter(
-    (c) => !["Sentinels", "KubrowPets"].includes(c.productCategory)
+    (c) => !["Sentinels", "KubrowPets"].includes(c.productCategory),
   );
 
   const allWeapons = z
@@ -129,88 +130,88 @@ export const getDataset = async () => {
     .parse(dataRecord.Weapons.ExportWeapons);
 
   const primaryWeapons = allWeapons.filter(
-    (w) => w.productCategory === "LongGuns" && w.slot === 1
+    (w) => w.productCategory === "LongGuns" && w.slot === 1,
   );
 
   const secondaryWeapons = allWeapons.filter(
-    (w) => w.productCategory === "Pistols" && w.slot === 0
+    (w) => w.productCategory === "Pistols" && w.slot === 0,
   );
 
   const meleeWeapons = allWeapons.filter(
-    (w) => w.productCategory === "Melee" && w.slot === 5
+    (w) => w.productCategory === "Melee" && w.slot === 5,
   );
 
   const archwingGuns = allWeapons.filter(
-    (w) => w.productCategory === "SpaceGuns" && w.slot === 1
+    (w) => w.productCategory === "SpaceGuns" && w.slot === 1,
   );
 
   const archwingMelee = allWeapons.filter(
-    (w) => w.productCategory === "SpaceMelee" && w.slot === 5
+    (w) => w.productCategory === "SpaceMelee" && w.slot === 5,
   );
 
   const specialWeapons = allWeapons.filter(
-    (w) => w.productCategory === "SpecialItems"
+    (w) => w.productCategory === "SpecialItems",
   );
 
   const crewShipWeapons = allWeapons.filter(
-    (w) => w.productCategory === "CrewShipWeapons"
+    (w) => w.productCategory === "CrewShipWeapons",
   );
 
   const sentinelWeapons = allWeapons.filter(
-    (w) => w.productCategory === "SentinelWeapons"
+    (w) => w.productCategory === "SentinelWeapons",
   );
 
   const nonSlotWeapons = allWeapons.filter(
     (w) =>
       (w.productCategory === "LongGuns" || w.productCategory === "Pistols") &&
-      w.slot === undefined
+      w.slot === undefined,
   );
 
   const zaws = nonSlotWeapons.filter(
     (w) =>
       w.uniqueName.includes("/Lotus/Weapons/Ostron/Melee/ModularMelee") &&
-      w.uniqueName.includes("/Tip/Tip")
+      w.uniqueName.includes("/Tip/Tip"),
   );
 
   const kitguns = nonSlotWeapons.filter(
     (w) =>
       w.uniqueName.includes(
-        "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/"
-      ) || w.uniqueName.includes("/InfKitGun/Barrels/")
+        "/Lotus/Weapons/SolarisUnited/Secondary/SUModularSecondarySet1/Barrel/",
+      ) || w.uniqueName.includes("/InfKitGun/Barrels/"),
   );
 
   const amps = nonSlotWeapons.filter(
     (w) =>
       /\/Lotus\/Weapons\/Sentients\/OperatorAmplifiers\/Set[0-9]\/Barrel\/SentAmpSet[0-9]BarrelPart[A-Z]/.test(
-        w.uniqueName
+        w.uniqueName,
       ) ||
       // /Lotus/Weapons/Corpus/OperatorAmplifiers/Set1/Barrel/CorpAmpSet1BarrelPartA
       /\/Lotus\/Weapons\/Corpus\/OperatorAmplifiers\/Set[0-9]\/Barrel\/CorpAmpSet[0-9]BarrelPart[A-Z]/.test(
-        w.uniqueName
+        w.uniqueName,
       ) ||
       [
         "/Lotus/Weapons/Sentients/OperatorAmplifiers/SentTrainingAmplifier/SentAmpTrainingBarrel",
         "/Lotus/Weapons/Operator/Pistols/DrifterPistol/DrifterPistolPlayerWeapon",
-      ].includes(w.uniqueName)
+      ].includes(w.uniqueName),
   );
 
   const modularCompanions = nonSlotWeapons.filter(
     (w) =>
       // /Lotus/Types/Friendly/Pets/MoaPets
       w.uniqueName.startsWith(
-        "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetHead"
+        "/Lotus/Types/Friendly/Pets/MoaPets/MoaPetParts/MoaPetHead",
       ) ||
       w.uniqueName.startsWith(
-        "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartHead"
-      )
+        "/Lotus/Types/Friendly/Pets/ZanukaPets/ZanukaPetParts/ZanukaPetPartHead",
+      ),
   );
 
   const kdrives = nonSlotWeapons.filter(
     (w) =>
       // /Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/HoverboardCorpusB/HoverboardCorpusBDeck
       w.uniqueName.startsWith(
-        "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/"
-      ) && w.uniqueName.endsWith("Deck")
+        "/Lotus/Types/Vehicles/Hoverboard/HoverboardParts/PartComponents/",
+      ) && w.uniqueName.endsWith("Deck"),
   );
 
   const allResources = z
@@ -221,8 +222,8 @@ export const getDataset = async () => {
     (r) =>
       r.uniqueName.startsWith("/Lotus/Types/Recipes/") ||
       r.uniqueName.startsWith(
-        "/Lotus/Types/Gameplay/InfestedMicroplanet/Resources/Mechs/"
-      )
+        "/Lotus/Types/Gameplay/InfestedMicroplanet/Resources/Mechs/",
+      ),
   );
 
   const relics = z
@@ -277,10 +278,13 @@ export const getDropTableData = async (relevantItemNames: Set<string>) => {
 
   console.log(headers);
 
-  const tables = headers.reduce((acc, header) => {
-    const table = $dropTables(`#${header}`).next("table");
-    return { ...acc, [header]: table };
-  }, {} as Record<string, ReturnType<typeof $dropTables>>);
+  const tables = headers.reduce(
+    (acc, header) => {
+      const table = $dropTables(`#${header}`).next("table");
+      return { ...acc, [header]: table };
+    },
+    {} as Record<string, ReturnType<typeof $dropTables>>,
+  );
 
   type DropData = { source: string[]; type: string };
   const dropTableData = new Map<string, DropData[]>();
@@ -379,7 +383,7 @@ export const getDropTableData = async (relevantItemNames: Set<string>) => {
         const existingData = dropTableData.get(itemName) || [];
         if (
           !existingData.find(
-            (d) => JSON.stringify(d) === JSON.stringify(dropData)
+            (d) => JSON.stringify(d) === JSON.stringify(dropData),
           )
         ) {
           dropTableData.set(itemName, [...existingData, dropData]);
@@ -395,9 +399,9 @@ export const processWikiVendorData = () => {
   const wikiData = fs.readFileSync(
     path.join(
       path.dirname(url.fileURLToPath(import.meta.url)),
-      "../../data/wiki-vendor-data.txt"
+      "../../data/wiki-vendor-data.txt",
     ),
-    "utf-8"
+    "utf-8",
   );
 
   const wikiDataLines = wikiData.split("\n");
@@ -450,7 +454,7 @@ export const processWikiVendorData = () => {
         ([k, v]) =>
           `${JSON.stringify(k)}: ${
             isNumericString(v) || isQuotedString(v) ? v : JSON.stringify(v)
-          }`
+          }`,
       )
       .join(", ")} },`;
   };
@@ -473,7 +477,7 @@ export const processWikiVendorData = () => {
     if (/\[["'][a-zA-Z0-9\-' ]+["']\] = ./.test(_line)) {
       _line = _line.replace(
         /\[["']([a-zA-Z0-9\-' ]+)["']\] = (.)/g,
-        '"$1": $2'
+        '"$1": $2',
       );
     }
 
